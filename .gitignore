@@ -89,4 +89,4 @@ fastlane/test_output
 
 iOSInjectionProject/
 
-MoviePractice/MoviePractice/API.plist
+MoviePractice/MoviePractice/Utils/API.plist
