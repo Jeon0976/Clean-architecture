@@ -10,6 +10,7 @@ import Foundation
 protocol NetworkConfigurable {
     var baseURL: URL { get }
     var headers: [String: String] { get }
+    /// 공통 query 처리
     var queryParameters: [String: String] { get }
 }
 

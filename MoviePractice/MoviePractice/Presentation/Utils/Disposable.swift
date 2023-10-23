@@ -27,6 +27,12 @@ final class DisposeBag {
         disposables.add(disposable)
     }
     
+    // 테스트 용
+    func clear() {
+        disposables.dispose()
+    }
+    
+    
     deinit {
         disposables.dispose()
     }

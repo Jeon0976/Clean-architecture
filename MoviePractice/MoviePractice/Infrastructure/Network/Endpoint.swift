@@ -43,6 +43,7 @@ class EndPoint<R>: ResponseRequestable {
     let method: HTTPMethodType
     let headerParameters: [String: String]
     let queryParametersEncodable: Encodable?
+    /// 특정 쿼리 처리
     let queryParameters: [String: Any]
     let bodyParametersEncodable: Encodable?
     let bodyParameters: [String: Any]
@@ -94,23 +95,74 @@ struct AsciiBodyEncoder: BodyEncoder {
 /// HTTP 요청을 나타내는 프로토콜
 /// - 경로, 메서드, 헤더, 쿼리 및 본문 매개변수와 같은 필요한 속성을 정의하며, URLRequest 객체를 생성하는 메서드를 포함한다.
 protocol RequestTable {
+    var path: String { get }
+    var isFullPath: Bool { get }
+    var method: HTTPMethodType { get }
+    var headerParameters: [String: String] { get }
+    var queryParametersEncodable: Encodable? { get }
+    var queryParameters: [String: Any] { get }
+    var bodyParametersEncodable: Encodable? { get }
+    var bodyParameters: [String: Any] { get }
+    var bodyEncoder: BodyEncoder { get }
     
-}
-
-extension RequestTable {
-    
+    func urlRequest(with networkConfig: NetworkConfigurable) throws -> URLRequest
 }
 
 // MARK: Response Request Table
 /// 응답과 함께 오는 HTTP 요청을 나타내는 프로토콜이다.
 /// - Requestable 프롵콜을 확장하며, 응답 타입과 응답 디코더 속성을 추가한다.
 protocol ResponseRequestable: RequestTable {
+    /// 'Response' 타입은 다양할 수 있고, 각각의 네트워크 요청에 따라 다른 타입을 가질 수 있다. 
+    associatedtype Response
     
+    var responseDecoder: ResponseDecoder { get }
 }
 
 /// 요청 생성 중 발생할 수 있는 오류를 나타내는 열거형이다.
 enum RequestGenerationError: Error {
+    case components
+}
+
+extension RequestTable {
+    func url(with config: NetworkConfigurable) throws -> URL {
+        let baseURL = config.baseURL.absoluteString.last != "/"
+        ? config.baseURL.absoluteString + "/"
+        : config.baseURL.absoluteString
+        let endpoint = isFullPath ? path : baseURL.appending(path)
+
+        guard var urlComponents = URLComponents(string: endpoint) else { throw RequestGenerationError.components }
+        var urlQueryItems = [URLQueryItem]()
+
+        let queryParameters = try queryParametersEncodable?.toDictionary() ?? self.queryParameters
+
+        config.queryParameters.forEach {
+            urlQueryItems.append(URLQueryItem(name: $0.key, value: $0.value))
+        }
+
+        queryParameters.forEach {
+            urlQueryItems.append(URLQueryItem(name: $0.key, value: "\($0.value)"))
+        }
+        
+        urlComponents.queryItems = !urlQueryItems.isEmpty ? urlQueryItems : nil
+        guard let url = urlComponents.url else { throw RequestGenerationError.components }
+        return url
+    }
     
+    func urlRequest(with config: NetworkConfigurable) throws -> URLRequest {
+        let url = try self.url(with: config)
+        var urlRequest = URLRequest(url: url)
+        var allHeaders: [String: String] = config.headers
+        headerParameters.forEach { allHeaders.updateValue($1, forKey: $0)}
+        
+        let bodyParamenters = try bodyParametersEncodable?.toDictionary() ?? self.bodyParameters
+        if !bodyParamenters.isEmpty {
+            urlRequest.httpBody = bodyEncoder.encode(bodyParamenters)
+        }
+        urlRequest.httpMethod = method.rawValue
+        urlRequest.allHTTPHeaderFields = allHeaders
+        
+        return urlRequest
+    }
 }
 
 private extension Dictionary {
