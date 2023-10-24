@@ -18,8 +18,4 @@ final class AppConfiguration {
     
     let apiBaseURL = "http://api.themoviedb.org"
     let imageBaseURL = "http://image.tmdb.org"
-    
-    private func showError() {
-        print("Error")
-    }
 }

@@ -14,6 +14,11 @@ protocol LoadMovieDetailUseCase {
     ) -> Cancellable?
 }
 
+struct LoadMovieDetailUseCaseRequestValue {
+    let moveId: Int
+    let language: String
+}
+
 final class DefaultLoadMovieDetailUseCase: LoadMovieDetailUseCase {
     
     private let movieDetailRepository : MovieDetailRepository
@@ -33,10 +38,5 @@ final class DefaultLoadMovieDetailUseCase: LoadMovieDetailUseCase {
             completion(result)
         }
     }
-}
-
-struct LoadMovieDetailUseCaseRequestValue {
-    let moveId: Int
-    let language: String
 }
 

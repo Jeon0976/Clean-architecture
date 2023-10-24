@@ -22,5 +22,37 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         self.dependencies = dependencies
     }
     
-    func makeSearchMoviesUseCase() -> SearchMoviesUseCase
+    // MARK: Use Cases
+    func makeSearchMoviesUseCase() -> SearchMoviesUseCase {
+        DefaultSearchMoviesUseCase(
+            moviesRepository: makeMoviesRepository(),
+            moviesQueriesRepository: makeMoviesQueriesRepository()
+        )
+    }
+    
+    func makeFetchRecentMovieQueriesUseCase(requestValue: FetchRecentMovieQueriesUseCase.RequestValue, completion: @escaping (FetchRecentMovieQueriesUseCase.ResultValue) -> Void) -> UseCase {
+        FetchRecentMovieQueriesUseCase(
+            requestValue: requestValue,
+            completion: completion,
+            moviesQueriesRepository: makeMoviesQueriesRepository()
+        )
+    }
+}
+
+// MARK: Repositories
+extension MoviesSceneDIContainer {
+    func makeMoviesRepository() -> MoviesRepository {
+        let tet =  MoviesRepository.self
+        return tet as! MoviesRepository
+    }
+    
+    func makeMoviesQueriesRepository() -> MoviesQueriesRepository {
+        let tet =  MoviesQueriesRepository.self
+        return tet as! MoviesQueriesRepository
+    }
+    
+}
+
+extension MoviesSceneDIContainer {
+    
 }

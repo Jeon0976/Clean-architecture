@@ -14,6 +14,11 @@ protocol LoadPopularMoviesUseCase {
     ) -> Cancellable?
 }
 
+struct LoadPopularMoviesUseCaseRequestValue {
+    let language: String
+    let page: Int
+}
+
 final class DefaultLoadPopularMoviesUseCase: LoadPopularMoviesUseCase {
     
     private let popularMoviesRepository: PopularMoviesRepository
@@ -33,9 +38,4 @@ final class DefaultLoadPopularMoviesUseCase: LoadPopularMoviesUseCase {
             completion(result)
         }
     }
-}
-
-struct LoadPopularMoviesUseCaseRequestValue {
-    let language: String
-    let page: Int
 }

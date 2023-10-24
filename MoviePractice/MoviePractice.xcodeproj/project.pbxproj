@@ -47,7 +47,7 @@
 		C58D31F12AE64F6600380F57 /* MovieQueryEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D31F02AE64F6600380F57 /* MovieQueryEntity+Mapping.swift */; };
 		C58D31F32AE64F7C00380F57 /* UserDefaultsMoviesQueriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D31F22AE64F7C00380F57 /* UserDefaultsMoviesQueriesStorage.swift */; };
 		C58D31F52AE64F9A00380F57 /* MovieQueryUDS+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D31F42AE64F9A00380F57 /* MovieQueryUDS+Mapping.swift */; };
-		C58D31F72AE64FB000380F57 /* MovieQueriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D31F62AE64FB000380F57 /* MovieQueriesStorage.swift */; };
+		C58D31F72AE64FB000380F57 /* MoviesQueriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D31F62AE64FB000380F57 /* MoviesQueriesStorage.swift */; };
 		C58D31FA2AE64FD400380F57 /* MoviesResponseEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D31F92AE64FD400380F57 /* MoviesResponseEntity+Mapping.swift */; };
 		C58D31FC2AE64FE900380F57 /* MoviesResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D31FB2AE64FE900380F57 /* MoviesResponseStorage.swift */; };
 		C58D31FE2AE64FFB00380F57 /* CoreDataMoviesResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D31FD2AE64FFB00380F57 /* CoreDataMoviesResponseStorage.swift */; };
@@ -113,7 +113,7 @@
 		C58D31F02AE64F6600380F57 /* MovieQueryEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieQueryEntity+Mapping.swift"; sourceTree = "<group>"; };
 		C58D31F22AE64F7C00380F57 /* UserDefaultsMoviesQueriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMoviesQueriesStorage.swift; sourceTree = "<group>"; };
 		C58D31F42AE64F9A00380F57 /* MovieQueryUDS+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieQueryUDS+Mapping.swift"; sourceTree = "<group>"; };
-		C58D31F62AE64FB000380F57 /* MovieQueriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQueriesStorage.swift; sourceTree = "<group>"; };
+		C58D31F62AE64FB000380F57 /* MoviesQueriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesQueriesStorage.swift; sourceTree = "<group>"; };
 		C58D31F92AE64FD400380F57 /* MoviesResponseEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoviesResponseEntity+Mapping.swift"; sourceTree = "<group>"; };
 		C58D31FB2AE64FE900380F57 /* MoviesResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResponseStorage.swift; sourceTree = "<group>"; };
 		C58D31FD2AE64FFB00380F57 /* CoreDataMoviesResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMoviesResponseStorage.swift; sourceTree = "<group>"; };
@@ -166,8 +166,8 @@
 			children = (
 				C518632D2A9DE87400141FCB /* Utils */,
 				C5681DC72AA1AAF100BA4FDC /* Application */,
-				C51863302A9DEC4A00141FCB /* Data */,
 				C518632E2A9DE91900141FCB /* Domain */,
+				C51863302A9DEC4A00141FCB /* Data */,
 				C518632F2A9DEC2900141FCB /* Presentation */,
 				C5681DA82A9F72F200BA4FDC /* Common */,
 				C5681DBD2AA1A73A00BA4FDC /* Infrastructure */,
@@ -479,7 +479,7 @@
 		C58D31E32AE64EA000380F57 /* MoviesQueriesStorage */ = {
 			isa = PBXGroup;
 			children = (
-				C58D31F62AE64FB000380F57 /* MovieQueriesStorage.swift */,
+				C58D31F62AE64FB000380F57 /* MoviesQueriesStorage.swift */,
 				C58D31EB2AE64F1600380F57 /* CoreDataStorage */,
 				C58D31EA2AE64F0600380F57 /* UserDefaultsStorage */,
 			);
@@ -668,7 +668,7 @@
 				C5681DBC2AA1927000BA4FDC /* Disposable.swift in Sources */,
 				C5681DB42AA0761100BA4FDC /* PosterImagesRepository.swift in Sources */,
 				C5681DA72A9F72C900BA4FDC /* UseCase.swift in Sources */,
-				C58D31F72AE64FB000380F57 /* MovieQueriesStorage.swift in Sources */,
+				C58D31F72AE64FB000380F57 /* MoviesQueriesStorage.swift in Sources */,
 				C58D31DF2AE64E7A00380F57 /* MoviesRequestDTO+Mapping.swift in Sources */,
 				C58D32022AE6646B00380F57 /* MovieQuery.swift in Sources */,
 				C58D32002AE6536900380F57 /* MoviesSearchFlowCoordinator.swift in Sources */,
