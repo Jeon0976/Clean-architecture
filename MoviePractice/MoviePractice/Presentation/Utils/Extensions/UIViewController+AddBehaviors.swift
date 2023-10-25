@@ -1,0 +1,140 @@
+//
+//  UIViewController+AddBehaviors.swift
+//  MoviePractice
+//
+//  Created by 전성훈 on 2023/10/25.
+//
+
+import UIKit
+
+protocol ViewControllerLifecycleBehavior {
+    func viewDidLoad(viewController: UIViewController)
+    func viewWillAppear(viewController: UIViewController)
+    func viewDidAppear(viewController: UIViewController)
+    func viewWillDisappear(viewController: UIViewController)
+    func viewDidDisappear(viewController: UIViewController)
+    func viewWillLayoutSubviews(viewController: UIViewController)
+    func viewDidLayoutSubviews(viewController: UIViewController)
+}
+
+// Default Implementations
+// TODO: 왜하는 걸까?
+extension ViewControllerLifecycleBehavior {
+    func viewDidLoad(viewController: UIViewController) {}
+    func viewWillAppear(viewController: UIViewController) {}
+    func viewDidAppear(viewController: UIViewController) {}
+    func viewWillDisappear(viewController: UIViewController) {}
+    func viewDidDisappear(viewController: UIViewController) {}
+    func viewWillLayoutSubviews(viewController: UIViewController) {}
+    func viewDidLayoutSubviews(viewController: UIViewController) {}
+}
+
+// 설명 필요
+extension UIViewController {
+    /*
+     뷰 컨트롤러의 라이프사이클에 통합될 동작들을 추가해야합니다.
+     
+     이 메서드는 뷰 컨트롤러의 뷰가 로드되어야 하므로, 이를 너무 이르게 로드하지 않기 위해 'viewDidLoad'에서 호출하는 것이 가장 좋습니다.
+     
+     - parameter behaviors: 추가될 동작들
+     */
+    
+    func addBehaviors(_ behaviors: [ViewControllerLifecycleBehavior]) {
+        let behaviorViewController = LifecycleBehaviorViewController(behaviors: behaviors)
+        
+        addChild(behaviorViewController)
+        view.addSubview(behaviorViewController.view)
+        behaviorViewController.didMove(toParent: self)
+    }
+    
+    private final class LifecycleBehaviorViewController: UIViewController, UIGestureRecognizerDelegate {
+        private let behaviors: [ViewControllerLifecycleBehavior]
+        
+        // MARK: Lifecycle
+        
+        init(behaviors: [ViewControllerLifecycleBehavior]) {
+            self.behaviors = behaviors
+            
+            super.init(nibName: nil, bundle: nil)
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            
+            // 왜??
+            view.isHidden = true
+            
+            applyBehaviors { behavior, viewController in
+                behavior.viewDidLoad(viewController: viewController)
+            }
+        }
+        
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            
+            applyBehaviors { behavior, viewController in
+                behavior.viewWillAppear(viewController: viewController)
+            }
+        }
+        
+        override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            
+            applyBehaviors { behavior, viewController in
+                behavior.viewDidAppear(viewController: viewController)
+            }
+        }
+        
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            
+            applyBehaviors { behavior, viewController in
+                behavior.viewDidAppear(viewController: viewController)
+            }
+        }
+        
+        override func viewDidDisappear(_ animated: Bool) {
+            super.viewDidDisappear(animated)
+
+            applyBehaviors { behavior, viewController in
+                behavior.viewDidDisappear(viewController: viewController)
+            }
+        }
+
+        override func viewWillLayoutSubviews() {
+            super.viewWillLayoutSubviews()
+
+            applyBehaviors { behavior, viewController in
+                behavior.viewWillLayoutSubviews(viewController: viewController)
+            }
+        }
+
+        override func viewDidLayoutSubviews() {
+            super.viewDidLayoutSubviews()
+
+            applyBehaviors { behavior, viewController in
+                behavior.viewDidLayoutSubviews(viewController: viewController)
+            }
+        }
+
+        
+        // MARK: Private
+        
+        private func applyBehaviors(
+            body: (
+                _ behavior: ViewControllerLifecycleBehavior,
+                _ viewController: UIViewController
+            ) -> Void
+        ) {
+            guard let parent = parent else { return }
+            
+            for behavior in behaviors {
+                body(behavior, parent)
+            }
+        }
+    }
+}

@@ -112,8 +112,6 @@ extension DefaultNetworkService: NetworkService {
             return nil 
         }
     }
-    
-    
 }
 
 final class DefaultNetworkSessionManager: NetworkSessionManager {

@@ -5,7 +5,8 @@
 //  Created by 전성훈 on 2023/10/23.
 //
 
-import Foundation
+import UIKit
+import SwiftUI
 
 final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
     
@@ -15,6 +16,10 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
     }
     
     private let dependencies: Dependencies
+    
+    // MARK: Persistent Storage
+    lazy var moviesQueriesStorage: MoviesQueriesStorage = CoreDataMoviesQueriesStorage(maxStorageLimit: 10)
+    lazy var moviesResponseCache: MoviesResponseStorage = CoreDataMoviesResponseStorage()
     
     // MARK: Persistent Storage
     
@@ -30,7 +35,10 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
-    func makeFetchRecentMovieQueriesUseCase(requestValue: FetchRecentMovieQueriesUseCase.RequestValue, completion: @escaping (FetchRecentMovieQueriesUseCase.ResultValue) -> Void) -> UseCase {
+    func makeFetchRecentMovieQueriesUseCase(
+        requestValue: FetchRecentMovieQueriesUseCase.RequestValue,
+        completion: @escaping (FetchRecentMovieQueriesUseCase.ResultValue) -> Void
+    ) -> UseCase {
         FetchRecentMovieQueriesUseCase(
             requestValue: requestValue,
             completion: completion,
@@ -42,17 +50,52 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
 // MARK: Repositories
 extension MoviesSceneDIContainer {
     func makeMoviesRepository() -> MoviesRepository {
-        let tet =  MoviesRepository.self
-        return tet as! MoviesRepository
+        DefaultMoviesRepository(
+            dataTransferService: dependencies.apiDataTransferService,
+            cache: moviesResponseCache
+        )
     }
     
     func makeMoviesQueriesRepository() -> MoviesQueriesRepository {
-        let tet =  MoviesQueriesRepository.self
-        return tet as! MoviesQueriesRepository
+        DefaultMoviesQueriesRepository(
+            moviesQueriesPersistentStorage: moviesQueriesStorage
+        )
     }
     
+    func makePosterImagesRepository() -> PosterImagesRepository {
+        DefaultPosterImagesRepository(
+            dataTransferService: dependencies.imageDataTransferService
+        )
+    }
+    
+    func makeMoviesListViewController(actions: MoviesListViewModelActions) {
+        
+    }
 }
 
 extension MoviesSceneDIContainer {
+    // MARK: Movie List
+    func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController {
+        MoviesListViewController.create(
+            with: makeMoviesListViewModel(actions: actions),
+            posterImagesRepostiory: makePosterImagesRepository()
+        )
+    }
     
+    func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
+        DefaultMoviesListViewmodel()
+    }
+    
+    // MARK: Movie Details
+    
+    // MARK: Movies Queries Suggestions List
+    
+    // MARK: Flow Coordinators
+    func makeMovieSearchFlowCoordinator(navigationController: UINavigationController) -> MoviesSearchFlowCoordinator {
+        MoviesSearchFlowCoordinator(
+            navigationController: navigationController,
+            dependencies: self
+        )
+    }
 }
+
