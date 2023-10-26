@@ -67,10 +67,6 @@ extension MoviesSceneDIContainer {
             dataTransferService: dependencies.imageDataTransferService
         )
     }
-    
-    func makeMoviesListViewController(actions: MoviesListViewModelActions) {
-        
-    }
 }
 
 extension MoviesSceneDIContainer {
@@ -83,7 +79,10 @@ extension MoviesSceneDIContainer {
     }
     
     func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
-        DefaultMoviesListViewmodel()
+        DefaultMoviesListViewmodel(
+            searchMoviesUseCase: makeSearchMoviesUseCase(),
+            actions: actions
+        )
     }
     
     // MARK: Movie Details

@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  MoviePractice
+
+  Created by 전성훈 on 2023/10/26.
+  
+*/
+
+
+"Movies" = "영화";
+"Search results" = "검색 결과";
+"Release Date" = "개봉일";
+"To be announced" = "추후 발표";
+"Error" = "에러";
+"No internet connection" = "인터넷 연결 실패";
+"Failed loading movies" = "검색 실패";
+"Search Movies" = "영화 검색하기";

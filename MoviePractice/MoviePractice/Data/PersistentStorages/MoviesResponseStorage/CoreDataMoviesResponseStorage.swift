@@ -22,7 +22,7 @@ final class CoreDataMoviesResponseStorage {
     private func fetchRequest(for requestDTO: MoviesRequestDTO) -> NSFetchRequest<MoviesRequestEntity> {
         let request: NSFetchRequest = MoviesRequestEntity.fetchRequest()
         request.predicate = NSPredicate(
-            format: "%K = $@ AND %K = %d",
+            format: "%K = %@ AND %K = %d",
             #keyPath(MoviesRequestEntity.query),
             requestDTO.query,
             #keyPath(MoviesRequestEntity.page),

@@ -16,6 +16,6 @@ final class AppConfiguration {
         return apiKey
     }()
     
-    let apiBaseURL = "http://api.themoviedb.org"
-    let imageBaseURL = "http://image.tmdb.org"
+    let apiBaseURL = "https://api.themoviedb.org"
+    let imageBaseURL = "https://image.tmdb.org"
 }
