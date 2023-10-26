@@ -23,7 +23,7 @@ final class MoviesListViewController: UIViewController, Alertable {
         if let moviesTV = moviesTableViewController {
             moviesTV.viewModel = viewModel
             moviesTV.posterImagesRepository = posterImagesRepository
-            moviesTV.view.backgroundColor = .lightGray
+            moviesTV.view.backgroundColor = .white
             add(child: moviesTV, container: view)
             
             view.addSubview(moviesTV.view)
@@ -32,7 +32,7 @@ final class MoviesListViewController: UIViewController, Alertable {
         return view
     }()
     
-    private lazy var suggestionsListContainer: UIView = {
+    private(set) lazy var suggestionsListContainer: UIView = {
         let view = UIView()
 
         return view
@@ -114,14 +114,14 @@ final class MoviesListViewController: UIViewController, Alertable {
     private func setupViews() {
 
         emptyDataLabel.text = viewModel.emptyDataTitle
-//        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = .white
         self.navigationItem.title = viewModel.screenTitle
         
         [
+            emptyDataLabel,
             searchBarContainer,
-            suggestionsListContainer,
             moviesListContainer,
-            emptyDataLabel
+            suggestionsListContainer
         ].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview($0)
@@ -188,7 +188,6 @@ final class MoviesListViewController: UIViewController, Alertable {
     }
     
     private func updateSearchQuery(_ query: String) {
-        print(query)
         searchController.isActive = false
         searchController.searchBar.text = query
     }
@@ -208,7 +207,7 @@ extension MoviesListViewController {
         // ??
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.barStyle = .black
+        searchController.searchBar.barStyle = .default
         searchController.searchBar.frame = searchBarContainer.bounds
         // ??
         searchController.searchBar.autoresizingMask = [.flexibleWidth]

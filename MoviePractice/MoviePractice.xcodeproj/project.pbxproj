@@ -74,6 +74,10 @@
 		C58D322D2AE9E2C000380F57 /* BackButtonEmptyTitleNavigationBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D322C2AE9E2C000380F57 /* BackButtonEmptyTitleNavigationBarBehavior.swift */; };
 		C58D32302AEA0BA600380F57 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C58D32322AEA0BA600380F57 /* Localizable.strings */; };
 		C58D32362AEA2D1F00380F57 /* BlackStyleNavigationBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D32352AEA2D1F00380F57 /* BlackStyleNavigationBarBehavior.swift */; };
+		C58D323A2AEA3F7300380F57 /* MoviesQueryListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D32392AEA3F7300380F57 /* MoviesQueryListItemViewModel.swift */; };
+		C58D323C2AEA3F7D00380F57 /* MoviesQueryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D323B2AEA3F7D00380F57 /* MoviesQueryListViewModel.swift */; };
+		C58D323E2AEA3F9000380F57 /* MoviesQueriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D323D2AEA3F9000380F57 /* MoviesQueriesTableViewController.swift */; };
+		C58D32412AEA3FD200380F57 /* MoviesQueriesItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D32402AEA3FD200380F57 /* MoviesQueriesItemCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +163,10 @@
 		C58D32332AEA0BC600380F57 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C58D32342AEA0BC600380F57 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C58D32352AEA2D1F00380F57 /* BlackStyleNavigationBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackStyleNavigationBarBehavior.swift; sourceTree = "<group>"; };
+		C58D32392AEA3F7300380F57 /* MoviesQueryListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesQueryListItemViewModel.swift; sourceTree = "<group>"; };
+		C58D323B2AEA3F7D00380F57 /* MoviesQueryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesQueryListViewModel.swift; sourceTree = "<group>"; };
+		C58D323D2AEA3F9000380F57 /* MoviesQueriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesQueriesTableViewController.swift; sourceTree = "<group>"; };
+		C58D32402AEA3FD200380F57 /* MoviesQueriesItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesQueriesItemCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -478,6 +486,8 @@
 		C58D31CF2AE642DD00380F57 /* MoviesQueriesList */ = {
 			isa = PBXGroup;
 			children = (
+				C58D32382AEA3F6000380F57 /* ViewModel */,
+				C58D32372AEA3F5900380F57 /* View */,
 			);
 			path = MoviesQueriesList;
 			sourceTree = "<group>";
@@ -597,6 +607,32 @@
 				C58D32262AE8F60B00380F57 /* MoviesListItemCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		C58D32372AEA3F5900380F57 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C58D323D2AEA3F9000380F57 /* MoviesQueriesTableViewController.swift */,
+				C58D323F2AEA3FB300380F57 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C58D32382AEA3F6000380F57 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C58D323B2AEA3F7D00380F57 /* MoviesQueryListViewModel.swift */,
+				C58D32392AEA3F7300380F57 /* MoviesQueryListItemViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C58D323F2AEA3FB300380F57 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C58D32402AEA3FD200380F57 /* MoviesQueriesItemCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -723,6 +759,7 @@
 				C5681DC22AA1A79E00BA4FDC /* Endpoint.swift in Sources */,
 				C58D32362AEA2D1F00380F57 /* BlackStyleNavigationBarBehavior.swift in Sources */,
 				C58D31D32AE64E1100380F57 /* DefaultMoviesRepository.swift in Sources */,
+				C58D323A2AEA3F7300380F57 /* MoviesQueryListItemViewModel.swift in Sources */,
 				C5681DC62AA1A7B900BA4FDC /* NetworkService.swift in Sources */,
 				C5681DA42A9F717800BA4FDC /* LoadPopularMoviesUseCase.swift in Sources */,
 				C58D32182AE8B5E000380F57 /* UIViewController+ActivityIndicator.swift in Sources */,
@@ -730,6 +767,7 @@
 				C58D31E12AE64E8A00380F57 /* MoviesResponseDTO+Mapping.swift in Sources */,
 				C58D32042AE6678700380F57 /* SearchMoviesUseCase.swift in Sources */,
 				C5681DB92AA0972600BA4FDC /* Observable.swift in Sources */,
+				C58D323E2AEA3F9000380F57 /* MoviesQueriesTableViewController.swift in Sources */,
 				C5681DAE2A9F767200BA4FDC /* MovieDetailRepository.swift in Sources */,
 				C58D31C82AE6426E00380F57 /* AppFlowCoordinator.swift in Sources */,
 				C58D31F12AE64F6600380F57 /* MovieQueryEntity+Mapping.swift in Sources */,
@@ -738,11 +776,13 @@
 				C58D31DC2AE64E5D00380F57 /* APIEndpoints.swift in Sources */,
 				C51863152A9D954F00141FCB /* AppDelegate.swift in Sources */,
 				C58D322D2AE9E2C000380F57 /* BackButtonEmptyTitleNavigationBarBehavior.swift in Sources */,
+				C58D32412AEA3FD200380F57 /* MoviesQueriesItemCell.swift in Sources */,
 				C5681DBC2AA1927000BA4FDC /* Disposable.swift in Sources */,
 				C58D321C2AE8B5F800380F57 /* UIViewController+AddBehaviors.swift in Sources */,
 				C5681DB42AA0761100BA4FDC /* PosterImagesRepository.swift in Sources */,
 				C5681DA72A9F72C900BA4FDC /* UseCase.swift in Sources */,
 				C58D32292AE90FFD00380F57 /* AccessibilityIdentifier.swift in Sources */,
+				C58D323C2AEA3F7D00380F57 /* MoviesQueryListViewModel.swift in Sources */,
 				C58D32162AE8B5CE00380F57 /* UIImageView+ImageSizeAfterAspectFit.swift in Sources */,
 				C58D31F72AE64FB000380F57 /* MoviesQueriesStorage.swift in Sources */,
 				C58D31DF2AE64E7A00380F57 /* MoviesRequestDTO+Mapping.swift in Sources */,

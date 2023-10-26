@@ -88,6 +88,17 @@ extension MoviesSceneDIContainer {
     // MARK: Movie Details
     
     // MARK: Movies Queries Suggestions List
+    func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> UIViewController {
+        MoviesQueriesTableViewController.create(with: makeMoviesQueryListViewModel(didSelect: didSelect))
+    }
+    
+    func makeMoviesQueryListViewModel(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> MoviesQueryListViewModel {
+        DefaultMoviesQueryListViewModel(
+            numberOfQueriesToShow: 15,
+            fetchRecentMovieQueriesUseCaseFactory: makeFetchRecentMovieQueriesUseCase,
+            didSelect: didSelect
+        )
+    }
     
     // MARK: Flow Coordinators
     func makeMovieSearchFlowCoordinator(navigationController: UINavigationController) -> MoviesSearchFlowCoordinator {
@@ -97,4 +108,3 @@ extension MoviesSceneDIContainer {
         )
     }
 }
-

@@ -10,9 +10,9 @@ import UIKit
 protocol MoviesSearchFlowCoordinatorDependencies {
     func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController
 //    func makeMoviesDetailsViewController(movie: Movie) -> UIViewController
-//    func makeMoviesQueriesSuggestionsListViewController(
-//        didSelect: @escaping MoviesQueryListViewModelDidSelectAction
-//    ) -> UIViewController
+    func makeMoviesQueriesSuggestionsListViewController(
+        didSelect: @escaping MoviesQueryListViewModelDidSelectAction
+    ) -> UIViewController
 }
 
 final class MoviesSearchFlowCoordinator {
@@ -49,8 +49,21 @@ final class MoviesSearchFlowCoordinator {
     }
     
     private func showMovieQueriesSuggestions(didSelect: @escaping( MovieQuery) -> Void) {
+        guard let moviesListViewController = moviesListVC,
+              moviesQueriesSuggestionsVC == nil else { return }
+              
+        let container = moviesListViewController.suggestionsListContainer
+        let vc = dependencies.makeMoviesQueriesSuggestionsListViewController(didSelect: didSelect)
         
+        moviesListViewController.add(child: vc, container: container)
+        moviesQueriesSuggestionsVC = vc
+
+        container.isHidden = false
     }
     
-    private func closeMovieQueriesSuggestions() { }
+    private func closeMovieQueriesSuggestions() {
+        moviesQueriesSuggestionsVC?.remove()
+        moviesQueriesSuggestionsVC = nil
+        moviesListVC?.suggestionsListContainer.isHidden = true
+    }
 }

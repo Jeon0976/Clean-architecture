@@ -20,8 +20,6 @@ final class AppFlowCoordinator {
     }
     
     func start() {
-        navigationController.navigationBar.barStyle = .black
-
         let moviesSceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()
         let flow = moviesSceneDIContainer.makeMovieSearchFlowCoordinator(navigationController: navigationController)
         
