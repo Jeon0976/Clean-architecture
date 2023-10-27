@@ -37,13 +37,15 @@ final class MoviesQueriesItemCell: UITableViewCell {
     
     private func setupView() {
         self.backgroundColor = .lightGray
-
+        
         self.contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
-            titleLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
+            titleLabel.topAnchor.constraint(greaterThanOrEqualTo: self.contentView.topAnchor, constant: 8),
+            titleLabel.bottomAnchor.constraint(lessThanOrEqualTo: self.contentView.bottomAnchor, constant: -8)
         ])
     }
 }

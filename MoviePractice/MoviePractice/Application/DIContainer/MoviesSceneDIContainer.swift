@@ -86,6 +86,17 @@ extension MoviesSceneDIContainer {
     }
     
     // MARK: Movie Details
+    func makeMoviesDetailsViewController(movie: Movie) -> UIViewController {
+        MovieDetailsViewController.create(with: makeMoviesDetailViewModel(movie: movie))
+    }
+    
+    func makeMoviesDetailViewModel(movie: Movie) -> MovieDetailsViewModel {
+        DefaultMovieDetailsViewModel(
+            movie: movie,
+            posterImagesRepository: makePosterImagesRepository()
+        )
+    }
+    
     
     // MARK: Movies Queries Suggestions List
     func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> UIViewController {

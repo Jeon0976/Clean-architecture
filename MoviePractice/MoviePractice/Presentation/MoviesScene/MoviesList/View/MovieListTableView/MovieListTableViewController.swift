@@ -18,7 +18,7 @@ final class MoviesListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupViews()
+        setupView()
     }
     
     func reload() {
@@ -36,7 +36,7 @@ final class MoviesListTableViewController: UITableViewController {
         }
     }
     
-    private func setupViews() {
+    private func setupView() {
         tableView.register(MoviesListItemCell.self, forCellReuseIdentifier: MoviesListItemCell.reuseIdentifier)
         
         tableView.estimatedRowHeight = MoviesListItemCell.height

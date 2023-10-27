@@ -70,7 +70,7 @@ final class MoviesListViewController: UIViewController, Alertable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupViews()
+        setupView()
         setupBehaviours()
         
         bind(to: viewModel)
@@ -111,7 +111,7 @@ final class MoviesListViewController: UIViewController, Alertable {
     }
 
     // MARK: Private
-    private func setupViews() {
+    private func setupView() {
 
         emptyDataLabel.text = viewModel.emptyDataTitle
         self.view.backgroundColor = .white
