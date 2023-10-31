@@ -19,6 +19,15 @@ final class MovieDetailsViewController: UIViewController {
         return imageView
     }()
     
+    private lazy var backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.backgroundColor = .white
+        imageView.layer.cornerRadius = 8.0
+        
+        return imageView
+    }()
+    
     private lazy var overviewTextView: UITextView = {
         let textView = UITextView()
         
@@ -31,13 +40,11 @@ final class MovieDetailsViewController: UIViewController {
     static func create(with viewModel: MovieDetailsViewModel) -> MovieDetailsViewController {
         let view = MovieDetailsViewController()
         view.viewModel = viewModel
-        
         return view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupView()
         bind(to: viewModel)
     }
@@ -58,13 +65,14 @@ final class MovieDetailsViewController: UIViewController {
     }
     
     private func setupView() {
-        self.view.backgroundColor = .white
+        view.backgroundColor = .white
         title = viewModel.title
         posterImageView.isHidden = viewModel.isPosterImageHidden
         overviewTextView.text = viewModel.overview
         view.accessibilityIdentifier = AccessibilityIdentifier.movieDetailsView
         
         [
+            backgroundImageView,
             posterImageView,
             overviewTextView
         ].forEach {
@@ -78,9 +86,14 @@ final class MovieDetailsViewController: UIViewController {
             posterImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             posterImageView.heightAnchor.constraint(equalToConstant: 300),
             
-            overviewTextView.topAnchor.constraint(equalTo: posterImageView.bottomAnchor),
-            overviewTextView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            overviewTextView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            backgroundImageView.topAnchor.constraint(equalTo: posterImageView.topAnchor, constant: -8),
+            backgroundImageView.leadingAnchor.constraint(equalTo: posterImageView.leadingAnchor, constant: 8),
+            backgroundImageView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
+            backgroundImageView.trailingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: -8),
+            
+            overviewTextView.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 8),
+            overviewTextView.leadingAnchor.constraint(equalTo: backgroundImageView.leadingAnchor, constant: 8),
+            overviewTextView.trailingAnchor.constraint(equalTo: backgroundImageView.trailingAnchor, constant: -8),
             overviewTextView.heightAnchor.constraint(equalToConstant: 300)
         ])
     }
@@ -95,7 +108,7 @@ final class MovieDetailsViewController: UIViewController {
         viewModel.backgroundColor
             .subscribe(on: self, disposeBag: disposeBag)
             .onNext { [weak self] in
-                self?.view.backgroundColor = $0
+                self?.backgroundImageView.backgroundColor = $0
             }
         
         viewModel.textColor

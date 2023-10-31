@@ -6,8 +6,9 @@
   
 */
 
-
-"Movies" = "Movies";
+"Search" = "Search";
+"Popular" = "Popular";
+"MyPage" = "MyPage";
 "Search results" = "Search results";
 "Release Date" = "Release Date";
 "To be announced" = "To be announced";

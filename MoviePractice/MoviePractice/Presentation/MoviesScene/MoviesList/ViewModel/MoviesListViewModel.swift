@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct MoviesListViewModelActions {
     let showMovieDetails: (Movie) -> Void
     let showMovieQueriesSuggestions: (@escaping (_ disSelect: MovieQuery) -> Void) -> Void
@@ -62,7 +63,7 @@ final class DefaultMoviesListViewmodel: MoviesListViewModel {
     var query: Observable<String> = Observable("")
     var error: Observable<String> = Observable("")
     var isEmpty: Bool { return items.value.isEmpty }
-    var screenTitle: String = NSLocalizedString("Movies", comment: "")
+    var screenTitle: String = NSLocalizedString("Search", comment: "")
     let emptyDataTitle = NSLocalizedString("Search results", comment: "")
     let errorTitle = NSLocalizedString("Error", comment: "")
     let searchBarPlaceholder = NSLocalizedString("Search Movies", comment: "")

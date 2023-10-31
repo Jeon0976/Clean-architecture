@@ -149,10 +149,10 @@ final class MoviesListViewController: UIViewController, Alertable {
     }
     
     private func setupBehaviours() {
-        addBehaviors([
-            BackButtonEmptyTitleNavigationBarBehavior(),
-            BlackStyleNavigationBarBehavior()
-        ])
+//        addBehaviors([
+//            BackButtonEmptyTitleNavigationBarBehavior(),
+//            BlackStyleNavigationBarBehavior()
+//        ])
     }
     
     private func updateTimes() {

@@ -50,4 +50,6 @@ final class AppDIContainer {
         
         return MoviesSceneDIContainer(dependencies: dependecies)
     }
+    
+    
 }

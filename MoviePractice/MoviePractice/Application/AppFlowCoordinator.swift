@@ -20,9 +20,28 @@ final class AppFlowCoordinator {
     }
     
     func start() {
-        let moviesSceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()
-        let flow = moviesSceneDIContainer.makeMovieSearchFlowCoordinator(navigationController: navigationController)
+        let tabBarController = UITabBarController()
+        let tabBarFlowCoordinator = TabBarFlowCoordinator(viewController: navigationController, tabBarController: tabBarController)
         
-        flow.start()
+        let moviesSceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()
+        let flow = moviesSceneDIContainer.makeMovieSearchFlowCoordinator(navigationController: UINavigationController())
+        
+        let moviesSceneDIContainer2 = appDIContainer.makeMoviesSceneDIContainer()
+        let flow2 = moviesSceneDIContainer2.makeMovieSearchFlowCoordinator(navigationController: UINavigationController())
+        
+        let moviesSceneDIContainer3 = appDIContainer.makeMoviesSceneDIContainer()
+        let flow3 = moviesSceneDIContainer3.makeMovieSearchFlowCoordinator(navigationController: UINavigationController())
+        
+        tabBarFlowCoordinator.setupTabs(with: [flow, flow2, flow3])
+        
+        tabBarFlowCoordinator.start()
+    }
+    
+    func showLoginFlow() {
+        
+    }
+    
+    func showMainFlow() {
+        
     }
 }

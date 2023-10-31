@@ -8,25 +8,32 @@
 import UIKit
 
 protocol MoviesSearchFlowCoordinatorDependencies {
-    func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController
+    func makeMoviesListViewController(
+        actions: MoviesListViewModelActions
+    ) -> MoviesListViewController
     func makeMoviesDetailsViewController(movie: Movie) -> UIViewController
     func makeMoviesQueriesSuggestionsListViewController(
         didSelect: @escaping MoviesQueryListViewModelDidSelectAction
     ) -> UIViewController
 }
 
-final class MoviesSearchFlowCoordinator {
-    private weak var navigationController: UINavigationController?
-    private let dependencies: MoviesSearchFlowCoordinatorDependencies
+final class MoviesSearchFlowCoordinator: Coordinator {
+    
+    weak var finishDelegate: CoordinatorFinishDelegate?
+        
+    var childCoordinators: [Coordinator] = []
+    
+    var viewController: UINavigationController
+    private let dependencies: MoviesSearchFlowCoordinatorDependencies!
     
     private weak var moviesListVC: MoviesListViewController?
     private weak var moviesQueriesSuggestionsVC: UIViewController?
     
     init(
-        navigationController: UINavigationController,
+        viewController: UINavigationController,
         dependencies: MoviesSearchFlowCoordinatorDependencies
     ) {
-        self.navigationController = navigationController
+        self.viewController = viewController
         self.dependencies = dependencies
     }
     
@@ -36,18 +43,18 @@ final class MoviesSearchFlowCoordinator {
             showMovieQueriesSuggestions: showMovieQueriesSuggestions,
             closeMovieQueriesSuggestions: closeMovieQueriesSuggestions
         )
-        
         let vc = dependencies.makeMoviesListViewController(actions: actions)
         
-        navigationController?.pushViewController(vc, animated: false)
+        viewController.pushViewController(vc, animated: false)
         
         moviesListVC = vc
     }
     
     private func showMovieDetails(movie: Movie) {
         let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
-        navigationController?.pushViewController(vc, animated: true)
-        
+        vc.hidesBottomBarWhenPushed = true
+
+        viewController.pushViewController(vc, animated: true)
     }
     
     private func showMovieQueriesSuggestions(didSelect: @escaping( MovieQuery) -> Void) {

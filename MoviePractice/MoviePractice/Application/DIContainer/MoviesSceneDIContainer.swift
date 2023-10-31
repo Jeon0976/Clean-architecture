@@ -18,13 +18,18 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
     private let dependencies: Dependencies
     
     // MARK: Persistent Storage
-    lazy var moviesQueriesStorage: MoviesQueriesStorage = CoreDataMoviesQueriesStorage(maxStorageLimit: 10)
+    lazy var moviesQueriesStorage: MoviesQueriesStorage = CoreDataMoviesQueriesStorage(maxStorageLimit: 15)
     lazy var moviesResponseCache: MoviesResponseStorage = CoreDataMoviesResponseStorage()
     
     // MARK: Persistent Storage
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
+        print("Init")
+    }
+    
+    deinit {
+        print("Deinit")
     }
     
     // MARK: Use Cases
@@ -71,7 +76,8 @@ extension MoviesSceneDIContainer {
 
 extension MoviesSceneDIContainer {
     // MARK: Movie List
-    func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController {
+    func makeMoviesListViewController(
+        actions: MoviesListViewModelActions) -> MoviesListViewController {
         MoviesListViewController.create(
             with: makeMoviesListViewModel(actions: actions),
             posterImagesRepostiory: makePosterImagesRepository()
@@ -79,6 +85,7 @@ extension MoviesSceneDIContainer {
     }
     
     func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
+        
         DefaultMoviesListViewmodel(
             searchMoviesUseCase: makeSearchMoviesUseCase(),
             actions: actions
@@ -114,7 +121,7 @@ extension MoviesSceneDIContainer {
     // MARK: Flow Coordinators
     func makeMovieSearchFlowCoordinator(navigationController: UINavigationController) -> MoviesSearchFlowCoordinator {
         MoviesSearchFlowCoordinator(
-            navigationController: navigationController,
+            viewController: navigationController,
             dependencies: self
         )
     }

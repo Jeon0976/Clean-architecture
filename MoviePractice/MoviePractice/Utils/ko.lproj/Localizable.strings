@@ -7,7 +7,9 @@
 */
 
 
-"Movies" = "영화";
+"Search" = "검색";
+"Popular" = "인기";
+"MyPage" = "설정";
 "Search results" = "검색 결과";
 "Release Date" = "개봉일";
 "To be announced" = "추후 발표";
