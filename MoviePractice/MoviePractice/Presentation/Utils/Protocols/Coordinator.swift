@@ -11,6 +11,8 @@ protocol Coordinator: AnyObject {
     var finishDelegate: CoordinatorFinishDelegate? { get set }
     var childCoordinators: [Coordinator] { get set }
     var viewController: UINavigationController { get set }
+    var viewTitle: String? { get set }
+    var tabBarViewController: TabBarDelegate? { get set }
     func start()
     func finish()
 }

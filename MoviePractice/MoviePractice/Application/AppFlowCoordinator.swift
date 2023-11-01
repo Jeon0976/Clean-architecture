@@ -20,7 +20,7 @@ final class AppFlowCoordinator {
     }
     
     func start() {
-        let tabBarController = UITabBarController()
+        let tabBarController = DefaultTabBarController()
         let tabBarFlowCoordinator = TabBarFlowCoordinator(viewController: navigationController, tabBarController: tabBarController)
         
         let moviesSceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()

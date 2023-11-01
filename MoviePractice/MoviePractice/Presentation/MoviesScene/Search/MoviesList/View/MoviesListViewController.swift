@@ -115,7 +115,6 @@ final class MoviesListViewController: UIViewController, Alertable {
 
         emptyDataLabel.text = viewModel.emptyDataTitle
         self.view.backgroundColor = .white
-        self.navigationItem.title = viewModel.screenTitle
         
         [
             emptyDataLabel,

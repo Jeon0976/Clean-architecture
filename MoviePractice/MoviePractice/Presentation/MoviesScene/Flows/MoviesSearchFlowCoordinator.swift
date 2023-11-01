@@ -17,13 +17,15 @@ protocol MoviesSearchFlowCoordinatorDependencies {
     ) -> UIViewController
 }
 
-final class MoviesSearchFlowCoordinator: Coordinator {
-    
+final class MoviesSearchFlowCoordinator: NSObject, UINavigationControllerDelegate, Coordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
-        
-    var childCoordinators: [Coordinator] = []
+    weak var tabBarViewController: TabBarDelegate?
     
+    var childCoordinators: [Coordinator] = []
     var viewController: UINavigationController
+
+    var viewTitle: String? = nil
+
     private let dependencies: MoviesSearchFlowCoordinatorDependencies!
     
     private weak var moviesListVC: MoviesListViewController?
@@ -45,15 +47,21 @@ final class MoviesSearchFlowCoordinator: Coordinator {
         )
         let vc = dependencies.makeMoviesListViewController(actions: actions)
         
+        if let title = viewTitle {
+            vc.title = title
+        }
+        
+        viewController.delegate = self
         viewController.pushViewController(vc, animated: false)
+
         
         moviesListVC = vc
     }
     
     private func showMovieDetails(movie: Movie) {
         let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
-        vc.hidesBottomBarWhenPushed = true
-
+        tabBarViewController?.shouldHideTabBar(true)
+        
         viewController.pushViewController(vc, animated: true)
     }
     
@@ -74,5 +82,13 @@ final class MoviesSearchFlowCoordinator: Coordinator {
         moviesQueriesSuggestionsVC?.remove()
         moviesQueriesSuggestionsVC = nil
         moviesListVC?.suggestionsListContainer.isHidden = true
+    }
+}
+
+extension MoviesSearchFlowCoordinator {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if viewController is MoviesListViewController {
+            tabBarViewController?.shouldHideTabBar(false)
+        }
     }
 }

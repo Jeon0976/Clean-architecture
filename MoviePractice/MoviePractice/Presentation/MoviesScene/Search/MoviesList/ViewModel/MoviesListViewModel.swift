@@ -35,7 +35,6 @@ protocol MoviesListViewModelOutput {
     var query: Observable<String> { get }
     var error: Observable<String> { get }
     var isEmpty: Bool { get }
-    var screenTitle: String { get }
     var emptyDataTitle: String { get }
     var errorTitle: String { get }
     var searchBarPlaceholder: String { get }
@@ -63,7 +62,6 @@ final class DefaultMoviesListViewmodel: MoviesListViewModel {
     var query: Observable<String> = Observable("")
     var error: Observable<String> = Observable("")
     var isEmpty: Bool { return items.value.isEmpty }
-    var screenTitle: String = NSLocalizedString("Search", comment: "")
     let emptyDataTitle = NSLocalizedString("Search results", comment: "")
     let errorTitle = NSLocalizedString("Error", comment: "")
     let searchBarPlaceholder = NSLocalizedString("Search Movies", comment: "")
