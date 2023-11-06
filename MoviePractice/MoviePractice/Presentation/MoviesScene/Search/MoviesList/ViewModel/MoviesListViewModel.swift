@@ -42,7 +42,7 @@ protocol MoviesListViewModelOutput {
 
 typealias MoviesListViewModel = MoviesListviewModelInput & MoviesListViewModelOutput
 
-final class DefaultMoviesListViewmodel: MoviesListViewModel {
+final class DefaultMoviesListViewModel: MoviesListViewModel {
     
     private let searchMoviesUseCase: SearchMoviesUseCase
     private let actions: MoviesListViewModelActions?
@@ -136,7 +136,7 @@ final class DefaultMoviesListViewmodel: MoviesListViewModel {
 }
 
 // MARK: Input. View Event methods
-extension DefaultMoviesListViewmodel {
+extension DefaultMoviesListViewModel {
     func viewDidLoad() {
         
     }

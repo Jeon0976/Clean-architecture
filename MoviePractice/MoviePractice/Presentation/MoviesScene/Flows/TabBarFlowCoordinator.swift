@@ -9,9 +9,11 @@ import UIKit
 
 
 final class TabBarFlowCoordinator: NSObject, Coordinator {
+    var type: CoordinatorType { .tab }
+    
     var viewTitle: String? = nil
     
-    weak var finishDelegate: CoordinatorFinishDelegate? = nil
+    weak var finishDelegate: CoordinatorFinishDelegate?
     weak var tabBarViewController: TabBarDelegate? = nil
 
     var childCoordinators: [Coordinator] = []
@@ -29,7 +31,6 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
     
     func start() {
         tabBarController.selectedIndex = 0
-        
     }
     
     func setupTabs(with coordinators: [Coordinator]) {

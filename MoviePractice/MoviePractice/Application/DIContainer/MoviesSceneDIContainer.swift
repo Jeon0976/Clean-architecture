@@ -84,9 +84,9 @@ extension MoviesSceneDIContainer {
         )
     }
     
-    func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
+    private func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
         
-        DefaultMoviesListViewmodel(
+        DefaultMoviesListViewModel(
             searchMoviesUseCase: makeSearchMoviesUseCase(),
             actions: actions
         )
@@ -97,7 +97,7 @@ extension MoviesSceneDIContainer {
         MovieDetailsViewController.create(with: makeMoviesDetailViewModel(movie: movie))
     }
     
-    func makeMoviesDetailViewModel(movie: Movie) -> MovieDetailsViewModel {
+    private func makeMoviesDetailViewModel(movie: Movie) -> MovieDetailsViewModel {
         DefaultMovieDetailsViewModel(
             movie: movie,
             posterImagesRepository: makePosterImagesRepository()

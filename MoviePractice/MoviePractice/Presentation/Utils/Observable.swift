@@ -36,23 +36,6 @@ class Observable<Value> {
         observers.removeAll()
     }
     
-    /// 모든 observers에게 값을 알린다
-    private func notifyObservers(event: ObservableEvent<Value>) {
-        for observer in observers {
-            observer.block(event)
-        }
-    }
-    
-    func asObservable() -> Observable<Value> { self }
-    
-    func onError(_ error: Error) {
-        notifyObservers(event: .error(error))
-    }
-    
-    func onCompleted() {
-        notifyObservers(event: .completed)
-    }
-    
     /// observer를 추가한다. 추가될 때 현재 값에 대한 알림도 바로 전달한다.
     @discardableResult
     fileprivate func observe(
@@ -65,6 +48,13 @@ class Observable<Value> {
         return self
     }
     
+    /// 모든 observers에게 값을 알린다
+    private func notifyObservers(event: ObservableEvent<Value>) {
+        for observer in observers {
+            observer.block(event)
+        }
+    }
+    
     fileprivate func removeDisposable(for observer: AnyObject) -> () -> Void {
         return { [weak self] in
             self?.remove(observer: observer)
@@ -72,22 +62,8 @@ class Observable<Value> {
     }
     
     /// 특정 observer를 제거한다
-    func remove(observer: AnyObject) {
+    private func remove(observer: AnyObject) {
         observers = observers.filter { $0.observer !== observer }
-    }
-    
-    /// 다른 'Observable' 객체에 값의 변경을 바인딩
-    func bind(to observable: Observable<Value>) {
-        observe(on: self) { event in
-            switch event {
-            case .next(let newValue):
-                observable.value = newValue
-            case .error(let error):
-                observable.onError(error)
-            case .completed:
-                observable.onCompleted()
-            }
-        }
     }
     
     func subscribe(

@@ -20,6 +20,9 @@
 		C5308D362AF22F4400856854 /* LoginFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5308D352AF22F4400856854 /* LoginFlowCoordinator.swift */; };
 		C5308D382AF22F5500856854 /* MyPageFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5308D372AF22F5500856854 /* MyPageFlowCoordinator.swift */; };
 		C5308D4C2AF2358E00856854 /* MoviePopularDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5308D4B2AF2358E00856854 /* MoviePopularDIContainer.swift */; };
+		C533C9862AF8D15B00F7A4C4 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C533C9852AF8D15B00F7A4C4 /* LoginViewModel.swift */; };
+		C533C9882AF8D16300F7A4C4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C533C9872AF8D16300F7A4C4 /* LoginViewController.swift */; };
+		C533C98A2AF8DACC00F7A4C4 /* LoginSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C533C9892AF8DACC00F7A4C4 /* LoginSceneDIContainer.swift */; };
 		C5681DA02A9F6E8D00BA4FDC /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5681D9F2A9F6E8D00BA4FDC /* Movie.swift */; };
 		C5681DA22A9F6E9800BA4FDC /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5681DA12A9F6E9800BA4FDC /* MovieDetail.swift */; };
 		C5681DA42A9F717800BA4FDC /* LoadPopularMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5681DA32A9F717800BA4FDC /* LoadPopularMoviesUseCase.swift */; };
@@ -118,6 +121,9 @@
 		C5308D352AF22F4400856854 /* LoginFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlowCoordinator.swift; sourceTree = "<group>"; };
 		C5308D372AF22F5500856854 /* MyPageFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlowCoordinator.swift; sourceTree = "<group>"; };
 		C5308D4B2AF2358E00856854 /* MoviePopularDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePopularDIContainer.swift; sourceTree = "<group>"; };
+		C533C9852AF8D15B00F7A4C4 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		C533C9872AF8D16300F7A4C4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C533C9892AF8DACC00F7A4C4 /* LoginSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSceneDIContainer.swift; sourceTree = "<group>"; };
 		C5681D9F2A9F6E8D00BA4FDC /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		C5681DA12A9F6E9800BA4FDC /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		C5681DA32A9F717800BA4FDC /* LoadPopularMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadPopularMoviesUseCase.swift; sourceTree = "<group>"; };
@@ -474,6 +480,7 @@
 		C5308D412AF232A700856854 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C533C9872AF8D16300F7A4C4 /* LoginViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -481,6 +488,7 @@
 		C5308D422AF232AE00856854 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				C533C9852AF8D15B00F7A4C4 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -641,6 +649,7 @@
 			isa = PBXGroup;
 			children = (
 				C58D31CA2AE6428200380F57 /* AppDIContainer.swift */,
+				C533C9892AF8DACC00F7A4C4 /* LoginSceneDIContainer.swift */,
 				C58D31CC2AE6428C00380F57 /* MoviesSceneDIContainer.swift */,
 				C5308D4B2AF2358E00856854 /* MoviePopularDIContainer.swift */,
 			);
@@ -939,6 +948,7 @@
 				C58D31CB2AE6428200380F57 /* AppDIContainer.swift in Sources */,
 				C58D321A2AE8B5EB00380F57 /* UIViewController+AddChild.swift in Sources */,
 				C58D31C22AE6413400380F57 /* ConnectionError.swift in Sources */,
+				C533C9862AF8D15B00F7A4C4 /* LoginViewModel.swift in Sources */,
 				C5681DC02AA1A77C00BA4FDC /* DataTransferService.swift in Sources */,
 				C5681DAA2A9F731C00BA4FDC /* Cancellable.swift in Sources */,
 				C58D32222AE8F3D600380F57 /* MoviesListViewController.swift in Sources */,
@@ -960,8 +970,10 @@
 				C58D32362AEA2D1F00380F57 /* BlackStyleNavigationBarBehavior.swift in Sources */,
 				C58D31D32AE64E1100380F57 /* DefaultMoviesRepository.swift in Sources */,
 				C58D323A2AEA3F7300380F57 /* MoviesQueryListItemViewModel.swift in Sources */,
+				C533C98A2AF8DACC00F7A4C4 /* LoginSceneDIContainer.swift in Sources */,
 				C5681DC62AA1A7B900BA4FDC /* NetworkService.swift in Sources */,
 				C5681DA42A9F717800BA4FDC /* LoadPopularMoviesUseCase.swift in Sources */,
+				C533C9882AF8D16300F7A4C4 /* LoginViewController.swift in Sources */,
 				C58D32182AE8B5E000380F57 /* UIViewController+ActivityIndicator.swift in Sources */,
 				C58D32142AE8B5BD00380F57 /* CGSize_ScaledSize.swift in Sources */,
 				C58D31E12AE64E8A00380F57 /* MoviesResponseDTO+Mapping.swift in Sources */,

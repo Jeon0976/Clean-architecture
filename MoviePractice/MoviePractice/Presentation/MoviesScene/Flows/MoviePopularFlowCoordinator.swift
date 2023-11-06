@@ -12,6 +12,8 @@ protocol MoviesPopularFlowCoordinatorDependencies {
 }
 
 final class MoviesPopularFlowCoordinator: Coordinator {
+    var type: CoordinatorType { .popular }
+    
     weak var finishDelegate: CoordinatorFinishDelegate?
     weak var tabBarViewController: TabBarDelegate?
 

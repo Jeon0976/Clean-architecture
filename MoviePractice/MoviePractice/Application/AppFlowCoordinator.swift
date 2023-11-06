@@ -7,21 +7,58 @@
 
 import UIKit
 
-final class AppFlowCoordinator {
-    var navigationController: UINavigationController
+final class AppFlowCoordinator: Coordinator {
+    var finishDelegate: CoordinatorFinishDelegate? = nil
+    
+    var childCoordinators: [Coordinator] = []
+    
+    var viewController: UINavigationController
+    
+    var viewTitle: String? = nil
+    
+    var tabBarViewController: TabBarDelegate? = nil
+    var type: CoordinatorType { .app }
+    
     private let appDIContainer: AppDIContainer
     
+    private var isLogin: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "isLogin")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "isLogin")
+        }
+    }
+
+    
     init(
-        navigationController: UINavigationController,
+        viewController: UINavigationController,
         appDIContainer: AppDIContainer
     ) {
-        self.navigationController = navigationController
+        self.viewController = viewController
         self.appDIContainer = appDIContainer
     }
     
     func start() {
+        if isLogin {
+            showTab()
+        } else {
+            showLoginFlow()
+        }
+    }
+    
+    func showLoginFlow() {
+        let loginSceneDIContainer = appDIContainer.makeLoginSceneDIContainer()
+        let flow = loginSceneDIContainer.makeLoginFlowCoordinator(navigationController: viewController)
+        flow.finishDelegate = self
+        flow.start()
+        childCoordinators.append(flow)
+    }
+    
+    func showTab() {
         let tabBarController = DefaultTabBarController()
-        let tabBarFlowCoordinator = TabBarFlowCoordinator(viewController: navigationController, tabBarController: tabBarController)
+        let tabBarFlowCoordinator = TabBarFlowCoordinator(viewController: viewController, tabBarController: tabBarController)
+        tabBarFlowCoordinator.finishDelegate = self
         
         let moviesSceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()
         let flow = moviesSceneDIContainer.makeMovieSearchFlowCoordinator(navigationController: UINavigationController())
@@ -35,13 +72,24 @@ final class AppFlowCoordinator {
         tabBarFlowCoordinator.setupTabs(with: [flow, flow2, flow3])
         
         tabBarFlowCoordinator.start()
+        childCoordinators.append(tabBarFlowCoordinator)
     }
-    
-    func showLoginFlow() {
+}
+
+extension AppFlowCoordinator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
         
-    }
-    
-    func showMainFlow() {
-        
+        print("Tab")
+        switch childCoordinator.type {
+        case .tab:
+            viewController.viewControllers.removeAll()
+            showLoginFlow()
+        case .login:
+            viewController.viewControllers.removeAll()
+            showTab()
+        default:
+            break
+        }
     }
 }

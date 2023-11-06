@@ -13,6 +13,7 @@ protocol Coordinator: AnyObject {
     var viewController: UINavigationController { get set }
     var viewTitle: String? { get set }
     var tabBarViewController: TabBarDelegate? { get set }
+    var type: CoordinatorType { get }
     func start()
     func finish()
 }
@@ -26,4 +27,8 @@ extension Coordinator {
 
 protocol CoordinatorFinishDelegate: AnyObject {
     func coordinatorDidFinish(childCoordinator: Coordinator)
+}
+
+enum CoordinatorType {
+    case app, login, tab, search, popular, myPage
 }

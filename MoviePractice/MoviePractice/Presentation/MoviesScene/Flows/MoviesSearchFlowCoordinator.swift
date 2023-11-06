@@ -18,6 +18,8 @@ protocol MoviesSearchFlowCoordinatorDependencies {
 }
 
 final class MoviesSearchFlowCoordinator: NSObject, UINavigationControllerDelegate, Coordinator {
+    var type: CoordinatorType { .search }
+    
     weak var finishDelegate: CoordinatorFinishDelegate?
     weak var tabBarViewController: TabBarDelegate?
     
