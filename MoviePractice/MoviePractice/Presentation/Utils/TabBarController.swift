@@ -62,6 +62,7 @@ final class DefaultTabBarController: UIViewController, TabBarDelegate {
             let button = UIButton()
             button.tag = index
             button.setTitle(viewController.title, for: .normal)
+            button.setImage(UIImage(systemName: "circle"), for: .normal)
             button.setTitleColor(.darkGray, for: .normal)
             button.setTitleColor(.black, for: .selected)
             button.addTarget(self, action: #selector(tabButtonTapped(_:)), for: .touchUpInside)

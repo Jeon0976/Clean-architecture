@@ -21,6 +21,13 @@ final class MoviesListTableViewController: UITableViewController {
         setupView()
     }
     
+    private func setupView() {
+        tableView.register(MoviesListItemCell.self, forCellReuseIdentifier: MoviesListItemCell.identifier)
+        
+        tableView.estimatedRowHeight = MoviesListItemCell.height
+        tableView.rowHeight = UITableView.automaticDimension
+    }
+    
     func reload() {
         tableView.reloadData()
     }
@@ -34,13 +41,6 @@ final class MoviesListTableViewController: UITableViewController {
         case .fullScreen, .none:
             tableView.tableFooterView = nil
         }
-    }
-    
-    private func setupView() {
-        tableView.register(MoviesListItemCell.self, forCellReuseIdentifier: MoviesListItemCell.reuseIdentifier)
-        
-        tableView.estimatedRowHeight = MoviesListItemCell.height
-        tableView.rowHeight = UITableView.automaticDimension
     }
 }
 
@@ -59,10 +59,10 @@ extension MoviesListTableViewController {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: MoviesListItemCell.reuseIdentifier,
+            withIdentifier: MoviesListItemCell.identifier,
             for: indexPath
         ) as? MoviesListItemCell else {
-            assertionFailure("Cannot dequeue reusable cell \(MoviesListItemCell.self) with reuseIdentifier: \(MoviesListItemCell.reuseIdentifier)")
+            assertionFailure("Cannot dequeue reusable cell \(MoviesListItemCell.self) with reuseIdentifier: \(MoviesListItemCell.identifier)")
             return UITableViewCell()
         }
 

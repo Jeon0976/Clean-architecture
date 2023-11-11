@@ -44,7 +44,7 @@ final class MoviesQueriesTableViewController: UITableViewController {
         tableView.backgroundColor = .clear
         tableView.register(
             MoviesQueriesItemCell.self,
-            forCellReuseIdentifier: MoviesQueriesItemCell.reuseIdentifier
+            forCellReuseIdentifier: MoviesQueriesItemCell.identifier
         )
         tableView.estimatedRowHeight = MoviesQueriesItemCell.height
         tableView.rowHeight = UITableView.automaticDimension
@@ -59,8 +59,8 @@ extension MoviesQueriesTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MoviesQueriesItemCell.reuseIdentifier, for: indexPath) as? MoviesQueriesItemCell else {
-            assertionFailure("Cannot dequeue reusable cell \(MoviesQueriesItemCell.self) with reuseIdentifier: \(MoviesQueriesItemCell.reuseIdentifier)")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MoviesQueriesItemCell.identifier, for: indexPath) as? MoviesQueriesItemCell else {
+            assertionFailure("Cannot dequeue reusable cell \(MoviesQueriesItemCell.self) with reuseIdentifier: \(MoviesQueriesItemCell.identifier)")
             return UITableViewCell()
         }
         cell.fill(with: viewModel.items.value[indexPath.row])

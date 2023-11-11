@@ -8,8 +8,13 @@
 import UIKit
 
 final class MoviesListItemCell: UITableViewCell {
-    static let reuseIdentifier = String(describing: MoviesListItemCell.self)
+    static let identifier = String(describing: MoviesListItemCell.self)
     static let height = CGFloat(130)
+    
+    private var viewModel: MoviesListItemViewModel!
+    private var posterImagesRepository: PosterImagesRepository?
+    private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() }}
+    private let mainQueue: DispatchQueueType = DispatchQueue.main
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -46,11 +51,6 @@ final class MoviesListItemCell: UITableViewCell {
         
         return imageView
     }()
-    
-    private var viewModel: MoviesListItemViewModel!
-    private var posterImagesRepository: PosterImagesRepository?
-    private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() }}
-    private let mainQueue: DispatchQueueType = DispatchQueue.main
     
     override init(
         style: UITableViewCell.CellStyle,

@@ -8,8 +8,8 @@
 import UIKit
 
 final class MoviesQueriesItemCell: UITableViewCell {
+    static let identifier = String(describing: MoviesQueriesItemCell.self)
     static let height = CGFloat(50)
-    static let reuseIdentifier = String(describing: MoviesQueriesItemCell.self)
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()

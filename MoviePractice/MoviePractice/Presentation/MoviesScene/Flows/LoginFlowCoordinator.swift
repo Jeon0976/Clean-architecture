@@ -12,7 +12,7 @@ protocol LoginFlowCoordinatorDependencies {
 }
 
 final class LoginFlowCoordinator: Coordinator {
-    var finishDelegate: CoordinatorFinishDelegate?
+    weak var finishDelegate: CoordinatorFinishDelegate?
     
     var childCoordinators: [Coordinator] = []
     
@@ -36,7 +36,12 @@ final class LoginFlowCoordinator: Coordinator {
         self.dependencies = dependencies
     }
     
+    deinit {
+        print("Coordinator Deinit")
+    }
+    
     func start() {
+//        let actions = LoginViewModelActions(showTabBar: { [weak self] in self?.showTabBar() } )
         let actions = LoginViewModelActions(showTabBar: showTabBar)
         let vc = dependencies.makeLoginViewController(actions: actions)
         

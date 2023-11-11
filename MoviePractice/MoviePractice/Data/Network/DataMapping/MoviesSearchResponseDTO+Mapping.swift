@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MoviesResponseDTO: Decodable {
+struct MoviesSearchResponseDTO: Decodable {
     private enum CodingKeys: String, CodingKey {
         case page
         case totalPages = "total_pages"
@@ -18,7 +18,7 @@ struct MoviesResponseDTO: Decodable {
     let movies: [MovieDTO]
 }
 
-extension MoviesResponseDTO {
+extension MoviesSearchResponseDTO {
     struct MovieDTO: Decodable {
         private enum CodingKeys: String, CodingKey {
             case id
@@ -41,16 +41,16 @@ extension MoviesResponseDTO {
     }
 }
 
-extension MoviesResponseDTO {
-    func toDomain() -> MoviesPage {
+extension MoviesSearchResponseDTO {
+    func toDomain() -> MoviesSearchPage {
         return .init(page: page, totalPages: totalPages, movies: movies.map { $0.toDomain() })
     }
 }
 
-extension MoviesResponseDTO.MovieDTO {
-    func toDomain() -> Movie {
+extension MoviesSearchResponseDTO.MovieDTO {
+    func toDomain() -> MovieWhenSearch {
         return .init(
-            id: Movie.Identifier(id),
+            id: MovieWhenSearch.Identifier(id),
             title: title,
             genre: genre?.toDomain(),
             posterPath: posterPath,
@@ -59,8 +59,8 @@ extension MoviesResponseDTO.MovieDTO {
     }
 }
 
-extension MoviesResponseDTO.MovieDTO.GenreDTO {
-    func toDomain() -> Movie.Genre {
+extension MoviesSearchResponseDTO.MovieDTO.GenreDTO {
+    func toDomain() -> MovieWhenSearch.Genre {
         switch self {
         case .adventure: return .adventure
         case .scienceFiction: return .scienceFiction

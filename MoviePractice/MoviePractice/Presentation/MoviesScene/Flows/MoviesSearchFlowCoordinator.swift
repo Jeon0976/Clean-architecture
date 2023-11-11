@@ -11,7 +11,7 @@ protocol MoviesSearchFlowCoordinatorDependencies {
     func makeMoviesListViewController(
         actions: MoviesListViewModelActions
     ) -> MoviesListViewController
-    func makeMoviesDetailsViewController(movie: Movie) -> UIViewController
+    func makeMoviesDetailsViewController(movie: MovieWhenSearch) -> UIViewController
     func makeMoviesQueriesSuggestionsListViewController(
         didSelect: @escaping MoviesQueryListViewModelDidSelectAction
     ) -> UIViewController
@@ -60,14 +60,14 @@ final class MoviesSearchFlowCoordinator: NSObject, UINavigationControllerDelegat
         moviesListVC = vc
     }
     
-    private func showMovieDetails(movie: Movie) {
+    private func showMovieDetails(movie: MovieWhenSearch) {
         let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
         tabBarViewController?.shouldHideTabBar(true)
         
         viewController.pushViewController(vc, animated: true)
     }
     
-    private func showMovieQueriesSuggestions(didSelect: @escaping( MovieQuery) -> Void) {
+    private func showMovieQueriesSuggestions(didSelect: @escaping(MovieQuery) -> Void) {
         guard let moviesListViewController = moviesListVC,
               moviesQueriesSuggestionsVC == nil else { return }
               

@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 extension MoviesResponseEntity {
-    func toDTO() -> MoviesResponseDTO {
+    func toDTO() -> MoviesSearchResponseDTO {
         return .init(
             page: Int(page),
             totalPages: Int(totalPages),
@@ -22,11 +22,11 @@ extension MoviesResponseEntity {
 }
 
 extension MovieResponseEntity {
-    func toDTO() -> MoviesResponseDTO.MovieDTO {
+    func toDTO() -> MoviesSearchResponseDTO.MovieDTO {
         return .init(
             id: Int(id),
             title: title,
-            genre: MoviesResponseDTO.MovieDTO.GenreDTO(rawValue: genre ?? ""),
+            genre: MoviesSearchResponseDTO.MovieDTO.GenreDTO(rawValue: genre ?? ""),
             posterPath: posterPath,
             overview: overview,
             releaseDate: releaseDate
@@ -34,7 +34,7 @@ extension MovieResponseEntity {
     }
 }
 
-extension MoviesRequestDTO {
+extension MoviesSearchRequestDTO {
     func toEntity(in context: NSManagedObjectContext) -> MoviesRequestEntity {
         let entity: MoviesRequestEntity = .init(context: context)
         
@@ -45,7 +45,7 @@ extension MoviesRequestDTO {
     }
 }
 
-extension MoviesResponseDTO {
+extension MoviesSearchResponseDTO {
     func toEntity(in context: NSManagedObjectContext) -> MoviesResponseEntity {
         let entity: MoviesResponseEntity = .init(context: context)
         
@@ -60,7 +60,7 @@ extension MoviesResponseDTO {
     }
 }
 
-extension MoviesResponseDTO.MovieDTO {
+extension MoviesSearchResponseDTO.MovieDTO {
     func toEntity(in context: NSManagedObjectContext) -> MovieResponseEntity {
         let entity: MovieResponseEntity = .init(context: context)
         

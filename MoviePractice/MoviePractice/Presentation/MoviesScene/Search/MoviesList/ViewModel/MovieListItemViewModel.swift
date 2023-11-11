@@ -15,7 +15,7 @@ struct MoviesListItemViewModel: Equatable {
 }
 
 extension MoviesListItemViewModel {
-    init(movie: Movie) {
+    init(movie: MovieWhenSearch) {
         self.title = movie.title ?? ""
         self.posterImagePath = movie.posterPath
         self.overview = movie.overview ?? ""

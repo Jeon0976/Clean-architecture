@@ -1,5 +1,5 @@
 //
-//  DefaultMoviesRepository.swift
+//  DefaultMoviesSearchRepository.swift
 //  MoviePractice
 //
 //  Created by 전성훈 on 2023/10/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DefaultMoviesRepository {
+final class DefaultMoviesSearchRepository {
     private let dataTransferService: DataTransferService
     private let cache: MoviesResponseStorage
     private let backgroundQueue: DataTransferDispatchQueue
@@ -23,14 +23,14 @@ final class DefaultMoviesRepository {
     }
 }
 
-extension DefaultMoviesRepository: MoviesRepository {
+extension DefaultMoviesSearchRepository: MoviesSearchRepository {
     func fetchMoviesList(
         query: MovieQuery,
         page: Int,
-        cached: @escaping (MoviesPage) -> Void,
-        completion: @escaping (Result<MoviesPage, Error>) -> Void
+        cached: @escaping (MoviesSearchPage) -> Void,
+        completion: @escaping (Result<MoviesSearchPage, Error>) -> Void
     ) -> Cancellable? {
-        let requestDTO = MoviesRequestDTO(
+        let requestDTO = MoviesSearchRequestDTO(
             query: query.query,
             page: page
         )
@@ -43,7 +43,7 @@ extension DefaultMoviesRepository: MoviesRepository {
             
             guard !task.isCancelled else { return }
             
-            let endPonit = APIEndpoints.getMovies(with: requestDTO)
+            let endPonit = APIEndpoints.getSearchMovies(with: requestDTO)
             task.networkTask = self?.dataTransferService.request(
                 with: endPonit,
                 on: backgroundQueue) { result in

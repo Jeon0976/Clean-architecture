@@ -7,9 +7,8 @@
 
 import Foundation
 
-
 struct MoviesListViewModelActions {
-    let showMovieDetails: (Movie) -> Void
+    let showMovieDetails: (MovieWhenSearch) -> Void
     let showMovieQueriesSuggestions: (@escaping (_ disSelect: MovieQuery) -> Void) -> Void
     let closeMovieQueriesSuggestions: () -> Void
 }
@@ -44,15 +43,15 @@ typealias MoviesListViewModel = MoviesListviewModelInput & MoviesListViewModelOu
 
 final class DefaultMoviesListViewModel: MoviesListViewModel {
     
-    private let searchMoviesUseCase: SearchMoviesUseCase
-    private let actions: MoviesListViewModelActions?
+    private let searchMoviesUseCase: SearchMoviesUseCase!
+    private let actions: MoviesListViewModelActions!
     
     var currentPage: Int = 0
     var totalPageCount: Int = 1
     var hasMorePages: Bool { currentPage < totalPageCount }
     var nextPage: Int { hasMorePages ? currentPage + 1 : currentPage}
     
-    private var pages: [MoviesPage] = []
+    private var pages: [MoviesSearchPage] = []
     private var moviesLoadTask: Cancellable? { willSet { moviesLoadTask?.cancel() } }
     private let mainQueue: DispatchQueueType
     
@@ -78,7 +77,7 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     }
     
     // MARK: Private
-    private func appendPage(_ moviesPage: MoviesPage){
+    private func appendPage(_ moviesPage: MoviesSearchPage){
         currentPage = moviesPage.page
         totalPageCount = moviesPage.totalPages
         
@@ -169,6 +168,6 @@ extension DefaultMoviesListViewModel {
 }
 
 // MARK: private
-private extension Array where Element == MoviesPage {
-    var movies: [Movie] { flatMap { $0.movies }}
+private extension Array where Element == MoviesSearchPage {
+    var movies: [MovieWhenSearch] { flatMap { $0.movies }}
 }

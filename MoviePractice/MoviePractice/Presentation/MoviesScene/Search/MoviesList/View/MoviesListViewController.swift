@@ -9,9 +9,12 @@ import UIKit
 
 final class MoviesListViewController: UIViewController, Alertable {
     
+    /// - 강제 옵셔널를 사용하여 뷰 컨트롤러가 기능하는 데 중요한 역할을 함을 명확하게 표현합니다.
+    /// - 이 방법은 `viewModel`의 중요성을 강조하고, 실수로 `nil`을 할당하는 것을 방지하는 데 도움이 될 수 있습니다.
     private var viewModel: MoviesListViewModel!
     private var posterImagesRepository: PosterImagesRepository?
     private var moviesTableViewController: MoviesListTableViewController?
+    
     private let disposeBag = DisposeBag()
     
     private var searchController = UISearchController(searchResultsController: nil)
@@ -83,34 +86,8 @@ final class MoviesListViewController: UIViewController, Alertable {
         setupSearchController()
     }
     
-    // MARK: Bind
-    private func bind(to viewModel: MoviesListViewModel) {
-        viewModel.items
-            .subscribe(on: self, disposeBag: disposeBag)
-            .onNext { [weak self] _ in
-            self?.updateTimes()
-        }
-        
-        viewModel.loading
-            .subscribe(on: self, disposeBag: disposeBag)
-            .onNext { [weak self] in
-            self?.updateLoading($0)
-        }
-        
-        viewModel.query
-            .subscribe(on: self, disposeBag: disposeBag)
-            .onNext { [weak self] in
-            self?.updateSearchQuery($0)
-        }
-        
-        viewModel.error
-            .subscribe(on: self, disposeBag: disposeBag)
-            .onNext { [weak self] in
-            self?.showError($0)
-        }
-    }
-
     // MARK: Private
+    
     private func setupView() {
 
         emptyDataLabel.text = viewModel.emptyDataTitle
@@ -145,6 +122,32 @@ final class MoviesListViewController: UIViewController, Alertable {
             emptyDataLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             emptyDataLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
         ])
+    }
+    
+    private func bind(to viewModel: MoviesListViewModel) {
+        viewModel.items
+            .subscribe(on: self, disposeBag: disposeBag)
+            .onNext { [weak self] _ in
+            self?.updateTimes()
+        }
+        
+        viewModel.loading
+            .subscribe(on: self, disposeBag: disposeBag)
+            .onNext { [weak self] in
+            self?.updateLoading($0)
+        }
+        
+        viewModel.query
+            .subscribe(on: self, disposeBag: disposeBag)
+            .onNext { [weak self] in
+            self?.updateSearchQuery($0)
+        }
+        
+        viewModel.error
+            .subscribe(on: self, disposeBag: disposeBag)
+            .onNext { [weak self] in
+            self?.showError($0)
+        }
     }
     
     private func setupBehaviours() {

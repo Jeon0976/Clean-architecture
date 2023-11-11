@@ -40,6 +40,7 @@ final class MovieDetailsViewController: UIViewController {
     static func create(with viewModel: MovieDetailsViewModel) -> MovieDetailsViewController {
         let view = MovieDetailsViewController()
         view.viewModel = viewModel
+        
         return view
     }
     

@@ -39,6 +39,10 @@ final class LoginViewController: UIViewController, Alertable {
         setupView()
     }
     
+    deinit {
+        print("LoginDeinit")
+    }
+    
     private func setupView() {
         self.view.backgroundColor = .white
         

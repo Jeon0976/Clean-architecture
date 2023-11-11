@@ -30,5 +30,5 @@ protocol CoordinatorFinishDelegate: AnyObject {
 }
 
 enum CoordinatorType {
-    case app, login, tab, search, popular, myPage
+    case app, login, tab, search, topRated, nowPlaying
 }

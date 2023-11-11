@@ -40,7 +40,7 @@ final class DefaultMovieDetailsViewModel: MovieDetailsViewModel {
     let textColor: Observable<UIColor?> = Observable(nil)
     
     init(
-        movie: Movie,
+        movie: MovieWhenSearch,
         posterImagesRepository: PosterImagesRepository,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {

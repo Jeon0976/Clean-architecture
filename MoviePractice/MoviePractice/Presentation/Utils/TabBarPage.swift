@@ -9,17 +9,17 @@ import Foundation
 
 enum TabBarPage {
     case search
-    case popular
-    case myPage
+    case topRated
+    case nowPlaying
     
     init?(index: Int) {
         switch index {
         case 0:
             self = .search
         case 1:
-            self = .popular
+            self = .topRated
         case 2:
-            self = .myPage
+            self = .nowPlaying
         default:
             return nil
         }
@@ -29,9 +29,9 @@ enum TabBarPage {
         switch self {
         case .search:
             return "Search"
-        case .popular:
+        case .topRated:
             return "Popular"
-        case .myPage:
+        case .nowPlaying:
             return "MyPage"
         }
     }
@@ -40,9 +40,9 @@ enum TabBarPage {
         switch self {
         case .search:
             return 0
-        case .popular:
+        case .topRated:
             return 1
-        case .myPage:
+        case .nowPlaying:
             return 2
         }
     }
