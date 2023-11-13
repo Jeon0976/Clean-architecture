@@ -78,12 +78,9 @@ final class AppFlowCoordinator: Coordinator {
 
 extension AppFlowCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
-        print(childCoordinators)
 
         childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
         
-        print("Tab")
-        print(childCoordinators)
         switch childCoordinator.type {
         case .tab:
             viewController.viewControllers.removeAll()

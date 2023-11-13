@@ -14,19 +14,66 @@ final class MoviesTopRatedCell: UICollectionViewCell {
     private var posterImagesRepository: PosterImagesRepository?
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() }}
     private let mainQueue: DispatchQueueType = DispatchQueue.main
-    
+        
     private lazy var posterImageView: UIImageView = {
         let imageView = UIImageView()
         
-        return imageView
-    }()
-    
-    private lazy var testlabel: UILabel = {
-        let imageView = UILabel()
+        imageView.backgroundColor = .lightGray
+        imageView.layer.cornerRadius = 8
+        imageView.clipsToBounds = true
         
         return imageView
     }()
-
+    
+    private lazy var posterTitle: UILabel = {
+        let label = UILabel()
+        
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 15, weight: .bold)
+        label.textColor = .black
+        
+        return label
+    }()
+    
+    private lazy var posterReleaseDate: UILabel = {
+        let label = UILabel()
+        
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 13, weight: .semibold)
+        label.textColor = .black
+        
+        return label
+    }()
+    
+    private lazy var ratingLabel: UILabel = {
+        let label = UILabel()
+        
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 13, weight: .semibold)
+        label.textColor = .black
+        
+        return label
+    }()
+    
+    private lazy var ratingCountLabel: UILabel = {
+        let label = UILabel()
+        
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 13, weight: .semibold)
+        label.textColor = .black
+        
+        return label
+    }()
+    
+    private lazy var labelStackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.alignment = .center
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        
+        return stackView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,12 +85,30 @@ final class MoviesTopRatedCell: UICollectionViewCell {
         fatalError()
     }
     
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        
+    }
+    
     private func setupView() {
-        self.backgroundColor = .lightGray
+        self.backgroundColor = .clear
+        
+        [
+            posterTitle,
+            posterReleaseDate,
+            ratingLabel,
+            ratingCountLabel
+        ].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            labelStackView.addArrangedSubview($0)
+        }
         
         [
             posterImageView,
-            testlabel
+            labelStackView
+            
         ].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             self.contentView.addSubview($0)
@@ -54,27 +119,30 @@ final class MoviesTopRatedCell: UICollectionViewCell {
             posterImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             posterImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
             posterImageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-            testlabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-            testlabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
+            
+            labelStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
+            labelStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            labelStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            labelStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16)
         ])
-    }
-    
-    func test() {
-        print("Test")
-        posterImageView.backgroundColor = .black
-        testlabel.text = "Test"
     }
     
     func fill(
         with viewModel: MoviesTopRatedCollectionItemViewModel,
+        selected isSelected: Bool,
         posterImagesRepository: PosterImagesRepository?
     ) {
         self.viewModel = viewModel
         self.posterImagesRepository = posterImagesRepository
         
-        
+        updateLabel()
+        updateVisibility(isSelected)
+
+        let width = Int(posterImageView.imageSizeAfterAspectFit.scaledSize.width)
+        width == 0 ? updatePosterImage(width: 300) : updatePosterImage(width: width)
     }
     
+
     private func updatePosterImage(width: Int) {
         posterImageView.image = nil
         
@@ -91,5 +159,23 @@ final class MoviesTopRatedCell: UICollectionViewCell {
                 self?.imageLoadTask = nil
             }
         })
+    }
+    
+    private func updateLabel() {
+        self.posterTitle.text = viewModel.title
+        self.posterReleaseDate.text = viewModel.releaseDate
+        self.ratingLabel.text = viewModel.rating
+        self.ratingCountLabel.text = viewModel.ratingCount
+    }
+    
+    private func updateVisibility(_ isSelected: Bool) {
+
+        if isSelected {
+            posterImageView.alpha = 0.2
+            labelStackView.alpha = 1
+        } else {
+            posterImageView.alpha = 1
+            labelStackView.alpha = 0
+        }
     }
 }

@@ -11,39 +11,41 @@ final class MoviesTopRatedCollectionViewController: UICollectionViewController {
     var viewModel: MoviesTopRatedViewModel!
     
     var posterImagesRepository: PosterImagesRepository?
-    var nextPageLoadingSpinner: UIActivityIndicatorView?
     
-    private var test = true
+    private var afterViewDidLoad = true
+    private var loading: MoviesTopRatedModelLoading?
+    
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        bind(to: viewModel)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-    }
-    
-    private func setupView() {
-        collectionView.register(MoviesTopRatedCell.self, forCellWithReuseIdentifier: MoviesTopRatedCell.identifier)
-        
-//        setupCollectionViewLayout()
-    }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if test {
+        if afterViewDidLoad {
             setupCollectionViewLayout()
-            test = !test
+            afterViewDidLoad = !afterViewDidLoad
         }
     }
-
+    
+    private func setupView() {
+        collectionView.register(
+            MoviesTopRatedCell.self,
+            forCellWithReuseIdentifier: MoviesTopRatedCell.identifier
+        )
+        collectionView.register(
+            MoviesTopRatedCollectionLodingFooterView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: MoviesTopRatedCollectionLodingFooterView.identifier
+        )
+        
+        collectionView.refreshControl = UIRefreshControl()
+        collectionView.refreshControl?.addTarget(self, action: #selector(refreshCollectionView(_:)), for: .valueChanged)
+    }
     
     private func setupCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
@@ -56,9 +58,6 @@ final class MoviesTopRatedCollectionViewController: UICollectionViewController {
 
         // collectionView의 너비를 안전하게 계산
         let availableWidth = collectionView.frame.width - totalSpacing
-        print(collectionView.bounds.width)
-        print(totalSpacing)
-        print(availableWidth)
         let itemWidth = max(availableWidth / numberOfItemsPerRow, 0) // 음수 방지
         let itemHeight = itemWidth * 1.3
 
@@ -69,28 +68,87 @@ final class MoviesTopRatedCollectionViewController: UICollectionViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
-    private func bind(to viewModel: MoviesTopRatedViewModel) {
-        
+    @objc private func refreshCollectionView(_ sender: UIRefreshControl) {
+        viewModel.reset()
+    }
+    
+    func reload() {
+        collectionView.reloadData()
+    }
+    
+    func isLoading(_ isLoading: MoviesTopRatedModelLoading?) {
+        self.loading = isLoading
+    }
+    
+    func isRefresh(_ isRefresh: Bool) {
+        isRefresh ? collectionView.refreshControl?.endRefreshing() : nil
     }
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 extension MoviesTopRatedCollectionViewController {
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        return viewModel.items.value.count
     }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesTopRatedCell.identifier, for: indexPath) as? MoviesTopRatedCell else {
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: MoviesTopRatedCell.identifier,
+            for: indexPath
+        ) as? MoviesTopRatedCell else {
             return UICollectionViewCell()
         }
+                
+        let isSelected = viewModel.detailTextShownStates.value[indexPath] ?? false
+                
+        cell.fill(
+            with: viewModel.items.value[indexPath.row],
+            selected: isSelected,
+            posterImagesRepository: posterImagesRepository
+        )
         
-        cell.test()
-//        cell.fill(with: <#T##MoviesTopRatedCollectionItemViewModel#>, posterImagesRepository: <#T##PosterImagesRepository?#>)
+        if indexPath.row == viewModel.items.value.count - 4 {
+            viewModel.didLoadNextPage()
+        }
         
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.didSelectedCell(indexPath)
+        
+        collectionView.reloadItems(at: [indexPath])
 
+    }
+    
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        guard kind == UICollectionView.elementKindSectionFooter else { return UICollectionReusableView() }
+        
+        let footer = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: MoviesTopRatedCollectionLodingFooterView.identifier,
+            for: indexPath
+        )
+        
+        
+        return footer
+    }
+    
+}
+
+extension MoviesTopRatedCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: 100)
+    }
 }

@@ -74,7 +74,7 @@ extension CoreDataMoviesResponseStorage: MoviesResponseStorage {
                 
                 try context.save()
             } catch {
-                debugPrint("CoreDataMoviesResponseStorage Unresolved error \(error), \((error as NSError).userInfo)")
+//                debugPrint("CoreDataMoviesResponseStorage Unresolved error \(error), \((error as NSError).userInfo)")
             }
         }
     }

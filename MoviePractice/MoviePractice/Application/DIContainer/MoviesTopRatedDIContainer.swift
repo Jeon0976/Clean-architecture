@@ -30,10 +30,14 @@ extension MoviesTopRatedDIContainer {
 
 // MARK: Repositories
 extension MoviesTopRatedDIContainer {
-    func makeTopRatedMoviesRepository() -> MoviesTopRatedRepository {
+    private func makeTopRatedMoviesRepository() -> MoviesTopRatedRepository {
         DefaultMoviesTopRatedRepository(
             dataTransferService: dependencies.apiDataTransferService
         )
+    }
+    
+    private func makePosterImagesRepository() -> PosterImagesRepository {
+        DefaultPosterImagesRepository(dataTransferService: dependencies.imageDataTransferService)
     }
 }
 
@@ -41,7 +45,10 @@ extension MoviesTopRatedDIContainer {
 extension MoviesTopRatedDIContainer {
     /// ViewController
     func makeMoviesTopRatedViewController(actions: MoviesTopRatedViewModelActions) -> MoviesTopRatedViewController {
-        MoviesTopRatedViewController.create(with: makeMoviesTopRatedViewModel(actions: actions))
+        MoviesTopRatedViewController.create(
+            with: makeMoviesTopRatedViewModel(actions: actions),
+            posterImageRepository: makePosterImagesRepository()
+        )
     }
     
     private func makeMoviesTopRatedViewModel(actions: MoviesTopRatedViewModelActions) -> MoviesTopRatedViewModel {

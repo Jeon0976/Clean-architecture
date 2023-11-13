@@ -89,7 +89,6 @@ final class MoviesListViewController: UIViewController, Alertable {
     // MARK: Private
     
     private func setupView() {
-
         emptyDataLabel.text = viewModel.emptyDataTitle
         self.view.backgroundColor = .white
         

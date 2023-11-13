@@ -48,6 +48,9 @@ final class MoviesListItemCell: UITableViewCell {
     
     private lazy var posterImageView: UIImageView = {
         let imageView = UIImageView()
+
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8
         
         return imageView
     }()

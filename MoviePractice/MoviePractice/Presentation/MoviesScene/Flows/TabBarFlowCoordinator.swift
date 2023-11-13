@@ -41,12 +41,8 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
             
             if let tabPage = TabBarPage(index: index) {
                 coordinator.tabBarViewController = tabBarController
-                coordinator.viewController.tabBarItem = UITabBarItem(
-                    title: tabPage.pageTitleValue(),
-                    image: nil, // 여기에 해당 탭의 이미지를 설정하세요.
-                    tag: tabPage.pageOrderNumber()
-                )
-                coordinator.viewTitle = tabPage.pageTitleValue()
+               
+                coordinator.viewTitle = NSLocalizedString(tabPage.pageTitleValue(), comment: "") 
             } else {
                 assertionFailure("Invalid tab index: \(index)")
             }

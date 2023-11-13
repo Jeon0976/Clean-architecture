@@ -7,6 +7,49 @@
 
 import UIKit
 
+enum TabBarPage {
+    case search
+    case topRated
+    case nowPlaying
+    
+    init?(index: Int) {
+        switch index {
+        case 0:
+            self = .search
+        case 1:
+            self = .topRated
+        case 2:
+            self = .nowPlaying
+        default:
+            return nil
+        }
+    }
+    
+    func pageTitleValue() -> String {
+        switch self {
+        case .search:
+            return "Search"
+        case .topRated:
+            return "Popular"
+        case .nowPlaying:
+            return "MyPage"
+        }
+    }
+    
+    func pageOrderNumber() -> Int {
+        switch self {
+        case .search:
+            return 0
+        case .topRated:
+            return 1
+        case .nowPlaying:
+            return 2
+        }
+    }
+}
+
+let tabBarHeight: CGFloat = 56
+
 protocol TabBarDelegate: AnyObject {
     func shouldHideTabBar(_ hide: Bool)
 }
@@ -18,7 +61,7 @@ final class DefaultTabBarController: UIViewController, TabBarDelegate {
     private lazy var tabBarView: UIView = {
         let view = UIView()
         
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 16
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
@@ -33,8 +76,16 @@ final class DefaultTabBarController: UIViewController, TabBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupTabBar()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    
+        updateTabBarHeight()
+    }
+
     
     func setViewControllers(_ viewControllers: [UIViewController]) {
         self.viewControllers = viewControllers
@@ -43,14 +94,21 @@ final class DefaultTabBarController: UIViewController, TabBarDelegate {
     }
     
     private func setupTabBar() {
+        self.view.backgroundColor = .white
         view.addSubview(tabBarView)
         
         tabBarView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tabBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tabBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tabBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tabBarView.heightAnchor.constraint(equalToConstant: 90)
+            tabBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+    
+    private func updateTabBarHeight() {
+        NSLayoutConstraint.activate([
+            tabBarView.heightAnchor.constraint(equalToConstant: tabBarHeight + view.safeAreaInsets.bottom)
+
         ])
     }
     
@@ -85,7 +143,15 @@ final class DefaultTabBarController: UIViewController, TabBarDelegate {
             if index == selectedIndex {
                 addChild(viewController)
                 view.insertSubview(viewController.view, belowSubview: tabBarView)
-                viewController.view.frame = view.bounds
+                
+                viewController.view.translatesAutoresizingMaskIntoConstraints = false
+                     NSLayoutConstraint.activate([
+                        viewController.view.topAnchor.constraint(equalTo: view.topAnchor),
+                        viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                        viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                        viewController.view.bottomAnchor.constraint(equalTo: tabBarView.topAnchor)
+                     ])
+                
                 viewController.didMove(toParent: self)
             } else if viewController.parent != nil {
                 viewController.willMove(toParent: nil)
