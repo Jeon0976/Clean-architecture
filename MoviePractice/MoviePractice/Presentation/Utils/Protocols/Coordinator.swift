@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+/// <#Description#>
 protocol Coordinator: AnyObject {
     var finishDelegate: CoordinatorFinishDelegate? { get set }
     var childCoordinators: [Coordinator] { get set }
@@ -25,6 +27,7 @@ extension Coordinator {
     }
 }
 
+/// <#Description#>
 protocol CoordinatorFinishDelegate: AnyObject {
     func coordinatorDidFinish(childCoordinator: Coordinator)
 }

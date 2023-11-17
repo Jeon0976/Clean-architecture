@@ -46,6 +46,8 @@
 		C56B883C2AFFC29600AD762F /* MoviesTopRatedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56B883B2AFFC29500AD762F /* MoviesTopRatedCell.swift */; };
 		C56B883E2AFFC2B200AD762F /* MoviesTopRatedCollectionItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56B883D2AFFC2B200AD762F /* MoviesTopRatedCollectionItemViewModel.swift */; };
 		C56B88402B00C2CF00AD762F /* MoviesTopRatedCollectionLodingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56B883F2B00C2CF00AD762F /* MoviesTopRatedCollectionLodingFooterView.swift */; };
+		C56B88462B026A5600AD762F /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56B88452B026A5600AD762F /* MyPageViewModel.swift */; };
+		C56B88482B026A5E00AD762F /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56B88472B026A5E00AD762F /* MyPageViewController.swift */; };
 		C58D31C22AE6413400380F57 /* ConnectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D31C12AE6413400380F57 /* ConnectionError.swift */; };
 		C58D31C42AE6413F00380F57 /* DispatchQueueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D31C32AE6413F00380F57 /* DispatchQueueType.swift */; };
 		C58D31C62AE6426500380F57 /* AppConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D31C52AE6426500380F57 /* AppConfigurations.swift */; };
@@ -155,6 +157,8 @@
 		C56B883B2AFFC29500AD762F /* MoviesTopRatedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTopRatedCell.swift; sourceTree = "<group>"; };
 		C56B883D2AFFC2B200AD762F /* MoviesTopRatedCollectionItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTopRatedCollectionItemViewModel.swift; sourceTree = "<group>"; };
 		C56B883F2B00C2CF00AD762F /* MoviesTopRatedCollectionLodingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTopRatedCollectionLodingFooterView.swift; sourceTree = "<group>"; };
+		C56B88452B026A5600AD762F /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		C56B88472B026A5E00AD762F /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		C58D31C12AE6413400380F57 /* ConnectionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionError.swift; sourceTree = "<group>"; };
 		C58D31C32AE6413F00380F57 /* DispatchQueueType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueType.swift; sourceTree = "<group>"; };
 		C58D31C52AE6426500380F57 /* AppConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurations.swift; sourceTree = "<group>"; };
@@ -439,12 +443,13 @@
 			path = TopRated;
 			sourceTree = "<group>";
 		};
-		C5308D3B2AF2324600856854 /* NowPlaying */ = {
+		C5308D3B2AF2324600856854 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				C56B881D2AFDCF6400AD762F /* NowPlayingList */,
+				C56B88432B02692800AD762F /* ViewModel */,
+				C56B88442B02692D00AD762F /* View */,
 			);
-			path = NowPlaying;
+			path = MyPage;
 			sourceTree = "<group>";
 		};
 		C5308D3C2AF2324A00856854 /* Login */ = {
@@ -594,29 +599,6 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		C56B881D2AFDCF6400AD762F /* NowPlayingList */ = {
-			isa = PBXGroup;
-			children = (
-				C56B881E2AFDCF7C00AD762F /* ViewModel */,
-				C56B881F2AFDCF8900AD762F /* View */,
-			);
-			path = NowPlayingList;
-			sourceTree = "<group>";
-		};
-		C56B881E2AFDCF7C00AD762F /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		C56B881F2AFDCF8900AD762F /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		C56B88372AFFC26000AD762F /* MoviesTopRatedCollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -633,6 +615,22 @@
 				C56B883B2AFFC29500AD762F /* MoviesTopRatedCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		C56B88432B02692800AD762F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C56B88452B026A5600AD762F /* MyPageViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C56B88442B02692D00AD762F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C56B88472B026A5E00AD762F /* MyPageViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		C58D31C92AE6427300380F57 /* DIContainer */ = {
@@ -674,7 +672,7 @@
 				C5308D3C2AF2324A00856854 /* Login */,
 				C5308D392AF2322700856854 /* Search */,
 				C5308D3A2AF2323600856854 /* TopRated */,
-				C5308D3B2AF2324600856854 /* NowPlaying */,
+				C5308D3B2AF2324600856854 /* MyPage */,
 				C58D31D12AE6430500380F57 /* Behaviors */,
 			);
 			path = MoviesScene;
@@ -953,6 +951,7 @@
 				C5308D382AF22F5500856854 /* MovieNowPlayingFlowCoordinator.swift in Sources */,
 				C58D31F32AE64F7C00380F57 /* UserDefaultsMoviesQueriesStorage.swift in Sources */,
 				C58D31F52AE64F9A00380F57 /* MovieQueryUDS+Mapping.swift in Sources */,
+				C56B88462B026A5600AD762F /* MyPageViewModel.swift in Sources */,
 				C58D31FE2AE64FFB00380F57 /* CoreDataMoviesResponseStorage.swift in Sources */,
 				C5308D322AF22D9E00856854 /* TabBarController.swift in Sources */,
 				C5681DA02A9F6E8D00BA4FDC /* MovieWhenSearch.swift in Sources */,
@@ -986,6 +985,7 @@
 				C56B883E2AFFC2B200AD762F /* MoviesTopRatedCollectionItemViewModel.swift in Sources */,
 				C51863152A9D954F00141FCB /* AppDelegate.swift in Sources */,
 				C58D322D2AE9E2C000380F57 /* BackButtonEmptyTitleNavigationBarBehavior.swift in Sources */,
+				C56B88482B026A5E00AD762F /* MyPageViewController.swift in Sources */,
 				C56B88342AFDF9F100AD762F /* DefaultMoviesTopRatedRepository.swift in Sources */,
 				C58D32412AEA3FD200380F57 /* MoviesQueriesItemCell.swift in Sources */,
 				C5681DBC2AA1927000BA4FDC /* Disposable.swift in Sources */,

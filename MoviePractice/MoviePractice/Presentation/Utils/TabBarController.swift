@@ -10,7 +10,7 @@ import UIKit
 enum TabBarPage {
     case search
     case topRated
-    case nowPlaying
+    case myPage
     
     init?(index: Int) {
         switch index {
@@ -19,7 +19,7 @@ enum TabBarPage {
         case 1:
             self = .topRated
         case 2:
-            self = .nowPlaying
+            self = .myPage
         default:
             return nil
         }
@@ -31,7 +31,7 @@ enum TabBarPage {
             return "Search"
         case .topRated:
             return "Popular"
-        case .nowPlaying:
+        case .myPage:
             return "MyPage"
         }
     }
@@ -42,7 +42,7 @@ enum TabBarPage {
             return 0
         case .topRated:
             return 1
-        case .nowPlaying:
+        case .myPage:
             return 2
         }
     }
@@ -108,7 +108,6 @@ final class DefaultTabBarController: UIViewController, TabBarDelegate {
     private func updateTabBarHeight() {
         NSLayoutConstraint.activate([
             tabBarView.heightAnchor.constraint(equalToConstant: tabBarHeight + view.safeAreaInsets.bottom)
-
         ])
     }
     
@@ -120,7 +119,6 @@ final class DefaultTabBarController: UIViewController, TabBarDelegate {
             let button = UIButton()
             button.tag = index
             button.setTitle(viewController.title, for: .normal)
-            button.setImage(UIImage(systemName: "circle"), for: .normal)
             button.setTitleColor(.darkGray, for: .normal)
             button.setTitleColor(.black, for: .selected)
             button.addTarget(self, action: #selector(tabButtonTapped(_:)), for: .touchUpInside)

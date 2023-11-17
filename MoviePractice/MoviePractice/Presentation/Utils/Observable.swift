@@ -11,6 +11,9 @@ enum ObservableEvent<Value> {
     case completed
 }
 
+
+
+/// <#Description#>
 class Observable<Value> {
     /// - observer : 실제 관찰자 객체
     /// - block: 값이 변경될 때 실행될 클로저를 저장
@@ -61,11 +64,23 @@ class Observable<Value> {
         }
     }
     
-    /// 특정 observer를 제거한다
+    
+    /// 리스트 안에 있는 특정 관찰자를 제거합니다.
+    /// - Parameter observer: 제거하고자 하는 관찰자 객체
+    /// - 해당 함수는 removeDisposable를 통해서만 호출됩니다.
     private func remove(observer: AnyObject) {
         observers = observers.filter { $0.observer !== observer }
     }
     
+    
+    /// 구독을 시작하고 관찰자에게 이벤트를 전달합니다.
+    /// - Parameters:
+    ///   - observer: 이벤트를 받을 관찰자 객체
+    ///   - disposeBag: 관찰자가 더 이상 필요하지 않을 때 관찰자를 제거하기 위한 객체
+    ///   - onNext: 값이 변경될 때마다 실행될 클로저
+    ///   - onError: 오류가 발생했을 때 실행될 클로저
+    ///   - onCompleted: 관찰이 완료되었을 때 실행될 클로저
+    /// - Returns: Subscription 객체를 반환한다. 이를 통해 관찰자는 구독을 관리할 수 있습니다.
     func subscribe(
         on observer: AnyObject,
         disposeBag: DisposeBag,
