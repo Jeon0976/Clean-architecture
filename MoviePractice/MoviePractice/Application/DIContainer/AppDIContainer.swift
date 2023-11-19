@@ -63,4 +63,8 @@ final class AppDIContainer {
         
         return MoviesTopRatedDIContainer(dependencies: dependecies)
     }
+    
+    func makeMyPageDIContainer() -> MyPageDIContainer {
+        return MyPageDIContainer()
+    }
 }

@@ -46,6 +46,7 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
             } else {
                 assertionFailure("Invalid tab index: \(index)")
             }
+            coordinator.finishDelegate = self
             coordinator.start()
 
             return coordinator.viewController
@@ -53,5 +54,13 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
         
         tabBarController.setViewControllers(viewControllers)
         childCoordinators = coordinators
+    }
+}
+
+extension TabBarFlowCoordinator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
+        
+        self.finish()
     }
 }

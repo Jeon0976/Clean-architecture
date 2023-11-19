@@ -11,7 +11,6 @@ protocol MoviesTopRatedFlowCoordinatorDependencies {
     func makeMoviesTopRatedViewController(
         actions: MoviesTopRatedViewModelActions
     ) -> MoviesTopRatedViewController
-//    func makeMoviesDetailsViewController(movie: MovieWhenTopRated) -> UIViewController
 }
 
 final class MoviesTopRatedFlowCoordinator: Coordinator {

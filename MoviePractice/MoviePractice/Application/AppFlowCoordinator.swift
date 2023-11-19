@@ -60,16 +60,20 @@ final class AppFlowCoordinator: Coordinator {
         let tabBarFlowCoordinator = TabBarFlowCoordinator(viewController: viewController, tabBarController: tabBarController)
         tabBarFlowCoordinator.finishDelegate = self
         
-        let moviesSceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()
-        let flow = moviesSceneDIContainer.makeMovieSearchFlowCoordinator(navigationController: UINavigationController())
+        let sceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()
+        let sceneFlow = sceneDIContainer.makeMovieSearchFlowCoordinator(navigationController: UINavigationController())
         
-        let moviesTopRatedDIContainer = appDIContainer.makeMoviesTopRatedDIContainer()
-        let flow2 = moviesTopRatedDIContainer.makeMoviesTopRatedFlowCoordinator(navigationController: UINavigationController())
+        let topRatedDIContainer = appDIContainer.makeMoviesTopRatedDIContainer()
+        let topRated = topRatedDIContainer.makeMoviesTopRatedFlowCoordinator(navigationController: UINavigationController())
         
-        let moviesSceneDIContainer3 = appDIContainer.makeMoviesSceneDIContainer()
-        let flow3 = moviesSceneDIContainer3.makeMovieSearchFlowCoordinator(navigationController: UINavigationController())
+        let myPageDIContainer = appDIContainer.makeMyPageDIContainer()
+        let myPageFlow = myPageDIContainer.makeMyPageFlowCoordinator(navigationController: UINavigationController())
         
-        tabBarFlowCoordinator.setupTabs(with: [flow, flow2, flow3])
+        tabBarFlowCoordinator.setupTabs(with: [
+            sceneFlow,
+            topRated,
+            myPageFlow]
+        )
         
         tabBarFlowCoordinator.start()
         childCoordinators.append(tabBarFlowCoordinator)

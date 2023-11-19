@@ -11,8 +11,6 @@ enum ObservableEvent<Value> {
     case completed
 }
 
-
-
 /// <#Description#>
 class Observable<Value> {
     /// - observer : 실제 관찰자 객체

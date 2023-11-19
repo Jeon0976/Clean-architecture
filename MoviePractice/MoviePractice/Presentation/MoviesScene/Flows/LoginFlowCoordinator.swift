@@ -12,17 +12,15 @@ protocol LoginFlowCoordinatorDependencies {
 }
 
 final class LoginFlowCoordinator: Coordinator {
+    var type: CoordinatorType { .login }
+
     weak var finishDelegate: CoordinatorFinishDelegate?
-    
+    var tabBarViewController: TabBarDelegate? = nil
+
     var childCoordinators: [Coordinator] = []
-    
     var viewController: UINavigationController
     
     var viewTitle: String? = nil
-    
-    var tabBarViewController: TabBarDelegate? = nil
-    
-    var type: CoordinatorType { .login }
     
     private let dependencies: LoginFlowCoordinatorDependencies!
     
@@ -41,7 +39,6 @@ final class LoginFlowCoordinator: Coordinator {
     }
     
     func start() {
-//        let actions = LoginViewModelActions(showTabBar: { [weak self] in self?.showTabBar() } )
         let actions = LoginViewModelActions(showTabBar: showTabBar)
         let vc = dependencies.makeLoginViewController(actions: actions)
         
