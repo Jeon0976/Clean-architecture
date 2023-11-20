@@ -34,7 +34,7 @@
 
 ### 😎 결과물 
 
-<img src="/imgs/5.gif" width = "250" height = "400"/><img src="/imgs/6.gif" width = "250" height = "400"/>
+<img src="/imgs/5.gif" width = "250" height = "420"/><img src="/imgs/6.gif" width = "250" height = "420"/>
 
 ### 🔧 진행 중인 업데이트
 
