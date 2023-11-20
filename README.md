@@ -33,7 +33,8 @@
 - Clean Architecture: https://github.com/kudoleh/iOS-Clean-Architecture-MVVM
 
 ### 😎 결과물 
-![5](/imgs/5.gif)![6](/imgs/6.gif)
+
+<img src="/imgs/5.gif" width = "250" height = "400"/><img src="/imgs/6.gif" width = "250" height = "400"/>
 
 ### 🔧 진행 중인 업데이트
 
