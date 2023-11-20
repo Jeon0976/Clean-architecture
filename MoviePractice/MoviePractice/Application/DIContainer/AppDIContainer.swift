@@ -46,13 +46,13 @@ final class AppDIContainer {
         return LoginSceneDIContainer()
     }
     
-    func makeMoviesSceneDIContainer() -> MoviesSceneDIContainer {
-        let dependecies = MoviesSceneDIContainer.Dependencies(
+    func makeMoviesSceneDIContainer() -> MoviesSearchDIContainer {
+        let dependecies = MoviesSearchDIContainer.Dependencies(
             apiDataTransferService: apiDataTransferService,
             imageDataTransferService: imageDataTranserService
         )
         
-        return MoviesSceneDIContainer(dependencies: dependecies)
+        return MoviesSearchDIContainer(dependencies: dependecies)
     }
     
     func makeMoviesTopRatedDIContainer() -> MoviesTopRatedDIContainer {

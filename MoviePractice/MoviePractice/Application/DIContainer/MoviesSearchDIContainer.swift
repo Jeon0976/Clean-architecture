@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
+final class MoviesSearchDIContainer: MoviesSearchFlowCoordinatorDependencies {
     
     struct Dependencies {
         let apiDataTransferService: DataTransferService
@@ -51,7 +51,7 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
 }
 
 // MARK: Repositories
-extension MoviesSceneDIContainer {
+extension MoviesSearchDIContainer {
     func makeMoviesRepository() -> MoviesSearchRepository {
         DefaultMoviesSearchRepository(
             dataTransferService: dependencies.apiDataTransferService,
@@ -72,7 +72,7 @@ extension MoviesSceneDIContainer {
     }
 }
 
-extension MoviesSceneDIContainer {
+extension MoviesSearchDIContainer {
     // MARK: Movie List
     func makeMoviesListViewController(
         actions: MoviesListViewModelActions) -> MoviesListViewController {
