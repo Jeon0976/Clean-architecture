@@ -59,6 +59,8 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
 
 extension TabBarFlowCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
+        childCoordinators.forEach { $0.viewController.viewControllers.removeAll() }
+        
         childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
         
         self.finish()

@@ -87,9 +87,11 @@ extension AppFlowCoordinator: CoordinatorFinishDelegate {
         
         switch childCoordinator.type {
         case .tab:
+            isLogin = false
             viewController.viewControllers.removeAll()
             showLoginFlow()
         case .login:
+            isLogin = true
             viewController.viewControllers.removeAll()
             showTab()
         default:
