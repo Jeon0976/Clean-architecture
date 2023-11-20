@@ -23,7 +23,7 @@
 
 ### 🗃️ Clean Architecture 구조
 
-![2](/imgs/2.png)![3](/imgs/3.png)
+<img src="/imgs/2.png" width = "250" height = "250"/> <img src="/imgs/3.png" width = "250" height = "450"/>
 
 ![4.png](/imgs/4.png)
 
