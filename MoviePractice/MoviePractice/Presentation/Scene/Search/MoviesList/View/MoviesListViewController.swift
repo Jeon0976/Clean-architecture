@@ -216,7 +216,7 @@ extension MoviesListViewController {
         definesPresentationContext = true
         if #available(iOS 13.0, *) {
             // accessibility는 테스트를 위해?
-            searchController.searchBar.searchTextField.accessibilityIdentifier = AccessibilityIdentifier.searchField
+            searchController.searchBar.searchTextField.accessibilityIdentifier = Identifier.searchField
         }
     }
 }

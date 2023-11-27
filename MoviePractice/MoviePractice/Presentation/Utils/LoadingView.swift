@@ -1,7 +1,6 @@
 import UIKit
 
 class LoadingView {
-
     private static var spinner: UIActivityIndicatorView?
     private static weak var currentWindow: UIWindow?
 

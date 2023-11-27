@@ -48,13 +48,13 @@ enum TabBarPage {
     }
 }
 
-let tabBarHeight: CGFloat = 56
-
 protocol TabBarDelegate: AnyObject {
     func shouldHideTabBar(_ hide: Bool)
 }
 
 final class DefaultTabBarController: UIViewController, TabBarDelegate {
+    private let tabBarHeight: CGFloat = 56
+    
     private lazy var viewControllers: [UIViewController] = []
     private lazy var buttons: [UIButton] = []
     

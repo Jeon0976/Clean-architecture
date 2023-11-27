@@ -70,7 +70,7 @@ final class MovieDetailsViewController: UIViewController {
         title = viewModel.title
         posterImageView.isHidden = viewModel.isPosterImageHidden
         overviewTextView.text = viewModel.overview
-        view.accessibilityIdentifier = AccessibilityIdentifier.movieDetailsView
+        view.accessibilityIdentifier = Identifier.movieDetailsView
         
         [
             backgroundImageView,

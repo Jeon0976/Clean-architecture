@@ -85,7 +85,6 @@ protocol DataTransferErrorLogger {
     func log(error: Error)
 }
 
-
 // MARK: DataTransfer Service
 /// **DataTransferService**  프로토콜을 준수하며, 네트워크 서비스, 에러 해결, 에러 로거의 인스턴스를 가지고 있습니다.
 /// - 네트워크 요청의 성공 또는 실패에 따라 적절한 동작을 실행한다.
@@ -225,7 +224,7 @@ final class DefaultDataTransferErrorResolver: DataTransferErrorResolver {
 
 // MARK: Response Decoder
 /// JSON 데이터를 디코드하는 역할
-class JSONResponseDecoder: ResponseDecoder {
+final class JSONResponseDecoder: ResponseDecoder {
     private let jsonDecoder = JSONDecoder()
     
     init() { }
@@ -239,7 +238,7 @@ class JSONResponseDecoder: ResponseDecoder {
 // MARK: 원시 데이터 Decoder
 /// 원시 데이터 (data)를 디코드하는 역할
 // TODO: - 설명 필요
-class RawDataResponseDecoder: ResponseDecoder {
+final class RawDataResponseDecoder: ResponseDecoder {
     init() { }
     
     enum CodingKeys: String, CodingKey {

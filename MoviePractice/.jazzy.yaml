@@ -1,0 +1,207 @@
+copyright: ''
+theme: fullwidth
+
+readme: '/Users/jeonseonghun/Desktop/CleanStudy/README.md'
+custom_categories:
+- name: Application
+  children:
+  - AppDelegate
+  - SceneDelegate
+  - AppConfiguration
+  - AppFlowCoordinator 
+- name: DIContainer
+  children:
+  - AppDIContainer 
+  - LoginSceneDIContainer
+  - MoviesSearchDIContainer
+  - MoviesTopRatedDIContainer
+  - MyPageDIContainer
+# - name: Presentation
+#   children: []
+# - name: Presentation, Scene
+#   childreN: [] 
+- name: Presentation - Scene - Flows 
+  children: 
+  - LoginFlowCoordinator
+  - TabBarFlowCoordinator
+  - MoviesSearchFlowCoordinatorDependencies
+  - MoviesSearchFlowCoordinator
+  - MoviesTopRatedFlowCoordinatorDependencies
+  - MoviesTopRatedFlowCoordinator
+  - MyPageFlowCoordinatorDependencies
+  - MyPageFlowCoordinator
+- name: Presentation - Scene - Login
+  children: 
+  - LoginViewModelActions
+  - LoginViewModelInput
+  - LoginViewModelOutput
+  - LoginViewModel
+  - DefaultLoginViewModel
+  - LoginViewController
+- name: Presentation - Scene - Search 
+  children: 
+  - MoviesListViewModelActions
+  - MoviesListViewModelLoading
+  - MoviesListviewModelInput
+  - MoviesListViewModelOutput
+  - MoviesListViewModel
+  - DefaultMoviesListViewModel
+  - MoviesListItemViewModel
+  - MoviesListViewController
+  - MoviesListTableViewController
+  - MoviesListItemCell
+- name: Presentation - Scene - Detail
+  children: 
+  - MovieDetailsViewModelInput
+  - MovieDetailsViewModelOutput
+  - MovieDetailsViewModel
+  - DefaultMovieDetailsViewModel
+  - MovieDetailsViewController
+- name: Presentation - Scene - Movies Query List 
+  children: 
+  - MoviesQueryListViewModelDidSelectAction
+  - MoviesQueryListViewModelInput
+  - MoviesQueryListViewModelOutput
+  - MoviesQueryListViewModel
+  - FetchRecentMovieQueriesUseCaseFactory
+  - DefaultMoviesQueryListViewModel
+  - MoviesQueryListItemViewModel
+  - MoviesQueriesTableViewController
+  - MoviesQueriesItemCell
+- name: Presentation - Scene - Top Rated 
+  children: 
+  - MoviesTopRatedViewModelActions
+  - MoviesTopRatedModelInput
+  - MoviesTopRatedModelOutput
+  - MoviesTopRatedModelLoading
+  - MoviesTopRatedViewModel
+  - DefaultMoviesTopRatedViewModel
+  - MoviesTopRatedCollectionItemViewModel
+  - MoviesTopRatedViewController
+  - MoviesTopRatedCollectionViewController
+  - MoviesTopRatedCollectionLodingFooterView
+  - MoviesTopRatedCell
+- name: Presentation - Scene - MyPage
+  children: 
+  - MyPageModelActions
+  - MyPageViewModelInput
+  - MyPageViewModelOutput
+  - MyPageViewModel
+  - DefaultMyPageViewModel
+  - MyPageViewController
+- name: Presentation - Scene - Behaviors 
+  children: 
+  - BackButtonEmptyTitleNavigationBarBehavior
+  - BlackStyleNavigationBarBehavior
+- name: Presentation - Utils
+  children: 
+  - ViewControllerLifecycleBehavior
+  - Coordinator
+  - CoordinatorFinishDelegate
+  - CoordinatorType
+  - Alertable
+  - ObservableEvent
+  - Observable
+  - Subscription
+  - Disposables
+  - DisposeBag
+  - Identifier
+  - LoadingView
+  - TabBarPage
+  - TabBarDelegate
+  - DefaultTabBarController
+# - name: Domain
+#   children: []
+- name: Domain - Entities
+  children: 
+  - MoviesSearchPage
+  - MoviesTopRatedPage
+  - MovieWhenSearch
+  - MovieWhenTopRated
+  - MovieQuery
+  - MovieDetail
+  - Genre
+  - SearchMoviesUseCase
+  - SearchMoviesUseCaseRequestValue
+  - DefaultSearchMoviesUseCase
+  - FetchRecentMovieQueriesUseCase
+  - TopRatedMoviesUseCase
+  - TopRatedMoviesUseCaseRequestValue
+  - DefaultTopRatedMoviesUseCase
+  - UseCase
+- name: Domain - Repositories (Dependency Inversion)
+  children: 
+  - MoviesSearchRepository
+  - MoviesQueriesRepository
+  - PosterImagesRepository
+  - MoviesTopRatedRepository
+# - name: Data
+#   chilren: [] 
+- name: Data - Repositories 
+  children: 
+  - DefaultMoviesSearchRepository
+  - DefaultMoviesQueriesRepository
+  - DefaultMoviesTopRatedRepository
+  - DefaultPosterImagesRepository
+  - RepositoryTask
+- name: Data - Network/DTO
+  children: 
+  - APIEndpoints
+  - MoviesSearchRequestDTO
+  - MoviesSearchResponseDTO
+  - MoviesTopRateRequestDTO
+  - MoviesTopRatedResponseDTO
+- name: Data - Persistent Storages
+  children: 
+  - MoviesResponseStorage
+  - CoreDataMoviesResponseStorage 
+  - MoviesQueriesStorage
+  - CoreDataMoviesQueriesStorage
+  - UserDefaultsMoviesQueriesStorage
+  - MovieQueriesListUDS
+  - MovieQueryUDS
+  - CoreDataStorageError
+  - CoreDataStorage
+- name: Common 
+  children: 
+  - Cancellable
+  - ConnectionError
+  - DispatchQueueType
+# - name: Infrastructure, Network 
+#   children: []
+- name: Infrastructure - Network - DataTransferService 
+  children: 
+  - DataTransferError
+  - DataTransferDispatchQueue
+  - DataTransferService
+  - DataTransferErrorResolver
+  - ResponseDecoder
+  - DataTransferErrorLogger
+  - DefaultDataTransferService
+  - DefaultDataTransferErrorLogger
+  - DefaultDataTransferErrorResolver
+  - JSONResponseDecoder
+  - RawDataResponseDecoder
+- name: Infrastructure - Network - NetworkService 
+  children: 
+  - NetworkError
+  - NetworkCancellable
+  - NetworkService
+  - NetworkSessionManager
+  - DefaultNetworkService
+  - DefaultNetworkSessionManager
+  - DefaultNetworkErrorLoger
+- name: Infrastructure - Network - EndPoint 
+  children: 
+  - HTTPMethodType
+  - EndPoint
+  - BodyEncoder
+  - JSONBodyEncoder
+  - AsciiBodyEncoder
+  - RequestTable
+  - ResponseRequestable
+  - RequestGenerationError
+- name: Infrastructure - Network - NetworkConfigurable
+  children:
+  - NetworkConfigurable
+  - ApiDataNetworkConfig
