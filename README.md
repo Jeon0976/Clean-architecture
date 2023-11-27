@@ -6,7 +6,9 @@
 
 <aside>
 💡 Clean Architecture 스터디 코드입니다.  https://github.com/kudoleh/iOS-Clean-Architecture-MVVM 코드를 기반으로 개발했으며, Login / TabBar, TabBarController 커스텀, Reactive Programming 커스텀, Coordinator 커스텀등을 진행했습니다.
-![코드 문서](https://jeon0976.github.io/CleanArchitecture_doc/)
+
+[코드 문서](https://jeon0976.github.io/CleanArchitecture_doc/)
+
 </aside>
 
 ## 🛠️ 사용 기술 및 라이브러리
