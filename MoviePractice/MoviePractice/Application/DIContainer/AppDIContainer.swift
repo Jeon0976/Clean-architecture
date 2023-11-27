@@ -7,21 +7,20 @@
 
 import Foundation
 
-/// **DI Container (Dependency Injection Container)**
-/// - Dependecy Injection (의존성 주입)을 구현하기 위해 사용되는 객체이다.
-/// 의존성 주입은 객체가 필요로 하는 의존성을 외부에서 주입받도록 만드는 패턴으로, 코드의 결합도를 낮추고, 테스트 용이성 및 확장성을 향상시키는데 도움을 준다.
-/// 1. 객체의 생명주기 관리
-///     - DIContainer는 객체의 생성, 설정, 파괴를 관리한다.
-///     - 객체 생성과 관리에 대한 걱정 없이 비즈시느 로직에 집중할 수 있다.
-/// 2. 의존성 해결
-///     - 객체가 필요로 하는 의존성을 자동으로 해결하고 주입한다.
-/// 3. 구성 관리
-///     - 다양한 환경에서 다른 설정 값을 가질 수 있도록 도와준다.
-/// 4. 객체 재사용
-///     - 한 번 생성된 객체를 재사용할 수 있도록 관리함으로써 메모리 사용 효율과 성능을 향상시킬 수 있다. 
+
+/// 앱의 전체적인 의존성 주입을 관리하는 Container입니다.
+///
+/// - Data 단계에 의존성을 주입하기 위한, **NetworkService**(UrlSession, Moya, Alamofire)..를 생성합니다.
+/// - 각 화면에 대한 **DIContainer**들을 생성합니다.
 final class AppDIContainer {
+    
+    /// API Key, API URL 정보 변수입니다.
     lazy var appConfiguration = AppConfiguration()
     
+    /// API NetworkService 변수 입니다.
+    ///
+    /// - 해당 변수는 전반적인 api 네트워크를 담당합니다.
+    /// - Infrastructure / Network -> *DataTransferService protocol*를 채택한 Network Service class(DefaultNetworkService)를 생성합니다.
     lazy var apiDataTransferService: DataTransferService = {
         let config = ApiDataNetworkConfig(baseURL: URL(string: appConfiguration.apiBaseURL)!, queryParameters: [
             "api_key": appConfiguration.apiKey,
@@ -33,6 +32,10 @@ final class AppDIContainer {
         return DefaultDataTransferService(with: apiDataNetwork)
     }()
     
+    /// API NetworkService 변수 입니다.
+    ///
+    /// - 해당 변수는 image 네트워크를 담당합니다.
+    /// - Infrastructure / Network -> *DataTransferService protocol*를 채택한 Network Service class(DefaultNetworkService)를 생성합니다.
     lazy var imageDataTranserService: DataTransferService = {
         let config = ApiDataNetworkConfig(baseURL: URL(string: appConfiguration.imageBaseURL)!)
         
@@ -42,11 +45,18 @@ final class AppDIContainer {
     }()
     
     // MARK: DIContainers of scenes
+    
+    
+    /// Login Scene DI Container를 생성합니다.
+    /// - Returns: LoginSceneDIContainer
     func makeLoginSceneDIContainer() -> LoginSceneDIContainer {
         return LoginSceneDIContainer()
     }
     
-    func makeMoviesSceneDIContainer() -> MoviesSearchDIContainer {
+    /// Movies Search DI Container를 생성합니다.
+    /// - Movies Search Data 단계에서 필요한 api, image network service를 주입해줍니다.
+    /// - Returns: MoviesSearchDIContainer
+    func makeMoviesSearchDIContainer() -> MoviesSearchDIContainer {
         let dependecies = MoviesSearchDIContainer.Dependencies(
             apiDataTransferService: apiDataTransferService,
             imageDataTransferService: imageDataTranserService
@@ -55,6 +65,9 @@ final class AppDIContainer {
         return MoviesSearchDIContainer(dependencies: dependecies)
     }
     
+    /// Movies Top Rated DI Container를 생성합니다.
+    /// - Movies Top Rated Data 단계에서 필요한 api, image network service를 주입해줍니다.
+    /// - Returns: MoviesTopRatedDIContainer
     func makeMoviesTopRatedDIContainer() -> MoviesTopRatedDIContainer {
         let dependecies = MoviesTopRatedDIContainer.Dependencies(
             apiDataTransferService: apiDataTransferService,
@@ -64,6 +77,8 @@ final class AppDIContainer {
         return MoviesTopRatedDIContainer(dependencies: dependecies)
     }
     
+    /// My Page DI Container를 생성합니다.
+    /// - Returns: MyPageDIContainer
     func makeMyPageDIContainer() -> MyPageDIContainer {
         return MyPageDIContainer()
     }

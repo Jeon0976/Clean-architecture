@@ -24,7 +24,7 @@ final class MoviesSearchFlowCoordinator: NSObject, UINavigationControllerDelegat
     weak var tabBarViewController: TabBarDelegate?
     
     var childCoordinators: [Coordinator] = []
-    var viewController: UINavigationController
+    var navigationController: UINavigationController
 
     var viewTitle: String? = nil
 
@@ -34,10 +34,10 @@ final class MoviesSearchFlowCoordinator: NSObject, UINavigationControllerDelegat
     private weak var moviesQueriesSuggestionsVC: UIViewController?
     
     init(
-        viewController: UINavigationController,
+        navigationController: UINavigationController,
         dependencies: MoviesSearchFlowCoordinatorDependencies
     ) {
-        self.viewController = viewController
+        self.navigationController = navigationController
         self.dependencies = dependencies
     }
     
@@ -53,8 +53,8 @@ final class MoviesSearchFlowCoordinator: NSObject, UINavigationControllerDelegat
             vc.title = title
         }
         
-        viewController.delegate = self
-        viewController.pushViewController(vc, animated: false)
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: false)
 
         
         moviesListVC = vc
@@ -64,7 +64,7 @@ final class MoviesSearchFlowCoordinator: NSObject, UINavigationControllerDelegat
         let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
         tabBarViewController?.shouldHideTabBar(true)
         
-        viewController.pushViewController(vc, animated: true)
+        navigationController.pushViewController(vc, animated: true)
     }
     
     private func showMovieQueriesSuggestions(didSelect: @escaping(MovieQuery) -> Void) {

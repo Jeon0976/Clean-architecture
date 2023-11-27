@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = navigationController
         
         appFlowCoordinator = AppFlowCoordinator(
-            viewController: navigationController,
+            navigationController: navigationController,
             appDIContainer: appDIContainer
         )
 

@@ -119,7 +119,7 @@ extension MoviesSearchDIContainer {
     // MARK: Flow Coordinators
     func makeMovieSearchFlowCoordinator(navigationController: UINavigationController) -> MoviesSearchFlowCoordinator {
         MoviesSearchFlowCoordinator(
-            viewController: navigationController,
+            navigationController: navigationController,
             dependencies: self
         )
     }

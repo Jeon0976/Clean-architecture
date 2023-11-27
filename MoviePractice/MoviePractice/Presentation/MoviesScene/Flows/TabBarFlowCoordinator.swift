@@ -18,14 +18,14 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
 
     var childCoordinators: [Coordinator] = []
     
-    var viewController: UINavigationController
+    var navigationController: UINavigationController
     private var tabBarController: DefaultTabBarController
     
     init(
-        viewController: UINavigationController,
+        navigationController: UINavigationController,
         tabBarController: DefaultTabBarController
     ) {
-        self.viewController = viewController
+        self.navigationController = navigationController
         self.tabBarController = tabBarController
     }
     
@@ -34,8 +34,8 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
     }
     
     func setupTabs(with coordinators: [Coordinator]) {
-        viewController.pushViewController(tabBarController, animated: false)
-        viewController.setNavigationBarHidden(true, animated: false)
+        navigationController.pushViewController(tabBarController, animated: false)
+        navigationController.setNavigationBarHidden(true, animated: false)
         
         let viewControllers = coordinators.enumerated().map { (index, coordinator) -> UINavigationController in
             
@@ -49,7 +49,7 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
             coordinator.finishDelegate = self
             coordinator.start()
 
-            return coordinator.viewController
+            return coordinator.navigationController
         }
         
         tabBarController.setViewControllers(viewControllers)
@@ -59,7 +59,7 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
 
 extension TabBarFlowCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
-        childCoordinators.forEach { $0.viewController.viewControllers.removeAll() }
+        childCoordinators.forEach { $0.navigationController.viewControllers.removeAll() }
         
         childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
         

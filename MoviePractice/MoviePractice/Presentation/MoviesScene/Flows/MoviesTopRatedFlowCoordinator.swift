@@ -20,7 +20,7 @@ final class MoviesTopRatedFlowCoordinator: Coordinator {
     weak var tabBarViewController: TabBarDelegate?
 
     var childCoordinators: [Coordinator] = []
-    var viewController: UINavigationController
+    var navigationController: UINavigationController
     
     var viewTitle: String? = nil
     
@@ -29,10 +29,10 @@ final class MoviesTopRatedFlowCoordinator: Coordinator {
     private weak var moviesTopRatedVC: MoviesTopRatedViewController?
     
     init(
-        viewController: UINavigationController,
+        navigationController: UINavigationController,
         dependencies: MoviesTopRatedFlowCoordinatorDependencies
     ) {
-        self.viewController = viewController
+        self.navigationController = navigationController
         self.dependencies = dependencies
     }
     
@@ -44,7 +44,7 @@ final class MoviesTopRatedFlowCoordinator: Coordinator {
             vc.title = title
         }
         
-        viewController.pushViewController(vc, animated: false)
+        navigationController.pushViewController(vc, animated: false)
         
         moviesTopRatedVC = vc
     }

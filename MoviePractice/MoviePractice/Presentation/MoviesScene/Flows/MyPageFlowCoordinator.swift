@@ -18,7 +18,7 @@ final class MyPageFlowCoordinator: NSObject, Coordinator {
     weak var tabBarViewController: TabBarDelegate?
     
     var childCoordinators: [Coordinator] = []
-    var viewController: UINavigationController
+    var navigationController: UINavigationController
     
     var viewTitle: String? = nil
     
@@ -27,10 +27,10 @@ final class MyPageFlowCoordinator: NSObject, Coordinator {
     private weak var myPageVC: MyPageViewController?
     
     init(
-        viewController: UINavigationController,
+        navigationController: UINavigationController,
         dependencies: MyPageFlowCoordinatorDependencies
     ) {
-        self.viewController = viewController
+        self.navigationController = navigationController
         self.dependencies = dependencies
     }
     
@@ -46,7 +46,7 @@ final class MyPageFlowCoordinator: NSObject, Coordinator {
             vc.title = title
         }
         
-        viewController.pushViewController(vc, animated: false)
+        navigationController.pushViewController(vc, animated: false)
         
         myPageVC = vc
     }

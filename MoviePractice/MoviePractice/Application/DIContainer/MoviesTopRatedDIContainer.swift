@@ -72,7 +72,7 @@ extension MoviesTopRatedDIContainer {
     
     func makeMoviesTopRatedFlowCoordinator(navigationController: UINavigationController) -> MoviesTopRatedFlowCoordinator {
         MoviesTopRatedFlowCoordinator(
-            viewController: navigationController,
+            navigationController: navigationController,
             dependencies: self
         )
     }

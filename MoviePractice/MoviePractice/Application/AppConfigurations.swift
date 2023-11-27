@@ -7,7 +7,10 @@
 
 import Foundation
 
+/// Api 관련 정보를 갖고있는 클래스 입니다.
 final class AppConfiguration {
+    
+    /// *API.plist*로 구분한 APIKey값을 불러오는 변수입니다.
     lazy var apiKey: String = {
         guard let path = Bundle.main.url(forResource: "API", withExtension: "plist"),
               let dict = NSDictionary(contentsOf: path) as? [String: Any],
@@ -16,6 +19,9 @@ final class AppConfiguration {
         return apiKey
     }()
     
+    /// api url
     let apiBaseURL = "https://api.themoviedb.org"
+    
+    /// image url
     let imageBaseURL = "https://image.tmdb.org"
 }

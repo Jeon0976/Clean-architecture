@@ -130,26 +130,19 @@ final class DefaultNetworkErrorLoger: NetworkErrorLogger {
     init() { }
     
     func log(request: URLRequest) {
-//        print("-------------")
-//        print("request: \(request.url!)")
-//        print("headers: \(request.allHTTPHeaderFields!)")
-//        print("method: \(request.httpMethod!)")
-        if let httpBody = request.httpBody, let result = ((try? JSONSerialization.jsonObject(with: httpBody, options: []) as? [String: AnyObject]) as [String: AnyObject]??) {
-//            printIfDebug("body: \(String(describing: result))")
-        } else if let httpBody = request.httpBody, let resultString = String(data: httpBody, encoding: .utf8) {
-//            printIfDebug("body: \(String(describing: resultString))")
-        }
+//        if let httpBody = request.httpBody, let result = ((try? JSONSerialization.jsonObject(with: httpBody, options: []) as? [String: AnyObject]) as [String: AnyObject]??) {
+//        } else if let httpBody = request.httpBody, let resultString = String(data: httpBody, encoding: .utf8) {
+//        }
     }
 
     func log(responseData data: Data?, response: URLResponse?) {
-        guard let data = data else { return }
-        if let dataDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-//            printIfDebug("responseData: \(String(describing: dataDict))")
-        }
+//        guard let data = data else { return }
+//        if let _ = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+//        }
     }
 
     func log(error: Error) {
-//        printIfDebug("\(error)")
+        printIfDebug("\(error)")
     }
 }
 

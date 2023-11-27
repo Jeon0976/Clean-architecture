@@ -27,7 +27,7 @@ final class LoginSceneDIContainer: LoginFlowCoordinatorDependencies {
     
     func makeLoginFlowCoordinator(navigationController: UINavigationController) -> LoginFlowCoordinator {
         LoginFlowCoordinator(
-            viewController: navigationController,
+            navigationController: navigationController,
             dependencies: self
         )
     }

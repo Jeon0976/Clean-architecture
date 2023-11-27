@@ -87,7 +87,7 @@ protocol DataTransferErrorLogger {
 
 
 // MARK: DataTransfer Service
-/// **DataTransferService**  프로토콜을 준수하며, 네트워크 서비스, 에러 해결, 에러 로거의 인스턴스를 가지고 있다.
+/// **DataTransferService**  프로토콜을 준수하며, 네트워크 서비스, 에러 해결, 에러 로거의 인스턴스를 가지고 있습니다.
 /// - 네트워크 요청의 성공 또는 실패에 따라 적절한 동작을 실행한다.
 final class DefaultDataTransferService {
     

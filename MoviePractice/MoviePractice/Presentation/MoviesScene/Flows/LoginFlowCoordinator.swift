@@ -18,7 +18,7 @@ final class LoginFlowCoordinator: Coordinator {
     var tabBarViewController: TabBarDelegate? = nil
 
     var childCoordinators: [Coordinator] = []
-    var viewController: UINavigationController
+    var navigationController: UINavigationController
     
     var viewTitle: String? = nil
     
@@ -27,10 +27,10 @@ final class LoginFlowCoordinator: Coordinator {
     private weak var loginVC: LoginViewController?
     
     init(
-        viewController: UINavigationController,
+        navigationController: UINavigationController,
         dependencies: LoginFlowCoordinatorDependencies
     ) {
-        self.viewController = viewController
+        self.navigationController = navigationController
         self.dependencies = dependencies
     }
     
@@ -46,7 +46,7 @@ final class LoginFlowCoordinator: Coordinator {
             vc.title = title
         }
         
-        viewController.pushViewController(vc, animated: false)
+        navigationController.pushViewController(vc, animated: false)
         
         loginVC = vc 
     }

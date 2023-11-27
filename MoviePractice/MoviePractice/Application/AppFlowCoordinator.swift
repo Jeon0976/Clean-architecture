@@ -7,12 +7,13 @@
 
 import UIKit
 
+/// 앱의 최초 화면 플로우를 정하는 클래스 입니다.
 final class AppFlowCoordinator: Coordinator {
     var finishDelegate: CoordinatorFinishDelegate? = nil
     
     var childCoordinators: [Coordinator] = []
     
-    var viewController: UINavigationController
+    var navigationController: UINavigationController
     
     var viewTitle: String? = nil
     
@@ -29,15 +30,19 @@ final class AppFlowCoordinator: Coordinator {
             UserDefaults.standard.set(newValue, forKey: "isLogin")
         }
     }
-
     
+    /// <#Description#>
+    /// - Parameters:
+    ///   - navigationController: <#navigationController description#>
+    ///   - appDIContainer: <#appDIContainer description#>
     init(
-        viewController: UINavigationController,
+        navigationController: UINavigationController,
         appDIContainer: AppDIContainer
     ) {
-        self.viewController = viewController
+        self.navigationController = navigationController
         self.appDIContainer = appDIContainer
     }
+    
     
     func start() {
         if isLogin {
@@ -49,7 +54,7 @@ final class AppFlowCoordinator: Coordinator {
     
     func showLoginFlow() {
         let loginSceneDIContainer = appDIContainer.makeLoginSceneDIContainer()
-        let flow = loginSceneDIContainer.makeLoginFlowCoordinator(navigationController: viewController)
+        let flow = loginSceneDIContainer.makeLoginFlowCoordinator(navigationController: navigationController)
         flow.finishDelegate = self
         flow.start()
         childCoordinators.append(flow)
@@ -57,10 +62,10 @@ final class AppFlowCoordinator: Coordinator {
     
     func showTab() {
         let tabBarController = DefaultTabBarController()
-        let tabBarFlowCoordinator = TabBarFlowCoordinator(viewController: viewController, tabBarController: tabBarController)
+        let tabBarFlowCoordinator = TabBarFlowCoordinator(navigationController: navigationController, tabBarController: tabBarController)
         tabBarFlowCoordinator.finishDelegate = self
         
-        let sceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()
+        let sceneDIContainer = appDIContainer.makeMoviesSearchDIContainer()
         let sceneFlow = sceneDIContainer.makeMovieSearchFlowCoordinator(navigationController: UINavigationController())
         
         let topRatedDIContainer = appDIContainer.makeMoviesTopRatedDIContainer()
@@ -80,7 +85,9 @@ final class AppFlowCoordinator: Coordinator {
     }
 }
 
+
 extension AppFlowCoordinator: CoordinatorFinishDelegate {
+    
     func coordinatorDidFinish(childCoordinator: Coordinator) {
 
         childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
@@ -88,11 +95,11 @@ extension AppFlowCoordinator: CoordinatorFinishDelegate {
         switch childCoordinator.type {
         case .tab:
             isLogin = false
-            viewController.viewControllers.removeAll()
+            navigationController.viewControllers.removeAll()
             showLoginFlow()
         case .login:
             isLogin = true
-            viewController.viewControllers.removeAll()
+            navigationController.viewControllers.removeAll()
             showTab()
         default:
             break
