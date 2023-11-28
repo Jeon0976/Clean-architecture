@@ -54,7 +54,7 @@ extension CoreDataMoviesResponseStorage: MoviesResponseStorage {
             do {
                 let fetchRequest = self.fetchRequest(for: request)
                 let requestEntity = try context.fetch(fetchRequest).first
-                
+                                
                 completion(.success(requestEntity?.response?.toDTO()))
             } catch {
                 completion(.failure(CoreDataStorageError.readError(error)))

@@ -58,18 +58,6 @@ extension MoviesTopRatedDIContainer {
         )
     }
     
-//    // MARK: Movie Details
-//    func makeMoviesDetailsViewController(movie: MovieWhenTopRated) -> UIViewController {
-//        MovieDetailsViewController.create(with: makeMoviesDetailViewModel(movie: movie))
-//    }
-//
-//    private func makeMoviesDetailViewModel(movie: MovieWhenTopRated) -> MovieDetailsViewModel {
-//        DefaultMovieDetailsViewModel(
-//            movie: movie,
-//            posterImagesRepository: makePosterImagesRepository()
-//        )
-//    }
-    
     func makeMoviesTopRatedFlowCoordinator(navigationController: UINavigationController) -> MoviesTopRatedFlowCoordinator {
         MoviesTopRatedFlowCoordinator(
             navigationController: navigationController,

@@ -30,7 +30,7 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
     }
     
     func start() {
-        tabBarController.selectedIndex = 0
+        tabBarController.selectedIndex = 1
     }
     
     func setupTabs(with coordinators: [Coordinator]) {

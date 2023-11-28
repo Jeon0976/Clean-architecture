@@ -34,10 +34,6 @@ final class LoginFlowCoordinator: Coordinator {
         self.dependencies = dependencies
     }
     
-    deinit {
-        print("Coordinator Deinit")
-    }
-    
     func start() {
         let actions = LoginViewModelActions(showTabBar: showTabBar)
         let vc = dependencies.makeLoginViewController(actions: actions)

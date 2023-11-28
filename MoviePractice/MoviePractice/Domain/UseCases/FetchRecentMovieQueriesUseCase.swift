@@ -11,6 +11,7 @@ final class FetchRecentMovieQueriesUseCase: UseCase {
     struct RequestValue {
         let maxCount: Int
     }
+    
     typealias ResultValue = (Result<[MovieQuery], Error>)
     
     private let requestValue: RequestValue

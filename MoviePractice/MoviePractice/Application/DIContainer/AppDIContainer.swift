@@ -10,6 +10,7 @@ import Foundation
 
 /// 앱의 전체적인 의존성 주입을 관리하는 Container입니다.
 ///
+/// - `DI Container`의 주요 특징은 각 상황에서 필요한 class를 해당 class의 init, static create 메서드를 통해 생성 후 해당 class를 return합니다.
 /// - Data 단계에 의존성을 주입하기 위한, **NetworkService**(UrlSession, Moya, Alamofire)..를 생성합니다.
 /// - 각 화면에 대한 **DIContainer**들을 생성합니다.
 final class AppDIContainer {
