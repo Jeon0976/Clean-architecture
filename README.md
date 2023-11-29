@@ -32,6 +32,8 @@
 
 - Coordinator: https://velog.io/@jeon0976/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4-Coordinator-Pattern
 - DIContainer: https://velog.io/@jeon0976/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4-DIDependency-Injection-Pattern-2-DI-Pattern-%EC%82%AC%EC%9A%A9%EB%B2%95
+- Reactive-Programming: https://velog.io/@jeon0976/iOSUIKit-Custom-Reactive-Programming-Make-Observable-In-UIkit
+- Custom TabBarController: https://velog.io/@jeon0976/iOSUikit-CustomTabBarController-구현
 - Clean Architecture: https://github.com/kudoleh/iOS-Clean-Architecture-MVVM
 
 ### 😎 결과물 
