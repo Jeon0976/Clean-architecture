@@ -11,17 +11,17 @@ protocol MoviesSearchFlowCoordinatorDependencies {
     func makeMoviesListViewController(
         actions: MoviesListViewModelActions
     ) -> MoviesListViewController
-    func makeMoviesDetailsViewController(movie: MovieWhenSearch) -> UIViewController
+    func makeMoviesDetailsViewController(movie: MovieWhenSearch) -> MovieDetailsViewController
     func makeMoviesQueriesSuggestionsListViewController(
         didSelect: @escaping MoviesQueryListViewModelDidSelectAction
-    ) -> UIViewController
+    ) -> MoviesQueriesTableViewController
 }
 
 final class MoviesSearchFlowCoordinator: NSObject, UINavigationControllerDelegate, Coordinator {
     var type: CoordinatorType { .search }
     
     weak var finishDelegate: CoordinatorFinishDelegate?
-    weak var tabBarViewController: TabBarDelegate?
+    weak var tabBarDelegate: TabBarDelegate?
     
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -31,7 +31,7 @@ final class MoviesSearchFlowCoordinator: NSObject, UINavigationControllerDelegat
     private let dependencies: MoviesSearchFlowCoordinatorDependencies!
     
     private weak var moviesListVC: MoviesListViewController?
-    private weak var moviesQueriesSuggestionsVC: UIViewController?
+    private weak var moviesQueriesSuggestionsVC: MoviesQueriesTableViewController?
     
     init(
         navigationController: UINavigationController,
@@ -39,6 +39,10 @@ final class MoviesSearchFlowCoordinator: NSObject, UINavigationControllerDelegat
     ) {
         self.navigationController = navigationController
         self.dependencies = dependencies
+    }
+    
+    deinit {
+        print("Movies Search Flow Coordinator Deinit")
     }
     
     func start() {
@@ -62,12 +66,12 @@ final class MoviesSearchFlowCoordinator: NSObject, UINavigationControllerDelegat
     
     private func showMovieDetails(movie: MovieWhenSearch) {
         let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
-        tabBarViewController?.shouldHideTabBar(true)
+        tabBarDelegate?.shouldHideTabBar(true)
         
         navigationController.pushViewController(vc, animated: true)
     }
     
-    private func showMovieQueriesSuggestions(didSelect: @escaping(MovieQuery) -> Void) {
+    private func showMovieQueriesSuggestions(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) {
         guard let moviesListViewController = moviesListVC,
               moviesQueriesSuggestionsVC == nil else { return }
               
@@ -90,7 +94,7 @@ final class MoviesSearchFlowCoordinator: NSObject, UINavigationControllerDelegat
 extension MoviesSearchFlowCoordinator {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         if viewController is MoviesListViewController {
-            tabBarViewController?.shouldHideTabBar(false)
+            tabBarDelegate?.shouldHideTabBar(false)
         }
     }
 }

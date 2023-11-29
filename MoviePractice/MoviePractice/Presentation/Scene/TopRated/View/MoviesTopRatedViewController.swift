@@ -21,7 +21,6 @@ final class MoviesTopRatedViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
 
         moviesCollectionViewController = MoviesTopRatedCollectionViewController(collectionViewLayout: layout)
-        
         if let moviesCV = moviesCollectionViewController {
             moviesCV.viewModel = viewModel
             moviesCV.posterImagesRepository = posterImagesRepository
@@ -41,8 +40,11 @@ final class MoviesTopRatedViewController: UIViewController {
         let view = MoviesTopRatedViewController()
         view.viewModel = viewModel
         view.posterImagesRepository = posterImageRepository
-        
         return view
+    }
+    
+    deinit {
+        print("MoviesTopRated View Controller Deinit")
     }
     
     override func viewDidLoad() {

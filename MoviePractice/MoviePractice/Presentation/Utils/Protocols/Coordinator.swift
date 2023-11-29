@@ -14,7 +14,7 @@ protocol Coordinator: AnyObject {
     var childCoordinators: [Coordinator] { get set }
     var navigationController: UINavigationController { get set }
     var viewTitle: String? { get set }
-    var tabBarViewController: TabBarDelegate? { get set }
+    var tabBarDelegate: TabBarDelegate? { get set }
     var type: CoordinatorType { get }
     func start()
     func finish()
@@ -22,7 +22,11 @@ protocol Coordinator: AnyObject {
 
 extension Coordinator {
     func finish() {
+        childCoordinators.forEach { $0.navigationController.viewControllers.removeAll() }
         childCoordinators.removeAll()
+
+        navigationController.viewControllers.removeAll()
+
         finishDelegate?.coordinatorDidFinish(childCoordinator: self)
     }
 }

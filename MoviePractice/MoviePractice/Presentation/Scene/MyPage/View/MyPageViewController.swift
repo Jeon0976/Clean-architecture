@@ -40,7 +40,7 @@ final class MyPageViewController: UIViewController {
     }
     
     deinit {
-        print("LoginDeinit")
+        print("MyPageViewController Deinit")
     }
     
     private func setupView() {

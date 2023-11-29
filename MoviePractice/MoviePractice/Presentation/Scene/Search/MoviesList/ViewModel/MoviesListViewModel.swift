@@ -76,6 +76,10 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
         self.mainQueue = mainQueue
     }
     
+    deinit {
+        print("MoviesListViewModel Deinit")
+    }
+    
     // MARK: Private
     private func appendPage(_ moviesPage: MoviesSearchPage){
         currentPage = moviesPage.page

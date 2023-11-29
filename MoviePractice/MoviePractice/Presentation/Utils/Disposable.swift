@@ -21,18 +21,19 @@ final class Disposables {
 }
 
 final class DisposeBag {
-    private let disposables = Disposables()
+    // 해당 코드 때문에 각 화면들이 Deinit이 안되고있었음
+    private weak var disposables: Disposables?
     
     func add(_ disposable: @escaping () -> Void) {
-        disposables.add(disposable)
+        disposables?.add(disposable)
     }
     
     // 테스트 용
     func clear() {
-        disposables.dispose()
+        disposables?.dispose()
     }
     
     deinit {
-        disposables.dispose()
+        disposables?.dispose()
     }
 }

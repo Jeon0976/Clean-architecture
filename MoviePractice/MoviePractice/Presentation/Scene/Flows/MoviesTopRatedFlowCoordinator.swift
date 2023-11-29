@@ -17,7 +17,7 @@ final class MoviesTopRatedFlowCoordinator: Coordinator {
     var type: CoordinatorType { .topRated }
     
     weak var finishDelegate: CoordinatorFinishDelegate?
-    weak var tabBarViewController: TabBarDelegate?
+    weak var tabBarDelegate: TabBarDelegate?
 
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -34,6 +34,11 @@ final class MoviesTopRatedFlowCoordinator: Coordinator {
     ) {
         self.navigationController = navigationController
         self.dependencies = dependencies
+    }
+    
+    deinit {
+//        moviesTopRatedVC?.moviesCollectionViewController?.remove()
+        print("Movies Top Rated Flow Coordinator Deinit")
     }
     
     func start() {

@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TabBarFlowCoordinator Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/TabBarFlowCoordinator" class="dashAnchor"></a>
+
+    <a title="TabBarFlowCoordinator Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+           Docs
+        </a>
+         (100% documented)
+      </p>
+    
+      <div class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </div>
+    
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html"> Reference</a>
+      <img class="carat" src="../img/carat.png" alt=""/>
+      TabBarFlowCoordinator Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Application.html">Application</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/SceneDelegate.html">SceneDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/AppConfiguration.html">AppConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/AppFlowCoordinator.html">AppFlowCoordinator</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../DIContainer.html">DIContainer</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/AppDIContainer.html">AppDIContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/LoginSceneDIContainer.html">LoginSceneDIContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesSearchDIContainer.html">MoviesSearchDIContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesSearchDIContainer/Dependencies.html">– Dependencies</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesTopRatedDIContainer.html">MoviesTopRatedDIContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesTopRatedDIContainer/Dependencies.html">– Dependencies</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MyPageDIContainer.html">MyPageDIContainer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Presentation%20-%20Scene%20-%20Flows.html">Presentation - Scene - Flows</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/LoginFlowCoordinator.html">LoginFlowCoordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TabBarFlowCoordinator.html">TabBarFlowCoordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MoviesSearchFlowCoordinatorDependencies.html">MoviesSearchFlowCoordinatorDependencies</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesSearchFlowCoordinator.html">MoviesSearchFlowCoordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MoviesTopRatedFlowCoordinatorDependencies.html">MoviesTopRatedFlowCoordinatorDependencies</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesTopRatedFlowCoordinator.html">MoviesTopRatedFlowCoordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MyPageFlowCoordinatorDependencies.html">MyPageFlowCoordinatorDependencies</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MyPageFlowCoordinator.html">MyPageFlowCoordinator</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Presentation%20-%20Scene%20-%20Login.html">Presentation - Scene - Login</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/LoginViewModelActions.html">LoginViewModelActions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/LoginViewModelInput.html">LoginViewModelInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Presentation%20-%20Scene%20-%20Login.html#/s:13MoviePractice20LoginViewModelOutputP">LoginViewModelOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Presentation%20-%20Scene%20-%20Login.html#/s:13MoviePractice14LoginViewModela">LoginViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultLoginViewModel.html">DefaultLoginViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/LoginViewController.html">LoginViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Presentation%20-%20Scene%20-%20Search.html">Presentation - Scene - Search</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MoviesListViewModelActions.html">MoviesListViewModelActions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/MoviesListViewModelLoading.html">MoviesListViewModelLoading</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MoviesListviewModelInput.html">MoviesListviewModelInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MoviesListViewModelOutput.html">MoviesListViewModelOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Presentation%20-%20Scene%20-%20Search.html#/s:13MoviePractice19MoviesListViewModela">MoviesListViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultMoviesListViewModel.html">DefaultMoviesListViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MoviesListItemViewModel.html">MoviesListItemViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesListViewController.html">MoviesListViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesListTableViewController.html">MoviesListTableViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesListItemCell.html">MoviesListItemCell</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Presentation%20-%20Scene%20-%20Detail.html">Presentation - Scene - Detail</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MovieDetailsViewModelInput.html">MovieDetailsViewModelInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MovieDetailsViewModelOutput.html">MovieDetailsViewModelOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Presentation%20-%20Scene%20-%20Detail.html#/s:13MoviePractice0A16DetailsViewModela">MovieDetailsViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultMovieDetailsViewModel.html">DefaultMovieDetailsViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MovieDetailsViewController.html">MovieDetailsViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Presentation%20-%20Scene%20-%20Movies%20Query%20List.html">Presentation - Scene - Movies Query List</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Presentation%20-%20Scene%20-%20Movies%20Query%20List.html#/s:13MoviePractice39MoviesQueryListViewModelDidSelectActiona">MoviesQueryListViewModelDidSelectAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MoviesQueryListViewModelInput.html">MoviesQueryListViewModelInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MoviesQueryListViewModelOutput.html">MoviesQueryListViewModelOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Presentation%20-%20Scene%20-%20Movies%20Query%20List.html#/s:13MoviePractice24MoviesQueryListViewModela">MoviesQueryListViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Presentation%20-%20Scene%20-%20Movies%20Query%20List.html#/s:13MoviePractice011FetchRecentA21QueriesUseCaseFactorya">FetchRecentMovieQueriesUseCaseFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultMoviesQueryListViewModel.html">DefaultMoviesQueryListViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesQueryListItemViewModel.html">MoviesQueryListItemViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesQueriesTableViewController.html">MoviesQueriesTableViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesQueriesItemCell.html">MoviesQueriesItemCell</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Presentation%20-%20Scene%20-%20Top%20Rated.html">Presentation - Scene - Top Rated</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Presentation%20-%20Scene%20-%20Top%20Rated.html#/s:13MoviePractice30MoviesTopRatedViewModelActionsV">MoviesTopRatedViewModelActions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MoviesTopRatedModelInput.html">MoviesTopRatedModelInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MoviesTopRatedModelOutput.html">MoviesTopRatedModelOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/MoviesTopRatedModelLoading.html">MoviesTopRatedModelLoading</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Presentation%20-%20Scene%20-%20Top%20Rated.html#/s:13MoviePractice23MoviesTopRatedViewModela">MoviesTopRatedViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultMoviesTopRatedViewModel.html">DefaultMoviesTopRatedViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MoviesTopRatedCollectionItemViewModel.html">MoviesTopRatedCollectionItemViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesTopRatedViewController.html">MoviesTopRatedViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesTopRatedCollectionViewController.html">MoviesTopRatedCollectionViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesTopRatedCollectionLodingFooterView.html">MoviesTopRatedCollectionLodingFooterView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesTopRatedCell.html">MoviesTopRatedCell</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Presentation%20-%20Scene%20-%20MyPage.html">Presentation - Scene - MyPage</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MyPageModelActions.html">MyPageModelActions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MyPageViewModelInput.html">MyPageViewModelInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Presentation%20-%20Scene%20-%20MyPage.html#/s:13MoviePractice21MyPageViewModelOutputP">MyPageViewModelOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Presentation%20-%20Scene%20-%20MyPage.html#/s:13MoviePractice15MyPageViewModela">MyPageViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultMyPageViewModel.html">DefaultMyPageViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MyPageViewController.html">MyPageViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Presentation%20-%20Scene%20-%20Behaviors.html">Presentation - Scene - Behaviors</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/BackButtonEmptyTitleNavigationBarBehavior.html">BackButtonEmptyTitleNavigationBarBehavior</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/BlackStyleNavigationBarBehavior.html">BlackStyleNavigationBarBehavior</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Presentation%20-%20Utils.html">Presentation - Utils</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ViewControllerLifecycleBehavior.html">ViewControllerLifecycleBehavior</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/Coordinator.html">Coordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/CoordinatorFinishDelegate.html">CoordinatorFinishDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/CoordinatorType.html">CoordinatorType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/Alertable.html">Alertable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ObservableEvent.html">ObservableEvent</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Observable.html">Observable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Observable/Observer.html">– Observer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Subscription.html">Subscription</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Disposables.html">Disposables</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DisposeBag.html">DisposeBag</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Identifier.html">Identifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/LoadingView.html">LoadingView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TabBarPage.html">TabBarPage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TabBarDelegate.html">TabBarDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultTabBarController.html">DefaultTabBarController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Domain%20-%20Entities.html">Domain - Entities</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MoviesSearchPage.html">MoviesSearchPage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MoviesTopRatedPage.html">MoviesTopRatedPage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MovieWhenSearch.html">MovieWhenSearch</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MovieWhenSearch/Genre.html">– Genre</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MovieWhenTopRated.html">MovieWhenTopRated</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MovieQuery.html">MovieQuery</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MovieDetail.html">MovieDetail</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Genre.html">Genre</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/SearchMoviesUseCase.html">SearchMoviesUseCase</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/SearchMoviesUseCaseRequestValue.html">SearchMoviesUseCaseRequestValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultSearchMoviesUseCase.html">DefaultSearchMoviesUseCase</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/FetchRecentMovieQueriesUseCase.html">FetchRecentMovieQueriesUseCase</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/FetchRecentMovieQueriesUseCase/RequestValue.html">– RequestValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TopRatedMoviesUseCase.html">TopRatedMoviesUseCase</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TopRatedMoviesUseCaseRequestValue.html">TopRatedMoviesUseCaseRequestValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultTopRatedMoviesUseCase.html">DefaultTopRatedMoviesUseCase</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/UseCase.html">UseCase</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Domain%20-%20Repositories%20%28Dependency%20Inversion%29.html">Domain - Repositories (Dependency Inversion)</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MoviesSearchRepository.html">MoviesSearchRepository</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MoviesQueriesRepository.html">MoviesQueriesRepository</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PosterImagesRepository.html">PosterImagesRepository</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MoviesTopRatedRepository.html">MoviesTopRatedRepository</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Data%20-%20Repositories.html">Data - Repositories</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultMoviesSearchRepository.html">DefaultMoviesSearchRepository</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultMoviesQueriesRepository.html">DefaultMoviesQueriesRepository</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultMoviesTopRatedRepository.html">DefaultMoviesTopRatedRepository</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultPosterImagesRepository.html">DefaultPosterImagesRepository</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RepositoryTask.html">RepositoryTask</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Data%20-%20Network%2FDTO.html">Data - Network/DTO</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/APIEndpoints.html">APIEndpoints</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MoviesSearchRequestDTO.html">MoviesSearchRequestDTO</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MoviesSearchResponseDTO.html">MoviesSearchResponseDTO</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MoviesSearchResponseDTO/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MoviesSearchResponseDTO/MovieDTO.html">– MovieDTO</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MoviesTopRateRequestDTO.html">MoviesTopRateRequestDTO</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MoviesTopRatedResponseDTO.html">MoviesTopRatedResponseDTO</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MoviesTopRatedResponseDTO/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MoviesTopRatedResponseDTO/MovieTopRatedDTO.html">– MovieTopRatedDTO</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Data%20-%20Persistent%20Storages.html">Data - Persistent Storages</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MoviesResponseStorage.html">MoviesResponseStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/CoreDataMoviesResponseStorage.html">CoreDataMoviesResponseStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/MoviesQueriesStorage.html">MoviesQueriesStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/CoreDataMoviesQueriesStorage.html">CoreDataMoviesQueriesStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/UserDefaultsMoviesQueriesStorage.html">UserDefaultsMoviesQueriesStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MovieQueriesListUDS.html">MovieQueriesListUDS</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/MovieQueryUDS.html">MovieQueryUDS</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/CoreDataStorageError.html">CoreDataStorageError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/CoreDataStorage.html">CoreDataStorage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Common.html">Common</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/Cancellable.html">Cancellable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ConnectionError.html">ConnectionError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/DispatchQueueType.html">DispatchQueueType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Infrastructure%20-%20Network%20-%20DataTransferService.html">Infrastructure - Network - DataTransferService</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/DataTransferError.html">DataTransferError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/DataTransferDispatchQueue.html">DataTransferDispatchQueue</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/DataTransferService.html">DataTransferService</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/DataTransferErrorResolver.html">DataTransferErrorResolver</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ResponseDecoder.html">ResponseDecoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/DataTransferErrorLogger.html">DataTransferErrorLogger</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultDataTransferService.html">DefaultDataTransferService</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultDataTransferErrorLogger.html">DefaultDataTransferErrorLogger</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultDataTransferErrorResolver.html">DefaultDataTransferErrorResolver</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/JSONResponseDecoder.html">JSONResponseDecoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RawDataResponseDecoder.html">RawDataResponseDecoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RawDataResponseDecoder/CodingKeys.html">– CodingKeys</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Infrastructure%20-%20Network%20-%20NetworkService.html">Infrastructure - Network - NetworkService</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/NetworkError.html">NetworkError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/NetworkCancellable.html">NetworkCancellable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/NetworkService.html">NetworkService</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/NetworkSessionManager.html">NetworkSessionManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultNetworkService.html">DefaultNetworkService</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultNetworkSessionManager.html">DefaultNetworkSessionManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultNetworkErrorLoger.html">DefaultNetworkErrorLoger</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Infrastructure%20-%20Network%20-%20EndPoint.html">Infrastructure - Network - EndPoint</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/HTTPMethodType.html">HTTPMethodType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/EndPoint.html">EndPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/BodyEncoder.html">BodyEncoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/JSONBodyEncoder.html">JSONBodyEncoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/AsciiBodyEncoder.html">AsciiBodyEncoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RequestTable.html">RequestTable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ResponseRequestable.html">ResponseRequestable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RequestGenerationError.html">RequestGenerationError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Infrastructure%20-%20Network%20-%20NetworkConfigurable.html">Infrastructure - Network - NetworkConfigurable</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/NetworkConfigurable.html">NetworkConfigurable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ApiDataNetworkConfig.html">ApiDataNetworkConfig</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Classes.html">Other Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MovieQueryEntity.html">MovieQueryEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MovieResponseEntity.html">MovieResponseEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesRequestEntity.html">MoviesRequestEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MoviesResponseEntity.html">MoviesResponseEntity</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Global%20Variables.html">Other Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Global%20Variables.html#/s:13MoviePractice13dateFormatter33_01B8CDE40E72A1A82B209AD65F9FF152LLSo06NSDateD0Cvp">dateFormatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Global%20Variables.html#/s:13MoviePractice13dateFormatter33_3542556547DC19E76C25EA14363BFEA2LLSo06NSDateD0Cvp">dateFormatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Global%20Variables.html#/s:13MoviePractice13dateFormatter33_7AADFED96024F59FA7D890DDC84ECE89LLSo06NSDateD0Cvp">dateFormatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Global%20Variables.html#/s:13MoviePractice13dateFormatter33_D52418C7D9E90E84550F04777999B7F0LLSo06NSDateD0Cvp">dateFormatter</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Extensions.html">Other Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/CGSize.html">CGSize</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Dictionary.html">Dictionary</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/DispatchQueue.html">DispatchQueue</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Encodable.html">Encodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Error.html">Error</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIImage.html">UIImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIImageView.html">UIImageView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UITableViewController.html">UITableViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIViewController.html">UIViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIViewController/LifecycleBehaviorViewController.html">– LifecycleBehaviorViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Extensions.html#/c:objc(cs)NSURLSessionTask">URLSessionTask</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Functions.html">Other Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Functions.html#/s:13MoviePractice12printIfDebugyySSF">printIfDebug(_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Protocols.html">Other Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/LoginFlowCoordinatorDependencies.html">LoginFlowCoordinatorDependencies</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/NetworkErrorLogger.html">NetworkErrorLogger</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>TabBarFlowCoordinator</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">final</span> <span class="kd">class</span> <span class="kt">TabBarFlowCoordinator</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt"><a href="../Protocols/Coordinator.html">Coordinator</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">TabBarFlowCoordinator</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CoordinatorFinishDelegate.html">CoordinatorFinishDelegate</a></span></code></pre>
+
+                </div>
+              </div>
+            
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MoviePractice21TabBarFlowCoordinatorC4typeAA0F4TypeOvp"></a>
+                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MoviePractice21TabBarFlowCoordinatorC4typeAA0F4TypeOvp">type</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/CoordinatorType.html">CoordinatorType</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MoviePractice21TabBarFlowCoordinatorC9viewTitleSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/viewTitle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MoviePractice21TabBarFlowCoordinatorC9viewTitleSSSgvp">viewTitle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">viewTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MoviePractice21TabBarFlowCoordinatorC14finishDelegateAA0f6FinishH0_pSgvp"></a>
+                    <a name="//apple_ref/swift/Property/finishDelegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MoviePractice21TabBarFlowCoordinatorC14finishDelegateAA0f6FinishH0_pSgvp">finishDelegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">weak</span> <span class="k">var</span> <span class="nv">finishDelegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CoordinatorFinishDelegate.html">CoordinatorFinishDelegate</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MoviePractice21TabBarFlowCoordinatorC03tabD14ViewControllerAA0cD8Delegate_pSgvp"></a>
+                    <a name="//apple_ref/swift/Property/tabBarViewController" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MoviePractice21TabBarFlowCoordinatorC03tabD14ViewControllerAA0cD8Delegate_pSgvp">tabBarViewController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">weak</span> <span class="k">var</span> <span class="nv">tabBarViewController</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TabBarDelegate.html">TabBarDelegate</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MoviePractice21TabBarFlowCoordinatorC17childCoordinatorsSayAA0F0_pGvp"></a>
+                    <a name="//apple_ref/swift/Property/childCoordinators" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MoviePractice21TabBarFlowCoordinatorC17childCoordinatorsSayAA0F0_pGvp">childCoordinators</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">childCoordinators</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/Coordinator.html">Coordinator</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MoviePractice21TabBarFlowCoordinatorC20navigationControllerSo012UINavigationH0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/navigationController" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MoviePractice21TabBarFlowCoordinatorC20navigationControllerSo012UINavigationH0Cvp">navigationController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">navigationController</span><span class="p">:</span> <span class="kt">UINavigationController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MoviePractice21TabBarFlowCoordinatorC03tabD10Controller33_194472EB1B75DEA3393EB2EE120AB15DLLAA07DefaultcdH0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/tabBarController" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MoviePractice21TabBarFlowCoordinatorC03tabD10Controller33_194472EB1B75DEA3393EB2EE120AB15DLLAA07DefaultcdH0Cvp">tabBarController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">tabBarController</span><span class="p">:</span> <span class="kt"><a href="../Classes/DefaultTabBarController.html">DefaultTabBarController</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MoviePractice21TabBarFlowCoordinatorC20navigationController03tabdH0ACSo012UINavigationH0C_AA07DefaultcdH0Ctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(navigationController:tabBarController:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MoviePractice21TabBarFlowCoordinatorC20navigationController03tabdH0ACSo012UINavigationH0C_AA07DefaultcdH0Ctcfc">init(navigationController:<wbr>tabBarController:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span>
+    <span class="nv">navigationController</span><span class="p">:</span> <span class="kt">UINavigationController</span><span class="p">,</span>
+    <span class="nv">tabBarController</span><span class="p">:</span> <span class="kt"><a href="../Classes/DefaultTabBarController.html">DefaultTabBarController</a></span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MoviePractice21TabBarFlowCoordinatorC5startyyF"></a>
+                    <a name="//apple_ref/swift/Method/start()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MoviePractice21TabBarFlowCoordinatorC5startyyF">start()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">start</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MoviePractice21TabBarFlowCoordinatorC9setupTabs4withySayAA0F0_pG_tF"></a>
+                    <a name="//apple_ref/swift/Method/setupTabs(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MoviePractice21TabBarFlowCoordinatorC9setupTabs4withySayAA0F0_pG_tF">setupTabs(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setupTabs</span><span class="p">(</span><span class="n">with</span> <span class="nv">coordinators</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/Coordinator.html">Coordinator</a></span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MoviePractice21TabBarFlowCoordinatorC20coordinatorDidFinish05childF0yAA0F0_p_tF"></a>
+                    <a name="//apple_ref/swift/Method/coordinatorDidFinish(childCoordinator:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MoviePractice21TabBarFlowCoordinatorC20coordinatorDidFinish05childF0yAA0F0_p_tF">coordinatorDidFinish(childCoordinator:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">coordinatorDidFinish</span><span class="p">(</span><span class="nv">childCoordinator</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Coordinator.html">Coordinator</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+    </section>
+  </body>
+</html>

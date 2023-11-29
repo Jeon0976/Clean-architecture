@@ -15,7 +15,7 @@ final class LoginFlowCoordinator: Coordinator {
     var type: CoordinatorType { .login }
 
     weak var finishDelegate: CoordinatorFinishDelegate?
-    var tabBarViewController: TabBarDelegate? = nil
+    var tabBarDelegate: TabBarDelegate? = nil
 
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -30,8 +30,12 @@ final class LoginFlowCoordinator: Coordinator {
         navigationController: UINavigationController,
         dependencies: LoginFlowCoordinatorDependencies
     ) {
+
         self.navigationController = navigationController
         self.dependencies = dependencies
+    }
+    
+    deinit {
     }
     
     func start() {

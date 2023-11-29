@@ -19,7 +19,7 @@ final class AppFlowCoordinator: Coordinator {
     var navigationController: UINavigationController
     var viewTitle: String? = nil
     
-    var tabBarViewController: TabBarDelegate? = nil
+    var tabBarDelegate: TabBarDelegate? = nil
         
     private let appDIContainer: AppDIContainer
     
@@ -67,6 +67,8 @@ final class AppFlowCoordinator: Coordinator {
         flow.finishDelegate = self
         flow.start()
         childCoordinators.append(flow)
+        print(CFGetRetainCount(self))
+
     }
     
     /// Tabbar Flow Coordinator를 생성하는 메서드 입니다.
@@ -75,25 +77,36 @@ final class AppFlowCoordinator: Coordinator {
     /// - 이때 각 화면 flow coordinator는 tabBarFlowCoordinator `setupTabs`메서드를 활용해서 주입해주고, tabBarFlowCoordinator를 childCoordinators에 append 해줍니다.
     private func showTab() {
         let tabBarController = DefaultTabBarController()
-        let tabBarFlowCoordinator = TabBarFlowCoordinator(navigationController: navigationController, tabBarController: tabBarController)
-        tabBarFlowCoordinator.finishDelegate = self
-        
+        let tabBarFlowCoordinator = TabBarFlowCoordinator(
+            navigationController: navigationController,
+            tabBarController: tabBarController
+        )
+                
         let sceneDIContainer = appDIContainer.makeMoviesSearchDIContainer()
-        let sceneFlow = sceneDIContainer.makeMovieSearchFlowCoordinator(navigationController: UINavigationController())
+        let sceneFlow = sceneDIContainer.makeMovieSearchFlowCoordinator(
+            navigationController: UINavigationController()
+        )
         
         let topRatedDIContainer = appDIContainer.makeMoviesTopRatedDIContainer()
-        let topRated = topRatedDIContainer.makeMoviesTopRatedFlowCoordinator(navigationController: UINavigationController())
+        let topRated = topRatedDIContainer.makeMoviesTopRatedFlowCoordinator(
+            navigationController: UINavigationController()
+        )
         
         let myPageDIContainer = appDIContainer.makeMyPageDIContainer()
-        let myPageFlow = myPageDIContainer.makeMyPageFlowCoordinator(navigationController: UINavigationController())
+        let myPageFlow = myPageDIContainer.makeMyPageFlowCoordinator(
+            navigationController: UINavigationController()
+        )
         
         tabBarFlowCoordinator.setupTabs(with: [
             sceneFlow,
             topRated,
-            myPageFlow]
-        )
+            myPageFlow
+        ])
+        
+        tabBarFlowCoordinator.finishDelegate = self
         
         tabBarFlowCoordinator.start()
+        
         childCoordinators.append(tabBarFlowCoordinator)
     }
 }
@@ -103,15 +116,14 @@ extension AppFlowCoordinator: CoordinatorFinishDelegate {
     
     func coordinatorDidFinish(childCoordinator: Coordinator) {
         childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
-        
+        navigationController.viewControllers.removeAll()
+
         switch childCoordinator.type {
         case .tab:
             isLogin = false
-            navigationController.viewControllers.removeAll()
             showLoginFlow()
         case .login:
             isLogin = true
-            navigationController.viewControllers.removeAll()
             showTab()
         default:
             break

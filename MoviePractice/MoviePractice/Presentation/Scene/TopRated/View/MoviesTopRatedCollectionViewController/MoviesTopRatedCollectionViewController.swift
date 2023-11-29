@@ -23,6 +23,10 @@ final class MoviesTopRatedCollectionViewController: UICollectionViewController {
         setupView()
     }
     
+    deinit {
+        print("MoviesTopRated Collection Controller Deinit")
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

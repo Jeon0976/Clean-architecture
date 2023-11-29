@@ -15,7 +15,7 @@ final class MyPageFlowCoordinator: NSObject, Coordinator {
     var type: CoordinatorType { .myPage }
     
     weak var finishDelegate: CoordinatorFinishDelegate?
-    weak var tabBarViewController: TabBarDelegate?
+    weak var tabBarDelegate: TabBarDelegate?
     
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController

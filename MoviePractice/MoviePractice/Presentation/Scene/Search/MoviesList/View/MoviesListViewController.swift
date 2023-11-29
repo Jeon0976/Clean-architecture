@@ -70,6 +70,10 @@ final class MoviesListViewController: UIViewController, Alertable {
         return view
     }
     
+    deinit {
+        print("List View Controller Deinit")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

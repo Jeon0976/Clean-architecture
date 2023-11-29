@@ -11,7 +11,7 @@ struct MoviesTopRatedViewModelActions {
 //    let showMovieDetails: (MovieWhenSearch) -> Void
 }
 
-protocol MoviesTopRatedModelInput {
+protocol MoviesTopRatedModelInput: AnyObject {
     var items: Observable<[MoviesTopRatedCollectionItemViewModel]> { get }
     var detailTextShownStates: Observable<[IndexPath: Bool]> { get }
     var loading: Observable<MoviesTopRatedModelLoading?> { get }
@@ -19,7 +19,7 @@ protocol MoviesTopRatedModelInput {
     var isResetCompleted: Observable<Bool> { get }
 }
 
-protocol MoviesTopRatedModelOutput {
+protocol MoviesTopRatedModelOutput: AnyObject {
     func viewDidLoad()
     func reset()
     func didLoadNextPage()
@@ -61,6 +61,12 @@ final class DefaultMoviesTopRatedViewModel: MoviesTopRatedViewModel {
         self.topRatedMoviesUseCase = topRatedMoviesUseCase
         self.actions = actions
         self.mainQueue = mainQueue
+        
+        print("Default Movies Top Rated View Model")
+    }
+    
+    deinit {
+        print("TopRated Deinit")
     }
     
     private func update() {

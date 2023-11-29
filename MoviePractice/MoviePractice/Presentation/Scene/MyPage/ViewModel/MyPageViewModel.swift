@@ -26,7 +26,12 @@ final class DefaultMyPageViewModel: MyPageViewModel {
     private let actions: MyPageModelActions!
     
     init(actions: MyPageModelActions) {
+        print("My Page Init")
         self.actions = actions
+    }
+    
+    deinit {
+        print("MyPage Deinit")
     }
 }
 

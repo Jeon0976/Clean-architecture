@@ -11,6 +11,8 @@ import SwiftUI
 /// Movies Search 화면에 대한 의존성 주입을 관리하는 Container입니다.
 final class MoviesSearchDIContainer: MoviesSearchFlowCoordinatorDependencies {
     
+    // MARK: Dependencies
+    
     /// MovieSearch 화면에서 필요한 Service를 주입 구조체로 갖고 해당 구조체는 Movie Search 화면에서 필요한 `ApiDataTransferService`, `ImageDataTransferService`를 갖고있습니다.
     /// - 해당 `Dependencies`는 `AppDIContainer`에서  `makeMoviesSearchDIContainer()` 메서드를 실행할 때 주입받습니다.
     struct Dependencies {
@@ -71,7 +73,7 @@ final class MoviesSearchDIContainer: MoviesSearchFlowCoordinatorDependencies {
 // MARK: Repositories - Data
 extension MoviesSearchDIContainer {
     
-    /// 영화를 검색하는 Repository입니다.
+    /// 영화를 검색하는 Repository를 불러오는 메서드입니다.
     ///
     /// - 해당 Repo는 `apiDataTransferService`와 `cache Local DB` 활용이 필요하며, 해당 Service들을 주입받고 생성합니다.
     /// - Returns: DIP 원칙을 준수하는 `MoviesSearchRepository` Protocol를 Return합니다.
@@ -82,7 +84,7 @@ extension MoviesSearchDIContainer {
         )
     }
     
-    /// 영화의 최근 검색 결과를 저장한 데이터를 보여주는 Repository입니다.
+    /// 영화의 최근 검색 결과를 저장한 데이터를 보여주는 Repository를 불러오는 메서드입니다.
     ///
     /// - 해당 Repo는 `moviesQueriesStorage` 활용이 필요하며, 해당 Service를 주입받고 생성합니다.
     /// - Returns: DIP 원칙을 준수하는 `MoviesQueriesRepository` Protocol를 Return합니다.
@@ -92,10 +94,10 @@ extension MoviesSearchDIContainer {
         )
     }
     
-    /// 영화 Poster Image를 불러오는 Repository입니다.
+    /// 영화 Poster Image를 불러오는 Repository를 불러오는 메서드입니다.
     ///
     /// - 해당 Repo는 `imageDataTransferService` 활용이 필요하며, 해당 Service를 주입받고 생성합니다.
-    /// - Returns: DIP 원칙을 준수하는 `PosterImagesRepository` Protocol를 Return합니다.
+    /// - Returns: DIP 원칙을 준수하는 `PosterImagesRepository` Protocol를 Return합니다.||
     func makePosterImagesRepository() -> PosterImagesRepository {
         DefaultPosterImagesRepository(
             dataTransferService: dependencies.imageDataTransferService
@@ -106,9 +108,10 @@ extension MoviesSearchDIContainer {
 extension MoviesSearchDIContainer {
     // MARK: Movie List - Presentation
     
-    /// <#Description#>
-    /// - Parameter actions: <#actions description#>
-    /// - Returns: <#description#>
+    /// Movie Search Scene View Controller를 불러오는 메서드입니다.
+    ///
+    /// - Parameter actions: flow coordinator에서 활용되는 actions 구조체입니다. 이는 ViewModel을 만드는 메서드에 직접 주입합니다.
+    /// - Returns: `MoviesListViewController`를 Return 합니다.
     func makeMoviesListViewController(
         actions: MoviesListViewModelActions) -> MoviesListViewController {
         MoviesListViewController.create(
@@ -117,9 +120,9 @@ extension MoviesSearchDIContainer {
         )
     }
     
-    /// <#Description#>
-    /// - Parameter actions: <#actions description#>
-    /// - Returns: <#description#>
+    /// Movie Search View Model를 불러오는 메서드입니다.
+    /// - Parameter actions: flow coordinator에서 활용되는 actions 구조체입니다.
+    /// - Returns: `MoviesListViewModel` Return합니다.
     private func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
         
         DefaultMoviesListViewModel(
@@ -130,16 +133,17 @@ extension MoviesSearchDIContainer {
     
     // MARK: Movie Details - Presentation
     
-    /// <#Description#>
-    /// - Parameter movie: <#movie description#>
-    /// - Returns: <#description#>
-    func makeMoviesDetailsViewController(movie: MovieWhenSearch) -> UIViewController {
+    /// Movie Detail View Controller를 불러오는 메서드입니다.
+    /// - Parameter movie: 클릭된 데이터, `MovieWhenSearch` Domain의 Entity를 파라미터로 받습니다. 해당 구조체는 Detail View Model에 주입합니다.
+    /// - Returns: `MovieDetailsViewController`를 Return합니다.
+    func makeMoviesDetailsViewController(movie: MovieWhenSearch) -> MovieDetailsViewController {
         MovieDetailsViewController.create(with: makeMoviesDetailViewModel(movie: movie))
     }
     
-    /// <#Description#>
-    /// - Parameter movie: <#movie description#>
-    /// - Returns: <#description#>
+    /// Movie Detail View Model를 불러오는 메서드입니다.
+    ///
+    /// - Parameter movie: 클릭된 데이터, `MovieWhenSearch` Domain의 Entity를 파라미터로 받습니다.
+    /// - Returns: `MovieDetailsViewModel`를 Return합니다.
     private func makeMoviesDetailViewModel(movie: MovieWhenSearch) -> MovieDetailsViewModel {
         DefaultMovieDetailsViewModel(
             movie: movie,
@@ -150,16 +154,17 @@ extension MoviesSearchDIContainer {
     
     // MARK: Movies Queries Suggestions List - Presentation
     
-    /// <#Description#>
-    /// - Parameter didSelect: <#didSelect description#>
-    /// - Returns: <#description#>
-    func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> UIViewController {
+    /// Movie Query List View Controller를 불러오는 메서드입니다.
+    /// - Parameter didSelect: typealias `MoviesQueryListViewModelDidSelectAction`를 파라미터로 받습니다. 해당 액션은 (`MovieQuery`) -> Void 클로저 함수 입니다. 해당 클로저는 `DefaultMoviesListViewModel`의 `update` 메서드 입니다.
+    /// - Returns: `MoviesQueriesTableViewController`를 Return합니다.
+    func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> MoviesQueriesTableViewController {
         MoviesQueriesTableViewController.create(with: makeMoviesQueryListViewModel(didSelect: didSelect))
     }
     
-    /// <#Description#>
-    /// - Parameter didSelect: <#didSelect description#>
-    /// - Returns: <#description#>
+    /// Movie Query List View Model를 불러오는 메서드입니다.
+    ///
+    /// - Parameter didSelect: typealias `MoviesQueryListViewModelDidSelectAction`를 파라미터로 받습니다. 해당 액션은 (`MovieQuery`) -> Void 클로저 함수 입니다. 해당 클로저는 `DefaultMoviesListViewModel`의 `update` 메서드 입니다.
+    /// - Returns: `MoviesQueryListViewModel`를 Return합니다.
     func makeMoviesQueryListViewModel(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> MoviesQueryListViewModel {
         DefaultMoviesQueryListViewModel(
             numberOfQueriesToShow: 10,
@@ -170,9 +175,11 @@ extension MoviesSearchDIContainer {
     
     // MARK: Flow Coordinators - Presentation
     
-    /// <#Description#>
-    /// - Parameter navigationController: <#navigationController description#>
-    /// - Returns: <#description#>
+    /// MoviesSearchFlowCoordinator를 불러오는 메서드입니다.
+    ///
+    /// - 해당 함수는 `AppFlowCoordinator`에서 실행합니다.
+    /// - Parameter navigationController: 해당 화면의 `UINavigationController`를 파라미터로 받습니다.
+    /// - Returns: `MoviesSearchFlowCoordinator`를 Return합니다.
     func makeMovieSearchFlowCoordinator(navigationController: UINavigationController) -> MoviesSearchFlowCoordinator {
         MoviesSearchFlowCoordinator(
             navigationController: navigationController,

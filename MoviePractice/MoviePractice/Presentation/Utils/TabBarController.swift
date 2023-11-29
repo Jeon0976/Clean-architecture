@@ -68,16 +68,37 @@ final class DefaultTabBarController: UIViewController, TabBarDelegate {
         return view
     }()
     
-    var selectedIndex = 0 {
+    var selectedIndex: Int = 0 {
+        willSet {
+            previousIndex = selectedIndex
+        }
         didSet {
             updateView()
         }
     }
     
+    private var previousIndex = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTabBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print(CFGetRetainCount(self))
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print(CFGetRetainCount(self))
+
+    }
+    
+    deinit {
+        print("TabBar Deinit")
     }
     
     override func viewDidLayoutSubviews() {
@@ -137,30 +158,35 @@ final class DefaultTabBarController: UIViewController, TabBarDelegate {
     }
     
     private func updateView() {
-        viewControllers.enumerated().forEach { (index, viewController) in
-            if index == selectedIndex {
-                addChild(viewController)
-                view.insertSubview(viewController.view, belowSubview: tabBarView)
-                
-                viewController.view.translatesAutoresizingMaskIntoConstraints = false
-                     NSLayoutConstraint.activate([
-                        viewController.view.topAnchor.constraint(equalTo: view.topAnchor),
-                        viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                        viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                        viewController.view.bottomAnchor.constraint(equalTo: tabBarView.topAnchor)
-                     ])
-                
-                viewController.didMove(toParent: self)
-            } else if viewController.parent != nil {
-                viewController.willMove(toParent: nil)
-                viewController.view.removeFromSuperview()
-                viewController.removeFromParent()
-            }
-        }
+        deleteView()
+        setupView()
+
+        buttons.forEach { $0.isSelected = ($0.tag == selectedIndex) }
+    }
+    
+    private func deleteView() {
+        let previousVC = viewControllers[previousIndex]
+        previousVC.willMove(toParent: nil)
+        previousVC.view.removeFromSuperview()
+        previousVC.removeFromParent()
+    }
+    
+    private func setupView() {
+        let selectedVC = viewControllers[selectedIndex]
         
-        buttons.enumerated().forEach { (index, button) in
-            button.isSelected = index == selectedIndex
-        }
+        self.addChild(selectedVC)
+        view.insertSubview(selectedVC.view, belowSubview: tabBarView)
+        
+        selectedVC.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            selectedVC.view.topAnchor.constraint(equalTo: view.topAnchor),
+            selectedVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            selectedVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            selectedVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        
+        selectedVC.didMove(toParent: self)
     }
     
     @objc private func tabButtonTapped(_ sender: UIButton) {
@@ -171,3 +197,4 @@ final class DefaultTabBarController: UIViewController, TabBarDelegate {
         tabBarView.isHidden = hide
     }
 }
+

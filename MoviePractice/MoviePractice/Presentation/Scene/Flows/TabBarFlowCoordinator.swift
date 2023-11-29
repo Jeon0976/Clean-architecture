@@ -14,12 +14,12 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
     var viewTitle: String? = nil
     
     weak var finishDelegate: CoordinatorFinishDelegate?
-    weak var tabBarViewController: TabBarDelegate? = nil
+    weak var tabBarDelegate: TabBarDelegate? = nil
 
     var childCoordinators: [Coordinator] = []
     
     var navigationController: UINavigationController
-    private var tabBarController: DefaultTabBarController
+    private var tabBarController: DefaultTabBarController!
     
     init(
         navigationController: UINavigationController,
@@ -31,16 +31,21 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
     
     func start() {
         tabBarController.selectedIndex = 1
+        
+        navigationController.pushViewController(tabBarController, animated: false)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
+    deinit {
+        print("TabBar Flow Deinit")
     }
     
     func setupTabs(with coordinators: [Coordinator]) {
-        navigationController.pushViewController(tabBarController, animated: false)
-        navigationController.setNavigationBarHidden(true, animated: false)
         
         let viewControllers = coordinators.enumerated().map { (index, coordinator) -> UINavigationController in
             
             if let tabPage = TabBarPage(index: index) {
-                coordinator.tabBarViewController = tabBarController
+                coordinator.tabBarDelegate = tabBarController
                
                 coordinator.viewTitle = NSLocalizedString(tabPage.pageTitleValue(), comment: "") 
             } else {
@@ -48,21 +53,18 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
             }
             coordinator.finishDelegate = self
             coordinator.start()
-
+            childCoordinators.append(coordinator)
+            
+            
             return coordinator.navigationController
         }
         
         tabBarController.setViewControllers(viewControllers)
-        childCoordinators = coordinators
     }
 }
 
 extension TabBarFlowCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
-        childCoordinators.forEach { $0.navigationController.viewControllers.removeAll() }
-        
-        childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
-        
         self.finish()
     }
 }
