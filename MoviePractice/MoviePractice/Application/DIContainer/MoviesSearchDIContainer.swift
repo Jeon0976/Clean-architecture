@@ -13,7 +13,7 @@ final class MoviesSearchDIContainer: MoviesSearchFlowCoordinatorDependencies {
     
     // MARK: Dependencies
     
-    /// MovieSearch 화면에서 필요한 Service를 주입 구조체로 갖고 해당 구조체는 Movie Search 화면에서 필요한 `ApiDataTransferService`, `ImageDataTransferService`를 갖고있습니다.
+    /// MovieSearch 화면에서 필요한 Service를 구조체로 갖고 해당 구조체는 `ApiDataTransferService`, `ImageDataTransferService`를 갖고있습니다.
     /// - 해당 `Dependencies`는 `AppDIContainer`에서  `makeMoviesSearchDIContainer()` 메서드를 실행할 때 주입받습니다.
     struct Dependencies {
         let apiDataTransferService: DataTransferService
@@ -75,7 +75,7 @@ extension MoviesSearchDIContainer {
     
     /// 영화를 검색하는 Repository를 불러오는 메서드입니다.
     ///
-    /// - 해당 Repo는 `apiDataTransferService`와 `cache Local DB` 활용이 필요하며, 해당 Service들을 주입받고 생성합니다.
+    /// - 해당 Repo는 `apiDataTransferService`와 `cache Local DB` 필요하며, 해당 Service들을 주입받고 생성합니다.
     /// - Returns: DIP 원칙을 준수하는 `MoviesSearchRepository` Protocol를 Return합니다.
     func makeMoviesRepository() -> MoviesSearchRepository {
         DefaultMoviesSearchRepository(
@@ -97,7 +97,7 @@ extension MoviesSearchDIContainer {
     /// 영화 Poster Image를 불러오는 Repository를 불러오는 메서드입니다.
     ///
     /// - 해당 Repo는 `imageDataTransferService` 활용이 필요하며, 해당 Service를 주입받고 생성합니다.
-    /// - Returns: DIP 원칙을 준수하는 `PosterImagesRepository` Protocol를 Return합니다.||
+    /// - Returns: DIP 원칙을 준수하는 `PosterImagesRepository` Protocol를 Return합니다.
     func makePosterImagesRepository() -> PosterImagesRepository {
         DefaultPosterImagesRepository(
             dataTransferService: dependencies.imageDataTransferService
@@ -112,9 +112,9 @@ extension MoviesSearchDIContainer {
     ///
     /// - Parameter actions: flow coordinator에서 활용되는 actions 구조체입니다. 이는 ViewModel을 만드는 메서드에 직접 주입합니다.
     /// - Returns: `MoviesListViewController`를 Return 합니다.
-    func makeMoviesListViewController(
-        actions: MoviesListViewModelActions) -> MoviesListViewController {
-        MoviesListViewController.create(
+    func makeMoviesSearchViewController(
+        actions: MoviesSearchViewModelActions) -> MoviesSearchViewController {
+        MoviesSearchViewController.create(
             with: makeMoviesListViewModel(actions: actions),
             posterImagesRepostiory: makePosterImagesRepository()
         )
@@ -123,9 +123,9 @@ extension MoviesSearchDIContainer {
     /// Movie Search View Model를 불러오는 메서드입니다.
     /// - Parameter actions: flow coordinator에서 활용되는 actions 구조체입니다.
     /// - Returns: `MoviesListViewModel` Return합니다.
-    private func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
+    private func makeMoviesListViewModel(actions: MoviesSearchViewModelActions) -> MoviesSearchViewModel {
         
-        DefaultMoviesListViewModel(
+        DefaultMoviesSearchViewModel(
             searchMoviesUseCase: makeSearchMoviesUseCase(),
             actions: actions
         )
@@ -155,7 +155,7 @@ extension MoviesSearchDIContainer {
     // MARK: Movies Queries Suggestions List - Presentation
     
     /// Movie Query List View Controller를 불러오는 메서드입니다.
-    /// - Parameter didSelect: typealias `MoviesQueryListViewModelDidSelectAction`를 파라미터로 받습니다. 해당 액션은 (`MovieQuery`) -> Void 클로저 함수 입니다. 해당 클로저는 `DefaultMoviesListViewModel`의 `update` 메서드 입니다.
+    /// - Parameter didSelect: typealias `MoviesQueryListViewModelDidSelectAction`를 파라미터로 받습니다. 해당 액션은 (`MovieQuery`) -> Void 클로저 함수이며, 이는`DefaultMoviesListViewModel`의 `update` 메서드 입니다.
     /// - Returns: `MoviesQueriesTableViewController`를 Return합니다.
     func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> MoviesQueriesTableViewController {
         MoviesQueriesTableViewController.create(with: makeMoviesQueryListViewModel(didSelect: didSelect))
@@ -163,7 +163,7 @@ extension MoviesSearchDIContainer {
     
     /// Movie Query List View Model를 불러오는 메서드입니다.
     ///
-    /// - Parameter didSelect: typealias `MoviesQueryListViewModelDidSelectAction`를 파라미터로 받습니다. 해당 액션은 (`MovieQuery`) -> Void 클로저 함수 입니다. 해당 클로저는 `DefaultMoviesListViewModel`의 `update` 메서드 입니다.
+    /// - Parameter didSelect: typealias `MoviesQueryListViewModelDidSelectAction`를 파라미터로 받습니다. 해당 액션은 (`MovieQuery`) -> Void 클로저 함수이며, 이는`DefaultMoviesListViewModel`의 `update` 메서드 입니다.
     /// - Returns: `MoviesQueryListViewModel`를 Return합니다.
     func makeMoviesQueryListViewModel(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> MoviesQueryListViewModel {
         DefaultMoviesQueryListViewModel(

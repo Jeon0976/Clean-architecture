@@ -5,31 +5,31 @@
 //  Created by 전성훈 on 2023/08/31.
 //
 
-enum ObservableEvent<Value> {
-    case next(Value)
+enum ObservableEvent<T> {
+    case next(T)
     case error(Error)
     case completed
 }
 
 /// <#Description#>
-class Observable<Value> {
+class Observable<T> {
     /// - observer : 실제 관찰자 객체
     /// - block: 값이 변경될 때 실행될 클로저를 저장
-    struct Observer<Value> {
+    struct Observer<V> {
         weak var observer: AnyObject?
-        let block: (ObservableEvent<Value>) -> Void
+        let block: (ObservableEvent<V>) -> Void
     }
     
     /// - 모든 observers를 저장하는 배열
-    private var observers = [Observer<Value>]()
+    private var observers = [Observer<T>]()
     
     /// - 실제 관찰되는 값
     /// - 값이 설정될 때마다 'didSet'에서 'notifyObservers' 메서드를 호출하여 모든 observer에게 알린다.
-    var value: Value {
+    var value: T {
         didSet { notifyObservers(event: .next(value)) }
     }
     
-    init(_ value: Value) {
+    init(_ value: T) {
         self.value = value
     }
     
@@ -41,8 +41,8 @@ class Observable<Value> {
     @discardableResult
     fileprivate func observe(
         on observer: AnyObject,
-        observerBlock: @escaping (ObservableEvent<Value>) -> Void
-    ) -> Observable<Value> {
+        observerBlock: @escaping (ObservableEvent<T>) -> Void
+    ) -> Observable<T> {
         observers.append(Observer(observer: observer, block: observerBlock))
         observerBlock(.next(self.value))
         
@@ -50,7 +50,7 @@ class Observable<Value> {
     }
     
     /// 모든 observers에게 값을 알린다
-    private func notifyObservers(event: ObservableEvent<Value>) {
+    private func notifyObservers(event: ObservableEvent<T>) {
         for observer in observers {
             observer.block(event)
         }
@@ -82,10 +82,10 @@ class Observable<Value> {
     func subscribe(
         on observer: AnyObject,
         disposeBag: DisposeBag,
-        onNext: ((Value) -> Void)? = nil,
+        onNext: ((T) -> Void)? = nil,
         onError: ((Error) -> Void)? = nil,
         onCompleted: (() -> Void)? = nil
-    ) -> Subscription<Value> {
+    ) -> Subscription<T> {
         return Subscription(
             observable: self,
             observer: observer,

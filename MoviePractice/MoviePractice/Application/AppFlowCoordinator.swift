@@ -13,14 +13,14 @@ import UIKit
 final class AppFlowCoordinator: Coordinator {
     var type: CoordinatorType { .app }
 
-    var finishDelegate: CoordinatorFinishDelegate? = nil
+    weak var finishDelegate: CoordinatorFinishDelegate? = nil
+    weak var tabBarDelegate: TabBarDelegate? = nil
+
     var childCoordinators: [Coordinator] = []
-    
     var navigationController: UINavigationController
+
     var viewTitle: String? = nil
-    
-    var tabBarDelegate: TabBarDelegate? = nil
-        
+            
     private let appDIContainer: AppDIContainer
     
     /// 로그인 분기 처리입니다.
@@ -67,8 +67,6 @@ final class AppFlowCoordinator: Coordinator {
         flow.finishDelegate = self
         flow.start()
         childCoordinators.append(flow)
-        print(CFGetRetainCount(self))
-
     }
     
     /// Tabbar Flow Coordinator를 생성하는 메서드 입니다.

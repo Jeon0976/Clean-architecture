@@ -25,7 +25,7 @@ typealias FetchRecentMovieQueriesUseCaseFactory = (FetchRecentMovieQueriesUseCas
 final class DefaultMoviesQueryListViewModel: MoviesQueryListViewModel {
     private let numberOfQueriesToShow: Int
     private let fetchRecentMovieQueriesUseCaseFactory: FetchRecentMovieQueriesUseCaseFactory
-    private let didSelect: MoviesQueryListViewModelDidSelectAction?
+    private let didSelect: MoviesQueryListViewModelDidSelectAction
     private let mainQueue: DispatchQueueType
     
     // MARK: Output
@@ -34,7 +34,7 @@ final class DefaultMoviesQueryListViewModel: MoviesQueryListViewModel {
     init(
         numberOfQueriesToShow: Int,
         fetchRecentMovieQueriesUseCaseFactory: @escaping FetchRecentMovieQueriesUseCaseFactory,
-        didSelect: MoviesQueryListViewModelDidSelectAction? = nil,
+        didSelect:  @escaping MoviesQueryListViewModelDidSelectAction,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
         self.numberOfQueriesToShow = numberOfQueriesToShow
@@ -71,6 +71,6 @@ extension DefaultMoviesQueryListViewModel {
     }
     
     func didSelect(item: MoviesQueryListItemViewModel) {
-        didSelect?(MovieQuery(query: item.query))
+        didSelect(MovieQuery(query: item.query))
     }
 }

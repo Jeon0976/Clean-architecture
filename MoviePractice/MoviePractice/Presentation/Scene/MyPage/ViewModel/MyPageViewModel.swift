@@ -8,7 +8,7 @@
 import Foundation
 
 struct MyPageModelActions {
-    let showLogin: () -> Void
+    let logout: () -> Void
 }
 
 protocol MyPageViewModelInput {
@@ -37,6 +37,6 @@ final class DefaultMyPageViewModel: MyPageViewModel {
 
 extension DefaultMyPageViewModel {
     func didTappedLogout() {
-        actions?.showLogin()
+        actions?.logout()
     }
 }

@@ -9,16 +9,6 @@ import UIKit
 
 /// Login 화면에 대한 의존성 주입을 관리하는 Container입니다.
 final class LoginSceneDIContainer: LoginFlowCoordinatorDependencies {
-    
-    init() {
-        print("Login DI Init \(CFGetRetainCount(self))")
-    }
-    
-    deinit {
-        print("Login DI Deinit \(CFGetRetainCount(self))")
-
-    }
-    
     /// **ViewController를 생성하는 메서드입니다.**
     /// - 해당 메서드는 `LoginFlowCoordinator` class의 `start` 메서드 내부에서 실행됩니다.
     /// - `LoginFlowCoordinatorDependencies` protocol의 메서드이면서 이는 화면 flow만을 담당하는 flowCoordinator가 flow와 관련없는 메서드를 사용하지 못하도록, Delegate Pattern을 사용했습니다.

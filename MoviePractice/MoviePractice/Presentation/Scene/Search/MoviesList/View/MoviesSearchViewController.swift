@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class MoviesListViewController: UIViewController, Alertable {
+final class MoviesSearchViewController: UIViewController, Alertable {
     
     /// - 강제 옵셔널를 사용하여 뷰 컨트롤러가 기능하는 데 중요한 역할을 함을 명확하게 표현합니다.
     /// - 이 방법은 `viewModel`의 중요성을 강조하고, 실수로 `nil`을 할당하는 것을 방지하는 데 도움이 될 수 있습니다.
-    private var viewModel: MoviesListViewModel!
+    private var viewModel: MoviesSearchViewModel!
     private var posterImagesRepository: PosterImagesRepository?
     private var moviesTableViewController: MoviesListTableViewController?
     
@@ -60,10 +60,10 @@ final class MoviesListViewController: UIViewController, Alertable {
     // MARK: Lifecycle
     
     static func create(
-        with viewModel: MoviesListViewModel,
+        with viewModel: MoviesSearchViewModel,
         posterImagesRepostiory: PosterImagesRepository?
-    ) -> MoviesListViewController {
-        let view = MoviesListViewController()
+    ) -> MoviesSearchViewController {
+        let view = MoviesSearchViewController()
         view.viewModel = viewModel
         view.posterImagesRepository = posterImagesRepostiory
         
@@ -127,7 +127,7 @@ final class MoviesListViewController: UIViewController, Alertable {
         ])
     }
     
-    private func bind(to viewModel: MoviesListViewModel) {
+    private func bind(to viewModel: MoviesSearchViewModel) {
         viewModel.items
             .subscribe(on: self, disposeBag: disposeBag)
             .onNext { [weak self] _ in
@@ -164,7 +164,7 @@ final class MoviesListViewController: UIViewController, Alertable {
         moviesTableViewController?.reload()
     }
     
-    private func updateLoading(_ loading: MoviesListViewModelLoading?) {
+    private func updateLoading(_ loading: MoviesSearchViewModelLoading?) {
         emptyDataLabel.isHidden = true
         moviesListContainer.isHidden = true
         suggestionsListContainer.isHidden = true
@@ -204,7 +204,7 @@ final class MoviesListViewController: UIViewController, Alertable {
 }
 
 // MARK: Search Controller
-extension MoviesListViewController {
+extension MoviesSearchViewController {
     private func setupSearchController() {
         searchController.delegate = self
         searchController.searchBar.delegate = self
@@ -225,7 +225,7 @@ extension MoviesListViewController {
     }
 }
 
-extension MoviesListViewController: UISearchBarDelegate {
+extension MoviesSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text, !searchText.isEmpty else { return }
         searchController.isActive = false
@@ -237,7 +237,7 @@ extension MoviesListViewController: UISearchBarDelegate {
     }
 }
 
-extension MoviesListViewController: UISearchControllerDelegate {
+extension MoviesSearchViewController: UISearchControllerDelegate {
     func willPresentSearchController(_ searchController: UISearchController) {
         updateQueriesSuggestions()
     }

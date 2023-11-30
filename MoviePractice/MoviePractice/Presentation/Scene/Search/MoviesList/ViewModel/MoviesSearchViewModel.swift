@@ -1,5 +1,5 @@
 //
-//  MoviesListViewModel.swift
+//  MoviesSearchViewModel.swift
 //  MoviePractice
 //
 //  Created by 전성훈 on 2023/10/25.
@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct MoviesListViewModelActions {
+struct MoviesSearchViewModelActions {
     let showMovieDetails: (MovieWhenSearch) -> Void
     let showMovieQueriesSuggestions: (@escaping (_ disSelect: MovieQuery) -> Void) -> Void
     let closeMovieQueriesSuggestions: () -> Void
 }
 
-enum MoviesListViewModelLoading {
+enum MoviesSearchViewModelLoading {
     case fullScreen
     case nextPage
 }
 
-protocol MoviesListviewModelInput {
+protocol MoviesSearchviewModelInput {
     func viewDidLoad()
     func didLoadNextPage()
     func didSearch(query: String)
@@ -28,9 +28,9 @@ protocol MoviesListviewModelInput {
     func didSelectItem(at index: Int)
 }
 
-protocol MoviesListViewModelOutput {
+protocol MoviesSearchViewModelOutput {
     var items: Observable<[MoviesListItemViewModel]> { get }
-    var loading: Observable<MoviesListViewModelLoading?> { get }
+    var loading: Observable<MoviesSearchViewModelLoading?> { get }
     var query: Observable<String> { get }
     var error: Observable<String> { get }
     var isEmpty: Bool { get }
@@ -39,12 +39,12 @@ protocol MoviesListViewModelOutput {
     var searchBarPlaceholder: String { get }
 }
 
-typealias MoviesListViewModel = MoviesListviewModelInput & MoviesListViewModelOutput
+typealias MoviesSearchViewModel = MoviesSearchviewModelInput & MoviesSearchViewModelOutput
 
-final class DefaultMoviesListViewModel: MoviesListViewModel {
+final class DefaultMoviesSearchViewModel: MoviesSearchViewModel {
     
     private let searchMoviesUseCase: SearchMoviesUseCase!
-    private let actions: MoviesListViewModelActions!
+    private let actions: MoviesSearchViewModelActions!
     
     var currentPage: Int = 0
     var totalPageCount: Int = 1
@@ -57,7 +57,7 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     
     // MARK: Output
     var items: Observable<[MoviesListItemViewModel]> = Observable([])
-    var loading: Observable<MoviesListViewModelLoading?> = Observable(.none)
+    var loading: Observable<MoviesSearchViewModelLoading?> = Observable(.none)
     var query: Observable<String> = Observable("")
     var error: Observable<String> = Observable("")
     var isEmpty: Bool { return items.value.isEmpty }
@@ -68,18 +68,14 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     // MARK: Init
     init(
         searchMoviesUseCase: SearchMoviesUseCase,
-        actions: MoviesListViewModelActions? = nil,
+        actions: MoviesSearchViewModelActions? = nil,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
         self.searchMoviesUseCase = searchMoviesUseCase
         self.actions = actions
         self.mainQueue = mainQueue
     }
-    
-    deinit {
-        print("MoviesListViewModel Deinit")
-    }
-    
+
     // MARK: Private
     private func appendPage(_ moviesPage: MoviesSearchPage){
         currentPage = moviesPage.page
@@ -101,7 +97,7 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     
     private func load(
         movieQuery: MovieQuery,
-        loading: MoviesListViewModelLoading
+        loading: MoviesSearchViewModelLoading
     ) {
         self.loading.value = loading
         query.value = movieQuery.query
@@ -139,7 +135,7 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
 }
 
 // MARK: Input. View Event methods
-extension DefaultMoviesListViewModel {
+extension DefaultMoviesSearchViewModel {
     func viewDidLoad() {
         
     }

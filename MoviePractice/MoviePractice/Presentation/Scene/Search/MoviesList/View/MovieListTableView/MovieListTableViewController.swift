@@ -8,7 +8,7 @@
 import UIKit
 
 final class MoviesListTableViewController: UITableViewController {
-    var viewModel: MoviesListViewModel!
+    var viewModel: MoviesSearchViewModel!
     
     var posterImagesRepository: PosterImagesRepository?
     var nextPageLoadingSpinner: UIActivityIndicatorView?
@@ -32,7 +32,7 @@ final class MoviesListTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func updateLoading(_ loading: MoviesListViewModelLoading?) {
+    func updateLoading(_ loading: MoviesSearchViewModelLoading?) {
         switch loading {
         case .nextPage:
             nextPageLoadingSpinner?.removeFromSuperview()
