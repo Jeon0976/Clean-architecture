@@ -8,12 +8,23 @@
 import UIKit
 
 final class MoviesListTableViewController: UITableViewController {
-    var viewModel: MoviesSearchViewModel!
+    private var viewModel: MoviesSearchViewModel!
     
-    var posterImagesUseCase: PosterImagesUseCase?
-    var nextPageLoadingSpinner: UIActivityIndicatorView?
+    private var posterImagesUseCase: PosterImagesUseCase?
+    private var nextPageLoadingSpinner: UIActivityIndicatorView?
 
     // MARK: Lifecycle
+    
+    static func create(
+        with viewModel: MoviesSearchViewModel,
+        posterImagesUseCase: PosterImagesUseCase?
+    ) -> MoviesListTableViewController {
+        let view = MoviesListTableViewController()
+        view.viewModel = viewModel
+        view.posterImagesUseCase = posterImagesUseCase
+        
+        return view
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

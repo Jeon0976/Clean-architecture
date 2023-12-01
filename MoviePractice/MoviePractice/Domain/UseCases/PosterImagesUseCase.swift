@@ -9,12 +9,12 @@ import Foundation
 
 protocol PosterImagesUseCase {
     func execute(
-        requestValue: PosterImagesPath,
+        requestValue: PosterImagesPathRequestValue,
         completion: @escaping(Result<Data, Error>) -> Void
     ) -> Cancellable?
 }
 
-struct PosterImagesPath {
+struct PosterImagesPathRequestValue {
     let imagePath: String
     let imageWidth: Int
 }
@@ -30,7 +30,7 @@ final class DefaultPosterImagesUseCase: PosterImagesUseCase {
     }
     
     func execute(
-        requestValue: PosterImagesPath,
+        requestValue: PosterImagesPathRequestValue,
         completion: @escaping (Result<Data, Error>) -> Void
     ) -> Cancellable? {
         return posterImagesRepository.fetchImage(

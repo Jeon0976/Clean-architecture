@@ -22,14 +22,12 @@ final class MoviesSearchViewController: UIViewController, Alertable {
     private lazy var moviesListContainer: UIView = {
         let view = UIView()
         
-        moviesTableViewController = MoviesListTableViewController()
-        if let moviesTV = moviesTableViewController {
-            moviesTV.viewModel = viewModel
-            moviesTV.posterImagesUseCase = posterImagesUseCase
-            moviesTV.view.backgroundColor = .white
-            add(child: moviesTV, container: view)
-            
-            view.addSubview(moviesTV.view)
+        moviesTableViewController = MoviesListTableViewController.create(with: viewModel, posterImagesUseCase: posterImagesUseCase)
+        
+        if let movies = moviesTableViewController {
+            movies.view.backgroundColor = .white
+            add(child: movies, container: view)
+            view.addSubview(movies.view)
         }
         
         return view
