@@ -10,7 +10,7 @@ import UIKit
 final class MoviesTopRatedViewController: UIViewController {
     
     private var viewModel: MoviesTopRatedViewModel!
-    private var posterImagesRepository: PosterImagesRepository?
+    private var posterImageUseCase: PosterImagesUseCase?
     private var moviesCollectionViewController: MoviesTopRatedCollectionViewController?
     
     private let disposeBag = DisposeBag()
@@ -23,7 +23,7 @@ final class MoviesTopRatedViewController: UIViewController {
         moviesCollectionViewController = MoviesTopRatedCollectionViewController(collectionViewLayout: layout)
         if let moviesCV = moviesCollectionViewController {
             moviesCV.viewModel = viewModel
-            moviesCV.posterImagesRepository = posterImagesRepository
+            moviesCV.posterImageUseCase = posterImageUseCase
             moviesCV.collectionView.backgroundColor = .clear
             add(child: moviesCV, container: view)
             
@@ -35,11 +35,11 @@ final class MoviesTopRatedViewController: UIViewController {
     
     static func create(
         with viewModel: MoviesTopRatedViewModel,
-        posterImageRepository: PosterImagesRepository?
+        posterImageUseCase: PosterImagesUseCase?
     ) -> MoviesTopRatedViewController {
         let view = MoviesTopRatedViewController()
         view.viewModel = viewModel
-        view.posterImagesRepository = posterImageRepository
+        view.posterImageUseCase = posterImageUseCase
         return view
     }
     
@@ -81,20 +81,6 @@ final class MoviesTopRatedViewController: UIViewController {
                 self?.updateCollectionView()
             }
         
-//        viewModel.detailTextShownStates
-//            .subscribe(on: self, disposeBag: disposeBag)
-//            .onNext { [weak self] value in
-//                let indexPaths = value.keys.filter { value[$0] == true }
-//                self?.updateCollectionItem(at: Array(indexPaths))
-//            }
-//
-//        viewModel.detailTextShownStates
-//            .subscribe(on: self, disposeBag: disposeBag)
-//            .onNext { [weak self] value in
-//                let indexPaths = value.keys.filter { value[$0] == false }
-//                self?.updateCollectionItem(at: Array(indexPaths))
-//            }
-//
         viewModel.loading
             .subscribe(on: self, disposeBag: disposeBag)
             .onNext { [weak self] in
@@ -113,10 +99,6 @@ final class MoviesTopRatedViewController: UIViewController {
         moviesCollectionViewController?.reload()
     }
     
-//    private func updateCollectionItem(at items: [IndexPath]) {
-//        moviesCollectionViewController?.reloadItems(at: items)
-//    }
-//
     private func updateLoading(_ loading: MoviesTopRatedModelLoading?) {
         moviesCollectionViewController?.isLoading(loading)
     }

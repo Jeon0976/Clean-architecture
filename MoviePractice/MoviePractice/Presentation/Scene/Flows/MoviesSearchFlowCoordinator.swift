@@ -11,7 +11,7 @@ import UIKit
 /// - 이는 DIP 원칙을 지키면서, DIContainer와 FlowCoordinator의 역할을 명확히 나눌 수 있습니다.
 /// - FlowCoordinator에서는 화면 전환에 대한 부분을 담당하기 때문에 Presentation에서 ViewController를 생성하는 부분을 프로토콜의 메서드로 만듭니다.
 /// - `makeMoviesListViewController`:  `MoviesSearchViewController`를 생성하는 메서드입니다.
-/// - `makeMoviesDetailsViewController`: `MoviesDetailsViewController`를 생성하는 메서드입니다.
+/// - `makeMoviesDetailsViewController`: `MovieDetailsViewController`를 생성하는 메서드입니다.
 /// - `makeMoviesQuriesSuggestionsListViewController`: `MoviesQueriesTableViewController`를 생성하는 메서드입니다.
 protocol MoviesSearchFlowCoordinatorDependencies {
     func makeMoviesSearchViewController(

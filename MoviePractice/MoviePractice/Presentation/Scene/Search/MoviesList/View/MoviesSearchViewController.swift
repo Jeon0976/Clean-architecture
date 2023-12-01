@@ -12,7 +12,7 @@ final class MoviesSearchViewController: UIViewController, Alertable {
     /// - 강제 옵셔널를 사용하여 뷰 컨트롤러가 기능하는 데 중요한 역할을 함을 명확하게 표현합니다.
     /// - 이 방법은 `viewModel`의 중요성을 강조하고, 실수로 `nil`을 할당하는 것을 방지하는 데 도움이 될 수 있습니다.
     private var viewModel: MoviesSearchViewModel!
-    private var posterImagesRepository: PosterImagesRepository?
+    private var posterImagesUseCase: PosterImagesUseCase?
     private var moviesTableViewController: MoviesListTableViewController?
     
     private let disposeBag = DisposeBag()
@@ -25,7 +25,7 @@ final class MoviesSearchViewController: UIViewController, Alertable {
         moviesTableViewController = MoviesListTableViewController()
         if let moviesTV = moviesTableViewController {
             moviesTV.viewModel = viewModel
-            moviesTV.posterImagesRepository = posterImagesRepository
+            moviesTV.posterImagesUseCase = posterImagesUseCase
             moviesTV.view.backgroundColor = .white
             add(child: moviesTV, container: view)
             
@@ -59,26 +59,25 @@ final class MoviesSearchViewController: UIViewController, Alertable {
     
     // MARK: Lifecycle
     
+    /// `ViewController`의 생성을 Static 메서드를 활용해서 생성 로직을 DIContainer에 중앙화 할 수 있습니다.
+    /// - Parameter viewModel: `MoviesSearchViewController`가 사용할 뷰 모델, 이 뷰 모델은 로그인 관련 로직을 처리하는 데 사용됩니다.
+    /// - Parameter posterImagesRepostiory: `MoviesListItemCell`에서 사용할 Repository입니다.
+    /// - Returns: 초기화된 `MoviesSearchViewController` 인스턴스를 반환합니다.
     static func create(
         with viewModel: MoviesSearchViewModel,
-        posterImagesRepostiory: PosterImagesRepository?
+        posterImagesUseCase: PosterImagesUseCase?
     ) -> MoviesSearchViewController {
         let view = MoviesSearchViewController()
         view.viewModel = viewModel
-        view.posterImagesRepository = posterImagesRepostiory
+        view.posterImagesUseCase = posterImagesUseCase
         
         return view
-    }
-    
-    deinit {
-        print("List View Controller Deinit")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupView()
-        setupBehaviours()
         
         bind(to: viewModel)
         viewModel.viewDidLoad()
@@ -153,13 +152,6 @@ final class MoviesSearchViewController: UIViewController, Alertable {
         }
     }
     
-    private func setupBehaviours() {
-//        addBehaviors([
-//            BackButtonEmptyTitleNavigationBarBehavior(),
-//            BlackStyleNavigationBarBehavior()
-//        ])
-    }
-    
     private func updateTimes() {
         moviesTableViewController?.reload()
     }
@@ -209,17 +201,13 @@ extension MoviesSearchViewController {
         searchController.delegate = self
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "추가"
-        // ??
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.barStyle = .default
         searchController.searchBar.frame = searchBarContainer.bounds
-        // ??
         searchController.searchBar.autoresizingMask = [.flexibleWidth]
-        // ??
         definesPresentationContext = true
         if #available(iOS 13.0, *) {
-            // accessibility는 테스트를 위해?
             searchController.searchBar.searchTextField.accessibilityIdentifier = Identifier.searchField
         }
     }

@@ -27,7 +27,7 @@ typealias MovieDetailsViewModel = MovieDetailsViewModelInput & MovieDetailsViewM
 final class DefaultMovieDetailsViewModel: MovieDetailsViewModel {
     
     private let posterImagePath: String?
-    private let posterImagesRepository: PosterImagesRepository
+    private let posterImageUseCase: PosterImagesUseCase
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() }}
     private let mainQueue: DispatchQueueType
     
@@ -41,14 +41,14 @@ final class DefaultMovieDetailsViewModel: MovieDetailsViewModel {
     
     init(
         movie: MovieWhenSearch,
-        posterImagesRepository: PosterImagesRepository,
+        posterImageUseCase: PosterImagesUseCase,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
         self.title = movie.title ?? ""
         self.overview = movie.overview ?? ""
         self.posterImagePath = movie.posterPath
         self.isPosterImageHidden = movie.posterPath == nil
-        self.posterImagesRepository = posterImagesRepository
+        self.posterImageUseCase = posterImageUseCase
         self.mainQueue = mainQueue
     }
     
@@ -70,9 +70,11 @@ extension DefaultMovieDetailsViewModel {
     func updatePosterImage(width: Int) {
         guard let posterImagePath = posterImagePath else { return }
         
-        imageLoadTask = posterImagesRepository.fetchImage(
-            with: posterImagePath,
-            width: width) { [weak self] result in
+        imageLoadTask = posterImageUseCase.execute(
+            requestValue: .init(
+                imagePath: posterImagePath,
+                imageWidth: width),
+            completion: { [weak self] result in
                 self?.mainQueue.async {
                     guard self?.posterImagePath == posterImagePath else { return }
                     
@@ -86,6 +88,6 @@ extension DefaultMovieDetailsViewModel {
                     
                     self?.imageLoadTask = nil
                 }
-            }
+            })
     }
 }

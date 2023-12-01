@@ -12,7 +12,8 @@ final class MoviesListItemCell: UITableViewCell {
     static let height = CGFloat(130)
     
     private var viewModel: MoviesListItemViewModel!
-    private var posterImagesRepository: PosterImagesRepository?
+    private var posterImagesUseCase: PosterImagesUseCase?
+    
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() }}
     private let mainQueue: DispatchQueueType = DispatchQueue.main
     
@@ -107,10 +108,10 @@ final class MoviesListItemCell: UITableViewCell {
     
     func fill(
         with viewModel: MoviesListItemViewModel,
-        posterImagesRepository: PosterImagesRepository?
+        posterImagesUseCase: PosterImagesUseCase?
     ) {
         self.viewModel = viewModel
-        self.posterImagesRepository = posterImagesRepository
+        self.posterImagesUseCase = posterImagesUseCase
         
         titleLabel.text = viewModel.title
         dateLabel.text = viewModel.releaseDate
@@ -122,10 +123,12 @@ final class MoviesListItemCell: UITableViewCell {
         posterImageView.image = nil
         guard let posterImagePath = viewModel.posterImagePath else { return }
         
-        imageLoadTask = posterImagesRepository?.fetchImage(
-            with: posterImagePath,
-            width: width,
-            compltion: { [weak self] result in
+        imageLoadTask = posterImagesUseCase?.execute(
+            requestValue: .init(
+                imagePath: posterImagePath,
+                imageWidth: width
+            ),
+            completion: { [weak self] result in
                 self?.mainQueue.async {
                     guard self?.viewModel.posterImagePath == posterImagePath else { return }
                     if case let .success(data) = result {

@@ -68,6 +68,11 @@ final class MoviesSearchDIContainer: MoviesSearchFlowCoordinatorDependencies {
             moviesQueriesRepository: makeMoviesQueriesRepository()
         )
     }
+    
+    func makePosterImageUseCase() -> PosterImagesUseCase {
+        DefaultPosterImagesUseCase(
+            posterImagesRepository: makePosterImagesRepository())
+    }
 }
 
 // MARK: Repositories - Data
@@ -116,7 +121,7 @@ extension MoviesSearchDIContainer {
         actions: MoviesSearchViewModelActions) -> MoviesSearchViewController {
         MoviesSearchViewController.create(
             with: makeMoviesListViewModel(actions: actions),
-            posterImagesRepostiory: makePosterImagesRepository()
+            posterImagesUseCase: makePosterImageUseCase()
         )
     }
     
@@ -147,7 +152,7 @@ extension MoviesSearchDIContainer {
     private func makeMoviesDetailViewModel(movie: MovieWhenSearch) -> MovieDetailsViewModel {
         DefaultMovieDetailsViewModel(
             movie: movie,
-            posterImagesRepository: makePosterImagesRepository()
+            posterImageUseCase: makePosterImageUseCase()
         )
     }
     

@@ -35,6 +35,10 @@ extension MoviesTopRatedDIContainer {
     func makeTopRatedMoviesUseCase() -> TopRatedMoviesUseCase {
         DefaultTopRatedMoviesUseCase(moviesTopRatedRepository: makeTopRatedMoviesRepository())
     }
+    
+    func makePosterImageUseCase() -> PosterImagesUseCase {
+        DefaultPosterImagesUseCase(posterImagesRepository: makePosterImagesRepository())
+    }
 }
 
 // MARK: Repositories - Data
@@ -69,7 +73,7 @@ extension MoviesTopRatedDIContainer {
     func makeMoviesTopRatedViewController(actions: MoviesTopRatedViewModelActions) -> MoviesTopRatedViewController {
         MoviesTopRatedViewController.create(
             with: makeMoviesTopRatedViewModel(actions: actions),
-            posterImageRepository: makePosterImagesRepository()
+            posterImageUseCase: makePosterImageUseCase()
         )
     }
     

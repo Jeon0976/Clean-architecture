@@ -11,24 +11,24 @@ struct MoviesTopRatedViewModelActions {
 //    let showMovieDetails: (MovieWhenSearch) -> Void
 }
 
-protocol MoviesTopRatedModelInput: AnyObject {
-    var items: Observable<[MoviesTopRatedCollectionItemViewModel]> { get }
-    var detailTextShownStates: Observable<[IndexPath: Bool]> { get }
-    var loading: Observable<MoviesTopRatedModelLoading?> { get }
-    var error: Observable<String> { get }
-    var isResetCompleted: Observable<Bool> { get }
+enum MoviesTopRatedModelLoading {
+    case fullScreen
+    case nextPage
 }
 
-protocol MoviesTopRatedModelOutput: AnyObject {
+protocol MoviesTopRatedModelInput {
     func viewDidLoad()
     func reset()
     func didLoadNextPage()
     func didSelectedCell(_ indexPath: IndexPath)
 }
 
-enum MoviesTopRatedModelLoading {
-    case fullScreen
-    case nextPage
+protocol MoviesTopRatedModelOutput {
+    var items: Observable<[MoviesTopRatedCollectionItemViewModel]> { get }
+    var detailTextShownStates: Observable<[IndexPath: Bool]> { get }
+    var loading: Observable<MoviesTopRatedModelLoading?> { get }
+    var error: Observable<String> { get }
+    var isResetCompleted: Observable<Bool> { get }
 }
 
 typealias MoviesTopRatedViewModel = MoviesTopRatedModelInput & MoviesTopRatedModelOutput
@@ -61,12 +61,6 @@ final class DefaultMoviesTopRatedViewModel: MoviesTopRatedViewModel {
         self.topRatedMoviesUseCase = topRatedMoviesUseCase
         self.actions = actions
         self.mainQueue = mainQueue
-        
-        print("Default Movies Top Rated View Model")
-    }
-    
-    deinit {
-        print("TopRated Deinit")
     }
     
     private func update() {

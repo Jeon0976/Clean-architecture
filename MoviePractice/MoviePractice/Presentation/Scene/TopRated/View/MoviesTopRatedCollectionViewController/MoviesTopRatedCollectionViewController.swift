@@ -10,7 +10,7 @@ import UIKit
 final class MoviesTopRatedCollectionViewController: UICollectionViewController {
     var viewModel: MoviesTopRatedViewModel!
     
-    var posterImagesRepository: PosterImagesRepository?
+    var posterImageUseCase: PosterImagesUseCase?
     
     private var afterViewDidLoad = true
     private var loading: MoviesTopRatedModelLoading?
@@ -21,10 +21,6 @@ final class MoviesTopRatedCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         setupView()
-    }
-    
-    deinit {
-        print("MoviesTopRated Collection Controller Deinit")
     }
     
     override func viewDidLayoutSubviews() {
@@ -115,7 +111,7 @@ extension MoviesTopRatedCollectionViewController {
         cell.fill(
             with: viewModel.items.value[indexPath.row],
             selected: isSelected,
-            posterImagesRepository: posterImagesRepository
+            posterImageUseCase: posterImageUseCase
         )
         
         if indexPath.row == viewModel.items.value.count - 4 {

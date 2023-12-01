@@ -11,7 +11,7 @@ final class MoviesTopRatedCell: UICollectionViewCell {
     static let identifier = String(describing: MoviesTopRatedCell.self)
     
     private var viewModel: MoviesTopRatedCollectionItemViewModel!
-    private var posterImagesRepository: PosterImagesRepository?
+    private var posterImageUseCase: PosterImagesUseCase?
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() }}
     private let mainQueue: DispatchQueueType = DispatchQueue.main
         
@@ -130,35 +130,40 @@ final class MoviesTopRatedCell: UICollectionViewCell {
     func fill(
         with viewModel: MoviesTopRatedCollectionItemViewModel,
         selected isSelected: Bool,
-        posterImagesRepository: PosterImagesRepository?
+        posterImageUseCase: PosterImagesUseCase?
     ) {
         self.viewModel = viewModel
-        self.posterImagesRepository = posterImagesRepository
+        self.posterImageUseCase = posterImageUseCase
         
         updateLabel()
         updateVisibility(isSelected)
-
+        
         let width = Int(posterImageView.imageSizeAfterAspectFit.scaledSize.width)
         width == 0 ? updatePosterImage(width: 300) : updatePosterImage(width: width)
     }
     
-
+    
     private func updatePosterImage(width: Int) {
         posterImageView.image = nil
         
         guard let posterImagePath = viewModel.posterImagePath else { return }
         
-        imageLoadTask = posterImagesRepository?.fetchImage(with: posterImagePath, width: width, compltion: { [weak self] result in
-            self?.mainQueue.async {
-                guard self?.viewModel.posterImagePath == posterImagePath else { return }
-                
-                if case let .success(data) = result {
-                    self?.posterImageView.image = UIImage(data: data)
+        imageLoadTask = posterImageUseCase?.execute(
+            requestValue: .init(
+                imagePath: posterImagePath,
+                imageWidth: width),
+            completion: { [weak self] result  in
+                self?.mainQueue.async {
+                    guard self?.viewModel.posterImagePath == posterImagePath else { return }
+                    
+                    if case let .success(data) = result {
+                        self?.posterImageView.image = UIImage(data: data)
+                    }
+                    
+                    self?.imageLoadTask = nil
                 }
-                
-                self?.imageLoadTask = nil
-            }
-        })
+            })
+        
     }
     
     private func updateLabel() {

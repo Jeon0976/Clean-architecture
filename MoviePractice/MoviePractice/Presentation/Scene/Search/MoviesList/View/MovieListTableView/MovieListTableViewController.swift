@@ -10,7 +10,7 @@ import UIKit
 final class MoviesListTableViewController: UITableViewController {
     var viewModel: MoviesSearchViewModel!
     
-    var posterImagesRepository: PosterImagesRepository?
+    var posterImagesUseCase: PosterImagesUseCase?
     var nextPageLoadingSpinner: UIActivityIndicatorView?
 
     // MARK: Lifecycle
@@ -68,7 +68,7 @@ extension MoviesListTableViewController {
 
         cell.fill(
             with: viewModel.items.value[indexPath.row],
-            posterImagesRepository: posterImagesRepository)
+            posterImagesUseCase: posterImagesUseCase)
         
         if indexPath.row == viewModel.items.value.count - 1 {
             viewModel.didLoadNextPage()

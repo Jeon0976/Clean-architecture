@@ -7,9 +7,16 @@
 
 import Foundation
 
+/// Coordinator 내부에 있는 화면 전환 메서드들 즉, private 메서드들을 나타내고 있습니다.
 struct MoviesSearchViewModelActions {
+    
+    /// `MoviesSearchFlowCoordinator`의 `showMovieDetails(movie: MovieWhenSearch)` 메서드를 의미합니다.
     let showMovieDetails: (MovieWhenSearch) -> Void
+    
+    /// `MoviesSearchFlowCoordinator`의 `showMovieQueriesSuggestions(didSelect: @escaping MoviesQueryListViewModelDidSelectAction)` 메서드를 의미합니다.
     let showMovieQueriesSuggestions: (@escaping (_ disSelect: MovieQuery) -> Void) -> Void
+    
+    /// `MoviesSearchFlowCoordinator`의 `closeMovieQueriesSuggestions()` 메서드를 의미합니다.
     let closeMovieQueriesSuggestions: () -> Void
 }
 
