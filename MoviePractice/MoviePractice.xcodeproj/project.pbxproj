@@ -424,9 +424,17 @@
 		C51863462A9DF0BE00141FCB /* MoviePracticeTests */ = {
 			isa = PBXGroup;
 			children = (
+				C5188D0B2B4D1D34004F1DA4 /* test */,
 				C51863472A9DF0BE00141FCB /* MoviePracticeTests.swift */,
 			);
 			path = MoviePracticeTests;
+			sourceTree = "<group>";
+		};
+		C5188D0B2B4D1D34004F1DA4 /* test */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = test;
 			sourceTree = "<group>";
 		};
 		C5308D392AF2322700856854 /* Search */ = {
