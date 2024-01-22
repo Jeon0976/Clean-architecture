@@ -148,6 +148,14 @@ final class MoviesTopRatedCell: UICollectionViewCell {
         
         guard let posterImagePath = viewModel.posterImagePath else { return }
         
+        // 캐시에서 이미지를 먼저 확인합니다.
+        let cacheKey = NSString(string: posterImagePath)
+        
+        if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
+            posterImageView.image = cachedImage
+            return
+        }
+        
         imageLoadTask = posterImageUseCase?.execute(
             requestValue: .init(
                 imagePath: posterImagePath,
@@ -155,11 +163,13 @@ final class MoviesTopRatedCell: UICollectionViewCell {
             completion: { [weak self] result  in
                 self?.mainQueue.async {
                     guard self?.viewModel.posterImagePath == posterImagePath else { return }
-                    
-                    if case let .success(data) = result {
-                        self?.posterImageView.image = UIImage(data: data)
+                    print(posterImagePath)
+                    if case let .success(data) = result, let image = UIImage(data: data) {
+                        // 이미지를 캐시에 저장합니다.
+                        ImageCache.shared.setObject(image, forKey: cacheKey)
+                        self?.posterImageView.image = image
                     }
-                    
+
                     self?.imageLoadTask = nil
                 }
             })
@@ -184,3 +194,10 @@ final class MoviesTopRatedCell: UICollectionViewCell {
         }
     }
 }
+
+
+class ImageCache {
+    static let shared = NSCache<NSString, UIImage>()
+}
+
+// 이제 캐시 인스턴스를 사용하여 이미지를 저장하고 검색할 수 있습니다.

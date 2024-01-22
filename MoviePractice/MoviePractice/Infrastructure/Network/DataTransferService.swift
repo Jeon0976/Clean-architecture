@@ -110,10 +110,7 @@ extension DefaultDataTransferService: DataTransferService {
         with endpoint: E,
         on queue: DataTransferDispatchQueue,
         completion: @escaping CompltionHandler<T>
-    ) -> NetworkCancellable? where
-    T : Decodable,
-    T == E.Response,
-    E : ResponseRequestable {
+    ) -> NetworkCancellable? where T : Decodable, T == E.Response,E : ResponseRequestable {
         networkService.request(endPoint: endpoint) { result in
             switch result {
             case .success(let data):

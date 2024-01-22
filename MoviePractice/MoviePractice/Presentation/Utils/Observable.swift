@@ -11,7 +11,7 @@ enum ObservableEvent<T> {
     case completed
 }
 
-/// <#Description#>
+/// Description
 class Observable<T> {
     /// - observer : 실제 관찰자 객체
     /// - block: 값이 변경될 때 실행될 클로저를 저장
