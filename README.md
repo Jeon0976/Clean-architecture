@@ -1,3 +1,5 @@
+# --------- 공사 중 ---------
+
 # Movie 소개 앱 (Clean Architecture + MVVM 연습)
 
 ## 📖  상세 정보
